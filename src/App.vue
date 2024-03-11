@@ -1,12 +1,13 @@
 <script setup>
 import Navbar from "./components/Navbar.vue"
 import Camplist from "./components/Camplist.vue"
+import DetailCamp from "./components/DetailCamp.vue";
 </script>
 
 <template>
   <div class="grid-container">
     <Navbar />
-    <div class="flex items-center justify-between px-3 py-5">
+    <!-- <div class="flex items-center justify-between px-3 py-5">
       <h1 class="ml-8 text-4xl font-bold">Hi [Name], welcome to your space!</h1>
 
       <label class="mr-8 input input-bordered- flex items-center gap-2">
@@ -24,9 +25,9 @@ import Camplist from "./components/Camplist.vue"
           />
         </svg>
       </label>
-    </div>
+    </div> -->
 
-    <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
+    <!-- <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
     <div class="grid grid-cols-5 gap-4 p-6">
       <div class="btn bg-navgreen text-white hover:bg-[#F79C1D]">Mountain</div>
       <div class="btn bg-navgreen text-white hover:bg-[#F79C1D]">Beach</div>
@@ -35,10 +36,13 @@ import Camplist from "./components/Camplist.vue"
       <div class="btn bg-navgreen text-white hover:bg-[#F79C1D]">
         National Park
       </div>
-    </div>
+    </div> -->
   </div>
 
   <Camplist />
+  <!-- <DetailCamp/> -->
+
+
 </template>
 
 <style scoped>
