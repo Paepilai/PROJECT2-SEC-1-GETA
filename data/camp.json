@@ -11,7 +11,11 @@
       }
     ],
     "Title": "Camp1",
-    "Description": "Tennis requires cat-like reflexes with short bursts of strength. These short movements do not allow the muscles to extend their full length. When muscles are strenuously worked they become tight and can lose their elasticity unless properly stretched. Yoga exercises can increase the body’s range of motion. The lack of movement because of inflexibility binds the joints. Without the elasticity of the muscles, I think an athlete can be a prisoner of his own body."
+    "Description": {
+      "detail": "ลานกางเต็นท์และจุดชมพระอาทิตย์ขึ้นและทะเลหมอกที่งดงามบนดอยอ่างขาง ตั้งอยู่ท่ามกลางป่าสนบนเนินเขาสูงหรือในภาษาเหนือเรียกว่า “ม่อน” สมชื่อ ที่นี่เป็นจุดชมวิวที่นักท่องเที่ยวนิยมมากางเต็นท์ดูพระอาทิตย์ขึ้นและลุ้นทะเลหมอก ท่ามกลางวิว180 องศา ใครมาเที่ยวดอยอ่างขางสามารถแวะมาถ่ายรูปหรือจะค้างคืนที่นี่ด้วยก็ได้ บริเวณลานกางเต็นท์ มีทั้งร้านค้า ร้านกาแฟและร้านอาหารให้บริการ พร้อมลานจอดรถกว้างขวางสะดวกสบาย กางเต็นท์พักที่นี่แล้วยังสามารถขับรถไปเที่ยวไร่สตอรว์เบอร์รี่-ไร่ชา และสวนดอกไม้ในสถานีเกษตรหลวงอ่างขางที่อยู่ใกล้ๆ ได้อีกด้วย",
+      "price": "เต็นท์ขนาด 2 คน 200 บาท, เต็นท์ 3 คน ราคา 225 บาท, นำเต็นท์มาเองคิดค่าบริการสถานที่กางเต็นท์ คนละ 30 บาท/คืน",
+      "location": "ดอยอ่างขาง อุทยานแห่งชาติดอยฟ้าห่มปก อ.ฝาง จ.เชียงใหม่"
+    }
   },
   {
     "ListImage": [
@@ -25,7 +29,11 @@
       }
     ],
     "Title": "Camp2",
-    "Description": "Tennis requires cat-like reflexes with short bursts of strength. These short movements do not allow the muscles to extend their full length. When muscles are strenuously worked they become tight and can lose their elasticity unless properly stretched. Yoga exercises can increase the body’s range of motion. The lack of movement because of inflexibility binds the joints. Without the elasticity of the muscles, I think an athlete can be a prisoner of his own body."
+    "Description": {
+      "detail": "ลานกางเต็นท์และจุดชมพระอาทิตย์ขึ้นและทะเลหมอกที่งดงามบนดอยอ่างขาง ตั้งอยู่ท่ามกลางป่าสนบนเนินเขาสูงหรือในภาษาเหนือเรียกว่า “ม่อน” สมชื่อ ที่นี่เป็นจุดชมวิวที่นักท่องเที่ยวนิยมมากางเต็นท์ดูพระอาทิตย์ขึ้นและลุ้นทะเลหมอก ท่ามกลางวิว180 องศา ใครมาเที่ยวดอยอ่างขางสามารถแวะมาถ่ายรูปหรือจะค้างคืนที่นี่ด้วยก็ได้ บริเวณลานกางเต็นท์ มีทั้งร้านค้า ร้านกาแฟและร้านอาหารให้บริการ พร้อมลานจอดรถกว้างขวางสะดวกสบาย กางเต็นท์พักที่นี่แล้วยังสามารถขับรถไปเที่ยวไร่สตอรว์เบอร์รี่-ไร่ชา และสวนดอกไม้ในสถานีเกษตรหลวงอ่างขางที่อยู่ใกล้ๆ ได้อีกด้วย",
+      "price": "เต็นท์ขนาด 2 คน 200 บาท, เต็นท์ 3 คน ราคา 225 บาท, นำเต็นท์มาเองคิดค่าบริการสถานที่กางเต็นท์ คนละ 30 บาท/คืน",
+      "location": "ดอยอ่างขาง อุทยานแห่งชาติดอยฟ้าห่มปก อ.ฝาง จ.เชียงใหม่"
+    }
   },
   {
     "ListImage": [
@@ -39,7 +47,11 @@
       }
     ],
     "Title": "Camp3",
-    "Description": "Tennis requires cat-like reflexes with short bursts of strength. These short movements do not allow the muscles to extend their full length. When muscles are strenuously worked they become tight and can lose their elasticity unless properly stretched. Yoga exercises can increase the body’s range of motion. The lack of movement because of inflexibility binds the joints. Without the elasticity of the muscles, I think an athlete can be a prisoner of his own body."
+    "Description": {
+      "detail": "ลานกางเต็นท์และจุดชมพระอาทิตย์ขึ้นและทะเลหมอกที่งดงามบนดอยอ่างขาง ตั้งอยู่ท่ามกลางป่าสนบนเนินเขาสูงหรือในภาษาเหนือเรียกว่า “ม่อน” สมชื่อ ที่นี่เป็นจุดชมวิวที่นักท่องเที่ยวนิยมมากางเต็นท์ดูพระอาทิตย์ขึ้นและลุ้นทะเลหมอก ท่ามกลางวิว180 องศา ใครมาเที่ยวดอยอ่างขางสามารถแวะมาถ่ายรูปหรือจะค้างคืนที่นี่ด้วยก็ได้ บริเวณลานกางเต็นท์ มีทั้งร้านค้า ร้านกาแฟและร้านอาหารให้บริการ พร้อมลานจอดรถกว้างขวางสะดวกสบาย กางเต็นท์พักที่นี่แล้วยังสามารถขับรถไปเที่ยวไร่สตอรว์เบอร์รี่-ไร่ชา และสวนดอกไม้ในสถานีเกษตรหลวงอ่างขางที่อยู่ใกล้ๆ ได้อีกด้วย",
+      "price": "เต็นท์ขนาด 2 คน 200 บาท, เต็นท์ 3 คน ราคา 225 บาท, นำเต็นท์มาเองคิดค่าบริการสถานที่กางเต็นท์ คนละ 30 บาท/คืน",
+      "location": "ดอยอ่างขาง อุทยานแห่งชาติดอยฟ้าห่มปก อ.ฝาง จ.เชียงใหม่"
+    }
   },
   {
     "ListImage": [
@@ -53,7 +65,11 @@
       }
     ],
     "Title": "Camp4",
-    "Description": "Tennis requires cat-like reflexes with short bursts of strength. These short movements do not allow the muscles to extend their full length. When muscles are strenuously worked they become tight and can lose their elasticity unless properly stretched. Yoga exercises can increase the body’s range of motion. The lack of movement because of inflexibility binds the joints. Without the elasticity of the muscles, I think an athlete can be a prisoner of his own body."
+    "Description": {
+      "detail": "ลานกางเต็นท์และจุดชมพระอาทิตย์ขึ้นและทะเลหมอกที่งดงามบนดอยอ่างขาง ตั้งอยู่ท่ามกลางป่าสนบนเนินเขาสูงหรือในภาษาเหนือเรียกว่า “ม่อน” สมชื่อ ที่นี่เป็นจุดชมวิวที่นักท่องเที่ยวนิยมมากางเต็นท์ดูพระอาทิตย์ขึ้นและลุ้นทะเลหมอก ท่ามกลางวิว180 องศา ใครมาเที่ยวดอยอ่างขางสามารถแวะมาถ่ายรูปหรือจะค้างคืนที่นี่ด้วยก็ได้ บริเวณลานกางเต็นท์ มีทั้งร้านค้า ร้านกาแฟและร้านอาหารให้บริการ พร้อมลานจอดรถกว้างขวางสะดวกสบาย กางเต็นท์พักที่นี่แล้วยังสามารถขับรถไปเที่ยวไร่สตอรว์เบอร์รี่-ไร่ชา และสวนดอกไม้ในสถานีเกษตรหลวงอ่างขางที่อยู่ใกล้ๆ ได้อีกด้วย",
+      "price": "เต็นท์ขนาด 2 คน 200 บาท, เต็นท์ 3 คน ราคา 225 บาท, นำเต็นท์มาเองคิดค่าบริการสถานที่กางเต็นท์ คนละ 30 บาท/คืน",
+      "location": "ดอยอ่างขาง อุทยานแห่งชาติดอยฟ้าห่มปก อ.ฝาง จ.เชียงใหม่"
+    }
   },
   {
     "ListImage": [
@@ -67,7 +83,11 @@
       }
     ],
     "Title": "Camp5",
-    "Description": "Tennis requires cat-like reflexes with short bursts of strength. These short movements do not allow the muscles to extend their full length. When muscles are strenuously worked they become tight and can lose their elasticity unless properly stretched. Yoga exercises can increase the body’s range of motion. The lack of movement because of inflexibility binds the joints. Without the elasticity of the muscles, I think an athlete can be a prisoner of his own body."
+    "Description": {
+      "detail": "ลานกางเต็นท์และจุดชมพระอาทิตย์ขึ้นและทะเลหมอกที่งดงามบนดอยอ่างขาง ตั้งอยู่ท่ามกลางป่าสนบนเนินเขาสูงหรือในภาษาเหนือเรียกว่า “ม่อน” สมชื่อ ที่นี่เป็นจุดชมวิวที่นักท่องเที่ยวนิยมมากางเต็นท์ดูพระอาทิตย์ขึ้นและลุ้นทะเลหมอก ท่ามกลางวิว180 องศา ใครมาเที่ยวดอยอ่างขางสามารถแวะมาถ่ายรูปหรือจะค้างคืนที่นี่ด้วยก็ได้ บริเวณลานกางเต็นท์ มีทั้งร้านค้า ร้านกาแฟและร้านอาหารให้บริการ พร้อมลานจอดรถกว้างขวางสะดวกสบาย กางเต็นท์พักที่นี่แล้วยังสามารถขับรถไปเที่ยวไร่สตอรว์เบอร์รี่-ไร่ชา และสวนดอกไม้ในสถานีเกษตรหลวงอ่างขางที่อยู่ใกล้ๆ ได้อีกด้วย",
+      "price": "เต็นท์ขนาด 2 คน 200 บาท, เต็นท์ 3 คน ราคา 225 บาท, นำเต็นท์มาเองคิดค่าบริการสถานที่กางเต็นท์ คนละ 30 บาท/คืน",
+      "location": "ดอยอ่างขาง อุทยานแห่งชาติดอยฟ้าห่มปก อ.ฝาง จ.เชียงใหม่"
+    }
   },
   {
     "ListImage": [
@@ -81,6 +101,10 @@
       }
     ],
     "Title": "Camp6",
-    "Description": "Tennis requires cat-like reflexes with short bursts of strength. These short movements do not allow the muscles to extend their full length. When muscles are strenuously worked they become tight and can lose their elasticity unless properly stretched. Yoga exercises can increase the body’s range of motion. The lack of movement because of inflexibility binds the joints. Without the elasticity of the muscles, I think an athlete can be a prisoner of his own body."
+    "Description": {
+      "detail": "ลานกางเต็นท์และจุดชมพระอาทิตย์ขึ้นและทะเลหมอกที่งดงามบนดอยอ่างขาง ตั้งอยู่ท่ามกลางป่าสนบนเนินเขาสูงหรือในภาษาเหนือเรียกว่า “ม่อน” สมชื่อ ที่นี่เป็นจุดชมวิวที่นักท่องเที่ยวนิยมมากางเต็นท์ดูพระอาทิตย์ขึ้นและลุ้นทะเลหมอก ท่ามกลางวิว180 องศา ใครมาเที่ยวดอยอ่างขางสามารถแวะมาถ่ายรูปหรือจะค้างคืนที่นี่ด้วยก็ได้ บริเวณลานกางเต็นท์ มีทั้งร้านค้า ร้านกาแฟและร้านอาหารให้บริการ พร้อมลานจอดรถกว้างขวางสะดวกสบาย กางเต็นท์พักที่นี่แล้วยังสามารถขับรถไปเที่ยวไร่สตอรว์เบอร์รี่-ไร่ชา และสวนดอกไม้ในสถานีเกษตรหลวงอ่างขางที่อยู่ใกล้ๆ ได้อีกด้วย",
+      "price": "เต็นท์ขนาด 2 คน 200 บาท, เต็นท์ 3 คน ราคา 225 บาท, นำเต็นท์มาเองคิดค่าบริการสถานที่กางเต็นท์ คนละ 30 บาท/คืน",
+      "location": "ดอยอ่างขาง อุทยานแห่งชาติดอยฟ้าห่มปก อ.ฝาง จ.เชียงใหม่"
+    }
   }
 ]
