@@ -51,15 +51,16 @@ const rangeOptions = {
         type="daterange"
         :range="rangeOptions"
         @onChange="updateNights"
-      />
+      /> -->
 
-      <datepicker
+      <!-- <datepicker
         v-model="selected"
         :locale="locale"
         :upperLimit="to"
         :lowerLimit="from"
         :clearable="true"
       /> -->
+
       <label class="block text-gray-700 font-bold mb-2" for="date">
         Date
       </label>
@@ -87,7 +88,7 @@ const rangeOptions = {
       <div
         class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
       >
-        1show available camp/tent
+        1show available camp/tent**
       </div>
       <form class="py-4 px-6" action="" method="POST">
         <div class="mb-4">
@@ -107,13 +108,13 @@ const rangeOptions = {
     </div>
     <div
       class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-      id="availableRest2"
-      v-show="chosenDate === '2024-03-17'"
+      id="availableRest1"
+      v-show="chosenDate === '2024-03-23' && !availableRest"
     >
       <div
         class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
       >
-        2show available camp/tent
+        2show available camp/tent//
       </div>
       <form class="py-4 px-6" action="" method="POST">
         <div class="mb-4">
@@ -141,8 +142,8 @@ const rangeOptions = {
           class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
         >
           <!-- Date, Nights -->
-          <!-- {{ chosenDate }} -->
-          {{ dateRange[0] }} to {{ dateRange[1] }} ({{ nights }} nights)
+          {{ chosenDate }}
+          <!-- {{ dateRange[0] }} to {{ dateRange[1] }} ({{ nights }} nights) -->
         </div>
         <form class="py-4 px-6" action="" method="POST">
           <div class="mb-4">
@@ -171,6 +172,7 @@ const rangeOptions = {
               id="name"
               type="text"
               placeholder="Enter your name"
+              v-model="nameValue"
             />
           </div>
           <h1>Contact Information</h1>
@@ -183,6 +185,7 @@ const rangeOptions = {
               id="email"
               type="email"
               placeholder="Enter your email"
+              v-model="emailValue"
             />
           </div>
           <div class="mb-4">
@@ -194,6 +197,7 @@ const rangeOptions = {
               id="phone"
               type="tel"
               placeholder="Enter your phone number"
+              v-model="phoneValue"
             />
           </div>
 
@@ -206,6 +210,7 @@ const rangeOptions = {
               id="message"
               rows="4"
               placeholder="Enter any additional information"
+              v-model="specialValue"
             ></textarea>
           </div>
           <div class="flex items-center justify-center mb-4">
@@ -236,17 +241,33 @@ const rangeOptions = {
         </div>
         <div class="flex flex-col gap-3 border-b py-6 text-xs">
           <p class="flex justify-between">
+            <span class="text-gray-400">Date:</span>
+            <span>{{ chosenDate }}</span>
+          </p>
+          <p class="flex justify-between">
             <span class="text-gray-400">Receipt No.:</span>
             <span>#5033</span>
           </p>
           <p class="flex justify-between">
-            <span class="text-gray-400">Order Type:</span>
-            <span>Dine-in</span>
+            <span class="text-gray-400">Rest Type:</span>
+            <span>Tent</span>
           </p>
 
           <p class="flex justify-between">
             <span class="text-gray-400">Customer:</span>
-            <span>John Doe</span>
+            <span>{{ nameValue }}</span>
+          </p>
+          <p class="flex justify-between">
+            <span class="text-gray-400">Email:</span>
+            <span>{{ emailValue }}</span>
+          </p>
+          <p class="flex justify-between">
+            <span class="text-gray-400">Phone Number:</span>
+            <span>{{ phoneValue }}</span>
+          </p>
+          <p class="flex justify-between">
+            <span class="text-gray-400">Special Requests:</span>
+            <span>{{ specialValue }}</span>
           </p>
         </div>
         <div class="flex flex-col gap-3 pb-6 pt-2 text-xs">
@@ -260,14 +281,14 @@ const rangeOptions = {
             </thead>
             <tbody>
               <tr class="flex">
-                <td class="flex-1 py-1">Shawarma Big</td>
-                <td class="min-w-[44px]">4</td>
-                <td class="min-w-[44px]">$12</td>
+                <td class="flex-1 py-1">Tent</td>
+                <td class="min-w-[31px]">4</td>
+                <td class="min-w-[44px]">120 Baht</td>
               </tr>
               <tr class="flex py-1">
-                <td class="flex-1">Viju Milk - 100ml</td>
-                <td class="min-w-[44px]">1</td>
-                <td class="min-w-[44px]">$1</td>
+                <td class="flex-1">Sheet</td>
+                <td class="min-w-[31px]">1</td>
+                <td class="min-w-[44px]">100 Baht</td>
               </tr>
             </tbody>
           </table>
