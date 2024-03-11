@@ -14,7 +14,7 @@ import camp from "../../data/camp.json"
           </template>
           <template v-slot:title>{{ slotProps.item.Title }}</template>
           <template v-slot:description>{{
-            slotProps.item.Description
+            slotProps.item.Description.detail
           }}</template>
         </CampCard>
       </template>
