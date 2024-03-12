@@ -8,5 +8,5 @@ export default {
       navgreen: '#4c7b6f',
     },},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
