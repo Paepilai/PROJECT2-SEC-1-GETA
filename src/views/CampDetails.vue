@@ -1,7 +1,11 @@
 <template>
-  <div>
+  <div v-if="campground">
     <h1 class="text-3xl font-semibold mb-4">{{ campground.name }}</h1>
-    <img :src="campground.image" alt="Campground Image" class="w-full h-auto mb-4" />
+    <img
+      :src="campground.image"
+      alt="Campground Image"
+      class="w-full h-auto mb-4"
+    />
     <p class="text-gray-600">{{ campground.description }}</p>
     <p class="text-gray-600">Location: {{ campground.location }}</p>
     <p class="text-gray-600">Price: ${{ campground.price }} per night</p>
@@ -9,15 +13,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import campData from "../../data/camp.json";
+import { ref, onMounted } from "vue"
+import { useRoute } from "vue-router"
+import campData from "../../data/camp.json"
 
-const campground = ref(null);
+const route = useRoute()
+const campground = ref(null)
 
 onMounted(() => {
-  const id = $route.params.id;
-  campground.value = campData.find((camp) => camp.id === parseInt(id));
-});
+  const id = route.params.id
+  campground.value = campData.find((camp) => camp.id === parseInt(id))
+})
 </script>
 
 <style scoped></style>
