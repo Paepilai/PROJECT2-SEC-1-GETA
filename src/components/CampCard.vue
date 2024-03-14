@@ -1,25 +1,20 @@
-<script setup></script>
-
 <template>
-  <div class="card w-96 bg-base-100 shadow-xl">
-    <figure>
-      <slot name="location"></slot>
-    </figure>
-    <div class="card-body">
-      <p class="font-bold text-2xl">📍<slot name="title">Camp!</slot></p>
-      <p class="line-clamp-3">
-        <slot name="description"></slot>
-      </p>
-      <div class="card-actions justify-end">
-        <a
-          href="#"
-          class="btn bg-[#F79C1D] hover:bg-[#F79C1D] hover:ring-2 ring-[#B99B9B] active:bg-[#B99B9B] focus:outline-none"
-        >
-          View Details
-        </a>
-      </div>
-    </div>
+  <div class="border border-gray-200 rounded p-4">
+    <slot name="location"></slot>
+    <h3 class="text-lg font-semibold">{{ name }}</h3>
+    <p class="text-gray-600">{{ location }}</p>
+    <router-link
+      :to="{ name: 'CampDetail', params: { id: id } }"
+      class="mt-2 block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+      >Explore Camp</router-link
+    >
   </div>
 </template>
 
-<style scoped></style>
+<script setup>
+const { title, location } = defineProps({
+  name: String,
+  location: String,
+  id: Number,
+});
+</script>

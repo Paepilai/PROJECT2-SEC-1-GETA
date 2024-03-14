@@ -1,25 +1,20 @@
-<script setup>
-import CampCard from "./CampCard.vue"
-import ListCard from "./ListCard.vue"
-import camp from "../../data/camp.json"
-</script>
-
 <template>
-  <div>
-    <ListCard :items="camp">
-      <template #default="slotProps">
-        <CampCard>
-          <template v-slot:location>
-            <img :src="slotProps.item.ListImage[0].image" alt="location" />
-          </template>
-          <template v-slot:title>{{ slotProps.item.Title }}</template>
-          <template v-slot:description>{{
-            slotProps.item.Description.detail
-          }}</template>
-        </CampCard>
-      </template>
-    </ListCard>
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <img :src="campground.image" alt="Campground" class="w-full h-40 object-cover" />
+    <div class="p-4">
+      <h3 class="text-xl font-semibold mb-2">{{ campground.name }}</h3>
+      <p class="text-gray-700 mb-2">{{ campground.location }}</p>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { PropType } from 'vue';
+
+const props = defineProps({
+  campground: {
+    type: Object as PropType<Object>,
+    required: true,
+  },
+});
+</script>
