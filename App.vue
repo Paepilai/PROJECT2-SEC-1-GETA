@@ -1,15 +1,31 @@
 <script setup>
-import { computed, ref } from "vue"
-// import Vue3Datepicker from "vue3-datepicker"
+import { computed, ref, createApp, defineProps } from "vue"
 import Vue3Datepicker from "vue3-datepicker"
+import Navbar from "./components/Navbar.vue"
+import Camplist from "./components/Camplist.vue"
+import DetailCamp from "./components/DetailCamp.vue"
+import AvailableArea from "./components/AvailableArea.vue"
+import Receipt from "./components/Receipt.vue"
+const app = createApp({})
+
+app.component("Vue3Datepicker", Vue3Datepicker)
 
 const chosenDate = ref("")
 //const availableRest = ref(true)
 const availableRest = ref(false)
 const isBook = ref(true)
+const nameValue = ref("")
+const emailValue = ref("")
+const phoneValue = ref("")
+const specialValue = ref("")
 
 const dateRange = ref([])
 const nights = ref(0)
+const chosenDates = ref(["", ""])
+const props = defineProps(["rangeOptions"])
+
+const selectedDates = ref([])
+const today = new Date()
 
 const startBooking = () => {
   console.log("Booking started")
@@ -21,10 +37,20 @@ const bookReceipt = () => {
   isBook.value = false
   // availableRest.value = true
 }
+// const updateNights = () => {
+//   if (chosenDates.length === 2) {
+//     const startDate = new Date(chosenDates[0])
+//     const endDate = new Date(chosenDates[1])
+//     const timeDifference = endDate.getTime() - startDate.getTime()
+//     const nightsCount = Math.ceil(timeDifference / (1000 * 3600 * 24))
+//     nights.value = nightsCount
+//   }
+// }
+
 const updateNights = () => {
-  if (dateRange.length === 2) {
-    const startDate = new Date(dateRange[0])
-    const endDate = new Date(dateRange[1])
+  if (chosenDates.length === 2) {
+    const startDate = new Date(chosenDates[0] + "T00:00:00Z")
+    const endDate = new Date(chosenDates[1] + "T00:00:00Z")
     const timeDifference = endDate.getTime() - startDate.getTime()
     const nightsCount = Math.ceil(timeDifference / (1000 * 3600 * 24))
     nights.value = nightsCount
@@ -35,31 +61,80 @@ const rangeOptions = {
   startPlaceholder: "Start Date",
   endPlaceholder: "End Date",
 }
+// const confirmDateRange = () => {
+//   console.log("Chosen Dates:", chosenDates)
+//   // Update nights when confirming the date range
+// }
+// const confirmDateRange = () => {
+//   console.log("Chosen Dates:", chosenDates)
+
+//   if (chosenDates.length === 2) {
+//     const startDate = new Date(chosenDates[0])
+//     const endDate = new Date(chosenDates[1])
+//     const timeDifference = endDate.getTime() - startDate.getTime()
+//     const nightsCount = Math.ceil(timeDifference / (1000 * 3600 * 24))
+
+//     nights.value = nightsCount
+//     console.log("Nights Count:", nightsCount)
+//   } else {
+//     console.error("Please select a valid date range.")
+//   }
+// }
+const confirmDateRange = () => {
+  console.log("Chosen Dates:", chosenDates)
+
+  if (chosenDates.length === 2) {
+    const startDate = new Date(chosenDates[0])
+    const endDate = new Date(chosenDates[1])
+    const timeDifference = endDate.getTime() - startDate.getTime()
+    const nightsCount = Math.ceil(timeDifference / (1000 * 3600 * 24))
+
+    nights.value = nightsCount
+    console.log("Nights Count:", nightsCount)
+  } else {
+    console.error("Please select a valid date range.")
+  }
+}
 </script>
 
 <template>
   <div>
     <!-- navbar link to camp name -->
+    <Navbar />
 
     <!-- demo, input date from camp info page -->
     <div class="mb-4">
       <!-- Dates 1. <input type="date" name="data_range_from[]" /> to
       <input type="date" name="data_range_to[]" /><br /> -->
 
-      <!-- <vue3-datepicker
-        v-model="dateRange"
+      <!-- <label class="block text-gray-700 font-bold mb-2" for="date">
+        Date Range
+      </label>
+      <vue3-datepicker
+        v-model="chosenDates"
         type="daterange"
         :range="rangeOptions"
+        :isMultiple="true"
         @onChange="updateNights"
       /> -->
+      <div>
+        <label for="date">Select Dates:</label>
+        <input
+          v-for="(date, index) in chosenDates"
+          :key="index"
+          type="date"
+          v-model="chosenDates[index]"
+          @change="updateNights"
+        />
 
-      <!-- <datepicker
-        v-model="selected"
-        :locale="locale"
-        :upperLimit="to"
-        :lowerLimit="from"
-        :clearable="true"
-      /> -->
+        <button @click="confirmDateRange">Confirm Date Range</button>
+
+        <div v-if="chosenDates.length > 0">
+          <p>Selected Dates: {{ chosenDates.join(", ") }}</p>
+          <p v-if="chosenDates.length === 2">Nights: {{ nights }} night(s)</p>
+          <p v-else style="color: red">Please select a valid date range.</p>
+        </div>
+      </div>
 
       <label class="block text-gray-700 font-bold mb-2" for="date">
         Date
@@ -85,6 +160,7 @@ const rangeOptions = {
       id="availableRest1"
       v-show="chosenDate === '2024-03-16' && !availableRest"
     >
+      <!-- <AvailableArea /> -->
       <div
         class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
       >
@@ -142,9 +218,16 @@ const rangeOptions = {
           class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
         >
           <!-- Date, Nights -->
-          {{ chosenDate }}
+          <!-- {{ chosenDate }} -->
+          <div v-if="chosenDates.length === 2">
+            <p>
+              Selected Date Range: {{ chosenDates[0] }} to {{ chosenDates[1] }}
+            </p>
+            <p>Nights: {{ nights }} night(s)</p>
+          </div>
           <!-- {{ dateRange[0] }} to {{ dateRange[1] }} ({{ nights }} nights) -->
         </div>
+
         <form class="py-4 px-6" action="" method="POST">
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="name">
