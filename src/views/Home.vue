@@ -21,7 +21,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="grid-container">
+  <div class="grid-container mt-20">
     <div class="flex items-center justify-between px-3 py-5">
       <h1 class="ml-8 text-4xl font-bold">Hi [Name], welcome to your space!</h1>
 
@@ -39,18 +39,10 @@ onMounted(async () => {
   <div>
     <ListCard :items="campgrounds">
       <template #default="slotProps">
-        <CampCard
-          :name="slotProps.item.name"
-          :location="slotProps.item.location"
-          :id="slotProps.item.id"
-        >
+        <CampCard :name="slotProps.item.name" :location="slotProps.item.location" :id="slotProps.item.id">
           :
           <template v-slot:location>
-            <img
-              :src="slotProps.item.image"
-              alt="Location Image"
-              class="h-60 w-80 object-cover rounded-t"
-            />
+            <img :src="slotProps.item.image" alt="Location Image" class="h-70 w-[100%] object-cover rounded-t " />
           </template>
         </CampCard>
       </template>
