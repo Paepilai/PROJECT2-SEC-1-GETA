@@ -4,7 +4,7 @@
     <div class="col-span-2 mt-20">
       <div class="flex-col">
         <div class=" font-bold text-4xl p-10 text-center inline flex-row ">
-          <RouterLink to="/" class="btn btn-circle text-bold">
+          <RouterLink to="/home" class="btn btn-circle text-bold">
             <img src="https://www.svgrepo.com/show/67631/back-arrow.svg" alt="back" class="h-10 w-10 mr-2" />
           </RouterLink>
 

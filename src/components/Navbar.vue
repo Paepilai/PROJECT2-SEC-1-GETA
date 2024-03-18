@@ -5,10 +5,10 @@
     <div class="container mx-auto flex items-center justify-between">
       <div class="flex items-center">
         <img src="./icons/navbar_logo.png" alt="navbar_logo" class="h-10 w-10 mr-2" />
-        <RouterLink to="/" class="text-white font-medium font-['mitr'] text-2xl">CampSpace</RouterLink>
+        <RouterLink to="/home" class="text-white font-medium font-['mitr'] text-2xl">CampSpace</RouterLink>
       </div>
       <div class="flex items-center">
-        <RouterLink to="/" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]">Home
+        <RouterLink to="/home" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]">Home
         </RouterLink>
         <RouterLink to="/camp" class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]">Booking
         </RouterLink>
