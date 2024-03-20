@@ -1,7 +1,7 @@
 <template>
   <div v-if="campground">
 
-    <div class="col-span-2 mt-20">
+    <div class="col-span-2 ">
       <div class="flex-col">
         <div class=" font-bold text-4xl p-10 text-center inline flex-row ">
           <RouterLink to="/home" class="btn btn-circle text-bold">
@@ -83,7 +83,7 @@
         </div>
         <hr class="h-2 border-dashed border-gray-300 ">
         <div class="flex justify-center p-5 ">
-          <RouterLink to="/" class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl">Join Camp
+          <RouterLink to="/booking" class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl">Join Camp
           </RouterLink>
         </div>
       </div>

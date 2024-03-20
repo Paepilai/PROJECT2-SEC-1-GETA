@@ -3,6 +3,7 @@ import campData from "../../data/camp.json";
 import Camplist from "../components/Navbar.vue";
 import CampCard from "../components/CampCard.vue";
 import ListCard from "../components/ListCard.vue";
+import Navbar from "../components/Navbar.vue";
 import { ref, onMounted } from "vue";
 const campgrounds = ref([]);
 
@@ -21,7 +22,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="grid-container mt-20">
+  <Navbar />
+  <div class="grid-container ">
     <div class="flex items-center justify-between px-3 py-5">
       <h1 class="ml-8 text-4xl font-bold">Hi [Name], welcome to your space!</h1>
 

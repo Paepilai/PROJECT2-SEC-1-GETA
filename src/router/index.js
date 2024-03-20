@@ -2,12 +2,19 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import CampDetail from "../views/CampDetails.vue";
 import Login from "../views/Login.vue";
+import Booking from "../views/Booking.vue";
+import NotFound from "../views/NotFound.vue";
 
 export const routes = [
   {
     path: "/",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/booking",
+    name: "Booking",
+    component: Booking,
   },
   {
     path: "/home",
@@ -19,6 +26,11 @@ export const routes = [
     name: "CampDetail",
     component: CampDetail,
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
+  }  
 ];
 
 const router = createRouter({

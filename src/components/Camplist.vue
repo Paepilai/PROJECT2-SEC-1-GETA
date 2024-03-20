@@ -9,11 +9,11 @@
 </template>
 
 <script setup>
-import { PropType } from 'vue';
+// import { PropType } from 'vue';
 
 const props = defineProps({
   campground: {
-    type: Object as PropType<Object>,
+    type: Object,
     required: true,
   },
 });
