@@ -45,7 +45,7 @@ const redirectToBooking = () => {
     <div
       class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
     >
-      1show available camp/tent**
+      Area 1
     </div>
     <div class="py-4 px-6">
       <div class="mb-4">
