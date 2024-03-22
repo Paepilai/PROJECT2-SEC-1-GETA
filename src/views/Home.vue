@@ -38,7 +38,7 @@ onMounted(async () => {
     <label class="mr-8 input input-bordered- flex items-center gap-2">
       <input type="text" v-model="searchQuery" class="grow" placeholder="Search" />
     </label>
-    <ul>
+    <ul v-if="searchQuery !== ''">
       <li v-for="item in filteredItems" :key="item.id">
         {{ item.name }}
       </li>
@@ -48,7 +48,7 @@ onMounted(async () => {
     <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
   </div>
   <div>
-    <ListCard :items="campgrounds">
+    <ListCard :items="filteredItems">
       <template #default="slotProps">
         <CampCard
           :name="slotProps.item.name"
