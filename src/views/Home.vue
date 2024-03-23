@@ -1,6 +1,6 @@
 <script setup>
-import campData from "../../data/camp.json";
-import Camplist from "../components/Navbar.vue";
+// import campData from "../../data/camp.json";
+// import Camplist from "../components/Navbar.vue";
 import CampCard from "../components/CampCard.vue";
 import ListCard from "../components/ListCard.vue";
 import { ref, onMounted } from "vue";

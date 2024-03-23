@@ -8,21 +8,13 @@
         <a href="#" class="text-white font-medium font-['mitr'] text-2xl">CampSpace</a>
       </div>
       <div class="flex items-center">
-        <a
-          href="#"
-          class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]"
-          >Home</a
-        >
-        <a
-          href="#"
-          class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]"
-          >Booking</a
-        >
-        <a
-          href="#"
-          class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]"
-          >Profile</a
-        >
+        <RouterLink :to="{ name: 'Home' }"
+          class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]">Home
+        </RouterLink>
+        <!-- <RouterLink :to="{ name: 'Booking' }"
+          class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]">Booking</RouterLink> -->
+        <RouterLink :to="{ name: 'Profile' }"
+          class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]">Profile</RouterLink>
       </div>
     </div>
   </nav>
