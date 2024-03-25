@@ -21,6 +21,6 @@
 const { title, location } = defineProps({
   name: String,
   location: String,
-  id: Number,
+  id: [Number, String],
 })
 </script>
