@@ -1,64 +1,93 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import { editItem } from '../libs/fetchUtils';
+import user from '../../data/user.json';
+
+const name = ref(user[0].name);
+const email = ref(user[0].email);
+const bio = ref(user[0].bio);
+
+const showModal = ref(false);
+
+const openModal = () => {
+    showModal.value = true;
+};
+
+const closeModal = () => {
+    showModal.value = false;
+};
+
+const updateProfile = async () => {
+    const updatedProfile = {
+        name: name.value,
+        email: email.value,
+        bio: bio.value
+    };
+
+    const response = await editItem(import.meta.env.VITE_USER_BASE_URL, updatedProfile);
+
+    if (response) {
+        name.value = response.name;
+        email.value = response.email;
+        bio.value = response.bio;
+    }
+
+    closeModal();
+};
+
+onMounted(async () => {
+    name.value = user[0].name;
+    email.value = user[0].email;
+    bio.value = user[0].bio;
+});
+
+</script>
+
 <template>
-    <div class="container mx-auto p-4">
+    <div class="p-3 mt-2">
         <h1 class="text-3xl font-bold mb-4">{{ name }}</h1>
         <p class="text-gray-600 mb-2">{{ email }}</p>
         <p class="text-gray-600 mb-4">{{ bio }}</p>
-        <button @click="openModal" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Edit
-            Profile</button>
+        <button @click="openModal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Edit Profile
+        </button>
 
-        <div v-if="isModalOpen">
-            <div class="fixed z-10 inset-0 overflow-y-auto">
-                <div class="flex items-center justify-center min-h-screen">
-                    <div class="modal bg-white rounded-lg overflow-hidden shadow-xl p-4">
-                        <form @submit.prevent="updateProfile">
-                            <input v-model="updatedProfile.name" type="text" placeholder="Name"
-                                class="w-full mb-4 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500">
-                            <input v-model="updatedProfile.email" type="email" placeholder="Email"
-                                class="w-full mb-4 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500">
-                            <textarea v-model="updatedProfile.bio" placeholder="Bio"
-                                class="w-full mb-4 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-500"></textarea>
-                            <button type="submit"
-                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Update</button>
+
+        <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto">
+            <div class="flex items-center justify-center min-h-screen">
+                <div class="bg-white w-1/2 p-6 rounded shadow">
+                    <h2 class="text-2xl font-bold mb-4">Edit Mode</h2>
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-bold mb-2">Name:</label>
+                            <input type="text" id="name" v-model="name"
+                                class="border border-gray-300 rounded px-4 py-2">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
+                            <input type="email" id="email" v-model="email"
+                                class="border border-gray-300 rounded px-4 py-2">
+                        </div>
+                        <div class="mb-4">
+                            <label for="bio" class="block text-gray-700 font-bold mb-2">Bio:</label>
+                            <textarea id="bio" v-model="bio"
+                                class="border border-gray-300 rounded px-4 py-2"></textarea>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="submit" @click.prevent="updateProfile"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Save
+                            </button>
                             <button @click="closeModal"
-                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Close</button>
-                        </form>
-                    </div>
+                                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">
+                                Close
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import profile from '../../data/user.json';
-
-const name = ref(profile[0].name);
-const email = ref(profile[0].email);
-const bio = ref(profile[0].bio);
-
-const updatedProfile = {
-    name: name.value,
-    email: email.value,
-    bio: bio.value
-};
-
-const isModalOpen = ref(false);
-
-const openModal = () => {
-    isModalOpen.value = true;
-}
-
-const closeModal = () => {
-    isModalOpen.value = false;
-}
-
-const updateProfile = () => {
-    name.value = updatedProfile.name;
-    email.value = updatedProfile.email;
-    bio.value = updatedProfile.bio;
-    isModalOpen.value = false;
-}
-</script>
 
 <style scoped></style>
