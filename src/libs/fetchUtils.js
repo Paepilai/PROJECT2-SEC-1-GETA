@@ -1,6 +1,6 @@
-async function editItem(url, editItem) {
+async function editItem(url, id, editItem) {
   try {
-    const res = fetch(`${url}`, {
+    const res = fetch(`${url}/${id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -8,11 +8,11 @@ async function editItem(url, editItem) {
       body: JSON.stringify({
         ...editItem,
       }),
-    });
-    const editedItem = await res.json();
-    return editedItem;
+    })
+    const editedItem = await res.json()
+    return editedItem
   } catch (error) {
-    console.log(`error: ${error}`);
+    console.log(`error: ${error}`)
   }
 }
-export { editItem };
+export { editItem }
