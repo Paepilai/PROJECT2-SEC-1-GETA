@@ -4,6 +4,7 @@ import CampDetail from "../views/CampDetails.vue"
 import Booking from "../views/Booking.vue"
 import AvailableArea from "../views/AvailableArea.vue"
 import Receipt from "../views/Receipt.vue"
+import MyBooking from "../views/MyBooking.vue"
 
 export const routes = [
   {
@@ -30,6 +31,11 @@ export const routes = [
     path: "/receipt",
     name: "Receipt",
     component: Receipt,
+  },
+  {
+    path: "/mybooking",
+    name: "MyBooking",
+    component: MyBooking,
   },
 ]
 

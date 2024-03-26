@@ -4,16 +4,24 @@ import { useRouter } from "vue-router"
 
 const router = useRouter()
 
-// const redirectToMyBooking = () => {
-//   console.log("Routing..")
-//   router.push("/mybooking")
-// }
+const redirectToMyBooking = () => {
+  console.log("Routing..")
+  router.push("/mybooking")
+}
 
 const chosenDate = ref(null)
 const nameValue = ref("")
 const emailValue = ref("")
 const phoneValue = ref("")
 const specialValue = ref("")
+const tentQuantity = ref(0)
+const sleepingBagQuantity = ref(0)
+const mattressQuantity = ref(0)
+const pillowQuantity = ref(0)
+const tentPrice = ref(0)
+const sleepingBagPrice = ref(0)
+const mattressPrice = ref(0)
+const pillowPrice = ref(0)
 
 onMounted(() => {
   const route = router.currentRoute.value
@@ -22,6 +30,14 @@ onMounted(() => {
   emailValue.value = route.query.emailValue || ""
   phoneValue.value = route.query.phoneValue || ""
   specialValue.value = route.query.specialValue || ""
+  tentQuantity.value = parseInt(route.query.tentQuantity) || 0
+  sleepingBagQuantity.value = parseInt(route.query.sleepingBagQuantity) || 0
+  mattressQuantity.value = parseInt(route.query.mattressQuantity) || 0
+  pillowQuantity.value = parseInt(route.query.pillowQuantity) || 0
+  tentPrice.value = parseFloat(route.query.tentPrice) || 0
+  sleepingBagPrice.value = parseFloat(route.query.sleepingBagPrice) || 0
+  mattressPrice.value = parseFloat(route.query.mattressPrice) || 0
+  pillowPrice.value = parseFloat(route.query.pillowPrice) || 0
 })
 </script>
 
@@ -71,7 +87,7 @@ onMounted(() => {
       <table class="w-full text-left">
         <thead>
           <tr class="flex">
-            <th class="w-full py-2">Product</th>
+            <th class="w-full py-2">List</th>
             <th class="min-w-[44px] py-2">QTY</th>
             <th class="min-w-[44px] py-2">Total</th>
           </tr>
@@ -79,11 +95,21 @@ onMounted(() => {
         <tbody>
           <tr class="flex">
             <td class="flex-1 py-1">Tent</td>
-            <td class="min-w-[31px]">4</td>
-            <td class="min-w-[44px]">120 Baht</td>
+            <td class="min-w-[31px]">{{ $route.query.tentQuantity }}</td>
+            <td class="min-w-[44px]">{{ $route.query.tentPrice }} Baht</td>
           </tr>
           <tr class="flex py-1">
-            <td class="flex-1">Sheet</td>
+            <td class="flex-1">Sleeping bag</td>
+            <td class="min-w-[31px]">1</td>
+            <td class="min-w-[44px]">100 Baht</td>
+          </tr>
+          <tr class="flex py-1">
+            <td class="flex-1">Mattress</td>
+            <td class="min-w-[31px]">1</td>
+            <td class="min-w-[44px]">100 Baht</td>
+          </tr>
+          <tr class="flex py-1">
+            <td class="flex-1">Pillow</td>
             <td class="min-w-[31px]">1</td>
             <td class="min-w-[44px]">100 Baht</td>
           </tr>
@@ -128,6 +154,7 @@ onMounted(() => {
         <button
           class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
           type="submit"
+          @click="redirectToMyBooking"
         >
           My Booking
         </button>
