@@ -54,17 +54,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-80 rounded bg-gray-50 px-6 pt-8 shadow-lg">
+  <div
+    class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+  >
     <img
       src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
       alt="chippz"
       class="mx-auto w-16 py-4"
     />
     <div class="flex flex-col justify-center items-center gap-2">
-      <h4 class="font-semibold">{{ selectedCampground }}</h4>
-      <p class="text-xs">Location</p>
+      <h4 class="font-semibold text-4xl">{{ selectedCampground }}</h4>
+      <p class="text-l">Location</p>
     </div>
-    <div class="flex flex-col gap-3 border-b py-6 text-xs">
+    <div class="flex flex-col gap-3 border-b py-6 text-xl px-10">
       <p class="flex justify-between">
         <span class="text-gray-400">Date:</span>
         <span>{{ chosenDate }}</span>
@@ -100,39 +102,39 @@ onMounted(() => {
         <span>{{ specialValue }}</span>
       </p>
     </div>
-    <div class="flex flex-col gap-3 pb-6 pt-2 text-xs">
+    <div class="flex flex-col gap-3 pb-6 pt-2 text-xl px-10">
       <table class="w-full text-left">
         <thead>
           <tr class="flex">
             <th class="w-full py-2">List</th>
-            <th class="min-w-[44px] py-2">QTY</th>
+            <th class="min-w-[44px] py-2 px-28">QTY</th>
             <th class="min-w-[44px] py-2">Total</th>
           </tr>
         </thead>
         <tbody>
           <tr class="flex">
-            <td class="flex-1 py-1">Tent</td>
-            <td class="min-w-[31px]">{{ qtyAmountTent }}</td>
+            <td class="flex-1">Tent</td>
+            <td class="min-w-[44px] py-2 px-28">{{ qtyAmountTent }}</td>
             <td class="min-w-[44px]">Baht</td>
           </tr>
-          <tr class="flex py-1">
+          <tr class="flex">
             <td class="flex-1">Sleeping bag</td>
-            <td class="min-w-[31px]">{{ qtyAmountSleepingBag }}</td>
+            <td class="min-w-[44px] py-2 px-28">{{ qtyAmountSleepingBag }}</td>
             <td class="min-w-[44px]">100 Baht</td>
           </tr>
-          <tr class="flex py-1">
+          <tr class="flex">
             <td class="flex-1">Mattress</td>
-            <td class="min-w-[31px]">{{ qtyAmountMattress }}</td>
+            <td class="min-w-[44px] py-2 px-28">{{ qtyAmountMattress }}</td>
             <td class="min-w-[44px]">100 Baht</td>
           </tr>
-          <tr class="flex py-1">
+          <tr class="flex">
             <td class="flex-1">Pillow</td>
-            <td class="min-w-[31px]">{{ qtyAmountPillow }}</td>
+            <td class="min-w-[44px] py-2 px-28">{{ qtyAmountPillow }}</td>
             <td class="min-w-[44px]">100 Baht</td>
           </tr>
-          <tr class="flex py-1">
+          <tr class="flex">
             <td class="flex-1">Total</td>
-            <td class="min-w-[31px]"></td>
+            <td class="min-w-[44px] py-2 px-28"></td>
             <td class="min-w-[44px]">Baht</td>
           </tr>
         </tbody>
@@ -174,7 +176,7 @@ onMounted(() => {
           +234XXXXXXXX
         </p>
         <button
-          class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+          class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
           type="submit"
           @click="redirectToMyBooking"
         >

@@ -50,7 +50,278 @@ const campground = campData[0]
   <div
     class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
     id="availableRest1"
-    v-show="chosenDate === '2024-03-16' && !availableRest"
+    v-show="chosenDate === '2024-03-16'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-01'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-02'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-03'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-04'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-05'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-06'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-07'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-08'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-09'"
+    v-for="(zone, index) in campground.area"
+    :key="index"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone {{ zone.zoneId }}
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          {{ zone.zoneName }}
+        </label>
+        <h1>{{ zone.zoneDesc }}</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking(zone)"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-04-10'"
     v-for="(zone, index) in campground.area"
     :key="index"
   >
