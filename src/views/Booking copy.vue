@@ -13,13 +13,6 @@ const redirectToReceipt = () => {
       emailValue: emailValue.value,
       phoneValue: phoneValue.value,
       specialValue: specialValue.value,
-      nightAmount: nightAmount.value,
-      calculateTotalAmount: calculateTotalAmount.value,
-      selectedCampground: selectedCampground.value,
-      qtyAmountTent: qtyAmountTent.value,
-      qtyAmountSleepingBag: qtyAmountSleepingBag.value,
-      qtyAmountMattress: qtyAmountMattress.value,
-      qtyAmountPillow: qtyAmountPillow.value,
     },
   })
 }
@@ -35,95 +28,20 @@ import campData from "../../data/old-camp.json"
 
 const campground = ref(null)
 
-const qtyAmountTent = ref(0)
-const qtyAmountSleepingBag = ref(0)
-const qtyAmountMattress = ref(0)
-const qtyAmountPillow = ref(0)
+const qtyAmount = ref(0)
 
 const nightAmount = ref(0)
+const totalPrices = ref([])
 
 onMounted(() => {
   const route = router.currentRoute.value
   chosenDate.value = route.query.chosenDate || null
 })
 
-// watchEffect(() => {
-//   calculateTotalAmount.value
-// })
-
 function getPrice(campId, item) {
   const camp = campData.find((camp) => camp.id === campId)
   return camp ? camp.price[item] : 0
 }
-
-const calculateTotalAmount = computed(() => {
-  let total = 0
-
-  total +=
-    getPrice(selectedCampground.value, "tent") *
-    nightAmount.value *
-    qtyAmountTent.value
-  total +=
-    getPrice(selectedCampground.value, "sleeping_bag") *
-    nightAmount.value *
-    qtyAmountSleepingBag.value
-  total +=
-    getPrice(selectedCampground.value, "mattress") *
-    nightAmount.value *
-    qtyAmountMattress.value
-  total +=
-    getPrice(selectedCampground.value, "pillow") *
-    nightAmount.value *
-    qtyAmountPillow.value
-
-  return total
-})
-
-const tentTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "tent") *
-    nightAmount.value *
-    qtyAmount.tent.value
-  )
-})
-
-const sleepingBagTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "sleeping_bag") *
-    nightAmount.value *
-    qtyAmountSleepingBag.value
-  )
-})
-
-const mattressTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "mattress") *
-    nightAmount.value *
-    qtyAmountMattress.value
-  )
-})
-
-const pillowTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "pillow") *
-    nightAmount.value *
-    qtyAmountPillow.value
-  )
-})
-
-const equipmentPrices = computed(() => {
-  const selectedCamp = campData.find(
-    (camp) => camp.id === selectedCampground.value
-  )
-  if (!selectedCamp) return {}
-
-  return {
-    Tent: selectedCamp.price.tent,
-    "Sleeping Bag": selectedCamp.price.sleeping_bag,
-    Mattress: selectedCamp.price.mattress,
-    Pillow: selectedCamp.price.pillow,
-  }
-})
 </script>
 
 <template>
@@ -178,7 +96,7 @@ const equipmentPrices = computed(() => {
           >
             <tr>
               <th scope="col" class="px-6 py-3 rounded-s-lg">List</th>
-
+              <th scope="col" class="px-6 py-3 rounded-s-lg">Night</th>
               <th scope="col" class="px-6 py-3 rounded-s-lg">Price</th>
               <th scope="col" class="px-6 py-3 rounded-s-lg">Net Price</th>
 
@@ -194,7 +112,9 @@ const equipmentPrices = computed(() => {
               >
                 Tent
               </th>
-
+              <td class="px-6 py-4">
+                {{ nightAmount }}
+              </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedCampground, "tent") }}
               </td>
@@ -202,13 +122,11 @@ const equipmentPrices = computed(() => {
                 {{ getPrice(selectedCampground, "tent") * nightAmount }}
               </td>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountTent" />
+                <input type="number" v-model="qtyAmount" />
               </td>
               <td class="px-6 py-4">
                 {{
-                  getPrice(selectedCampground, "tent") *
-                  nightAmount *
-                  qtyAmountTent
+                  getPrice(selectedCampground, "tent") * nightAmount * qtyAmount
                 }}
               </td>
             </tr>
@@ -220,7 +138,9 @@ const equipmentPrices = computed(() => {
               >
                 Sleeping bag
               </th>
-
+              <td class="px-6 py-4">
+                {{ nightAmount }}
+              </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedCampground, "sleeping_bag") }}
               </td>
@@ -228,13 +148,13 @@ const equipmentPrices = computed(() => {
                 {{ getPrice(selectedCampground, "sleeping_bag") * nightAmount }}
               </td>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountSleepingBag" />
+                <input type="number" v-model="qtyAmount" />
               </td>
               <td class="px-6 py-4">
                 {{
                   getPrice(selectedCampground, "sleeping_bag") *
                   nightAmount *
-                  qtyAmountSleepingBag
+                  qtyAmount
                 }}
               </td>
             </tr>
@@ -245,7 +165,9 @@ const equipmentPrices = computed(() => {
               >
                 Mattress
               </th>
-
+              <td class="px-6 py-4">
+                {{ nightAmount }}
+              </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedCampground, "mattress") }}
               </td>
@@ -253,13 +175,13 @@ const equipmentPrices = computed(() => {
                 {{ getPrice(selectedCampground, "mattress") * nightAmount }}
               </td>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountMattress" />
+                <input type="number" v-model="qtyAmount" />
               </td>
               <td class="px-6 py-4">
                 {{
                   getPrice(selectedCampground, "mattress") *
                   nightAmount *
-                  qtyAmountMattress
+                  qtyAmount
                 }}
               </td>
             </tr>
@@ -270,7 +192,9 @@ const equipmentPrices = computed(() => {
               >
                 Pillow
               </th>
-
+              <td class="px-6 py-4">
+                {{ nightAmount }}
+              </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedCampground, "pillow") }}
               </td>
@@ -278,13 +202,13 @@ const equipmentPrices = computed(() => {
                 {{ getPrice(selectedCampground, "pillow") * nightAmount }}
               </td>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountPillow" />
+                <input type="number" v-model="qtyAmount" />
               </td>
               <td class="px-6 py-4">
                 {{
                   getPrice(selectedCampground, "pillow") *
                   nightAmount *
-                  qtyAmountPillow
+                  qtyAmount
                 }}
               </td>
             </tr>
@@ -293,7 +217,7 @@ const equipmentPrices = computed(() => {
             <tr class="font-semibold text-gray-900 dark:text-white">
               <th scope="row" class="px-6 py-3 text-base">Total</th>
               <td class="px-6 py-3">{{ nightAmount }}</td>
-              <td class="px-6 py-3">{{ calculateTotalAmount }}</td>
+              <td class="px-6 py-3">calculateTotalAmount</td>
             </tr>
           </tfoot>
         </table>

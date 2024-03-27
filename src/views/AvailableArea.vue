@@ -43,19 +43,69 @@ const redirectToBooking = () => {
     v-show="chosenDate === '2024-03-16' && !availableRest"
   >
     <div
-      class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
     >
-      Area 1
+      Zone 1
     </div>
     <div class="py-4 px-6">
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2" for="name">
-          Living Details
+          โซนที่ทำการอุทยานแห่งชาติ
         </label>
-        <h1>dff</h1>
+        <h1>บริการบ้านพัก ห้องประชุม เต็นท์ ลานกางเต็นท์</h1>
       </div>
       <button
-        class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking()"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-03-16' && !availableRest"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone 2
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          โซนริมแก่ง
+        </label>
+        <h1>ห่างจากที่ทำการ 1.5 กม. ใกล้สะพานแขวน บริการบ้านพัก</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+        @click="redirectToBooking()"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <div
+    class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    id="availableRest1"
+    v-show="chosenDate === '2024-03-16' && !availableRest"
+  >
+    <div
+      class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+    >
+      Zone 3
+    </div>
+    <div class="py-4 px-6">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2" for="name">
+          โซนหน่วยพิทักษ์ฯ บ้านกร่าง
+        </label>
+        <h1>ห่างจากที่ทำการฯ 35 กม. บริการค่ายพักแรม เต็นท์ ลานกางเต็นท์</h1>
+      </div>
+      <button
+        class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
         @click="redirectToBooking()"
       >
         Book

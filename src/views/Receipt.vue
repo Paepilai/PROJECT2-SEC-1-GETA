@@ -1,6 +1,7 @@
 <script setup>
-import { ref, defineProps, onMounted } from "vue"
+import { ref, defineProps, onMounted, watchEffect, computed } from "vue"
 import { useRouter } from "vue-router"
+import { calculateTotalAmount } from "../views/Booking.vue"
 
 const router = useRouter()
 
@@ -14,14 +15,12 @@ const nameValue = ref("")
 const emailValue = ref("")
 const phoneValue = ref("")
 const specialValue = ref("")
-const tentQuantity = ref(0)
-const sleepingBagQuantity = ref(0)
-const mattressQuantity = ref(0)
-const pillowQuantity = ref(0)
-const tentPrice = ref(0)
-const sleepingBagPrice = ref(0)
-const mattressPrice = ref(0)
-const pillowPrice = ref(0)
+const selectedCampground = ref(null)
+const qtyAmountTent = ref(0)
+const qtyAmountSleepingBag = ref(0)
+const qtyAmountMattress = ref(0)
+const qtyAmountPillow = ref(0)
+const nightAmount = ref(0)
 
 onMounted(() => {
   const route = router.currentRoute.value
@@ -30,14 +29,12 @@ onMounted(() => {
   emailValue.value = route.query.emailValue || ""
   phoneValue.value = route.query.phoneValue || ""
   specialValue.value = route.query.specialValue || ""
-  tentQuantity.value = parseInt(route.query.tentQuantity) || 0
-  sleepingBagQuantity.value = parseInt(route.query.sleepingBagQuantity) || 0
-  mattressQuantity.value = parseInt(route.query.mattressQuantity) || 0
-  pillowQuantity.value = parseInt(route.query.pillowQuantity) || 0
-  tentPrice.value = parseFloat(route.query.tentPrice) || 0
-  sleepingBagPrice.value = parseFloat(route.query.sleepingBagPrice) || 0
-  mattressPrice.value = parseFloat(route.query.mattressPrice) || 0
-  pillowPrice.value = parseFloat(route.query.pillowPrice) || 0
+  qtyAmountTent.value = parseInt(route.query.qtyAmountTent) || 0
+  qtyAmountSleepingBag.value = parseInt(route.query.qtyAmountSleepingBag) || 0
+  qtyAmountMattress.value = parseInt(route.query.qtyAmountMattress) || 0
+  qtyAmountPillow.value = parseInt(route.query.qtyAmountPillow) || 0
+  nightAmount.value = parseInt(route.query.nightAmount) || 0
+  selectedCampground.value = route.query.selectedCampground || null
 })
 </script>
 
@@ -49,7 +46,7 @@ onMounted(() => {
       class="mx-auto w-16 py-4"
     />
     <div class="flex flex-col justify-center items-center gap-2">
-      <h4 class="font-semibold">Camp Name</h4>
+      <h4 class="font-semibold">{{ selectedCampground }}</h4>
       <p class="text-xs">Location</p>
     </div>
     <div class="flex flex-col gap-3 border-b py-6 text-xs">
@@ -61,11 +58,16 @@ onMounted(() => {
         <span class="text-gray-400">Receipt No.:</span>
         <span>#5033</span>
       </p>
+
       <p class="flex justify-between">
-        <span class="text-gray-400">Rest Type:</span>
-        <span>Tent</span>
+        <span class="text-gray-400">Zone:</span>
+        <span>Zone,ZoneName</span>
       </p>
 
+      <p class="flex justify-between">
+        <span class="text-gray-400">Nights:</span>
+        <span>{{ nightAmount }}</span>
+      </p>
       <p class="flex justify-between">
         <span class="text-gray-400">Customer:</span>
         <span>{{ nameValue }}</span>
@@ -95,23 +97,28 @@ onMounted(() => {
         <tbody>
           <tr class="flex">
             <td class="flex-1 py-1">Tent</td>
-            <td class="min-w-[31px]">{{ $route.query.tentQuantity }}</td>
-            <td class="min-w-[44px]">{{ $route.query.tentPrice }} Baht</td>
+            <td class="min-w-[31px]">{{ qtyAmountTent }}</td>
+            <td class="min-w-[44px]">Baht</td>
           </tr>
           <tr class="flex py-1">
             <td class="flex-1">Sleeping bag</td>
-            <td class="min-w-[31px]">1</td>
+            <td class="min-w-[31px]">{{ qtyAmountSleepingBag }}</td>
             <td class="min-w-[44px]">100 Baht</td>
           </tr>
           <tr class="flex py-1">
             <td class="flex-1">Mattress</td>
-            <td class="min-w-[31px]">1</td>
+            <td class="min-w-[31px]">{{ qtyAmountMattress }}</td>
             <td class="min-w-[44px]">100 Baht</td>
           </tr>
           <tr class="flex py-1">
             <td class="flex-1">Pillow</td>
-            <td class="min-w-[31px]">1</td>
+            <td class="min-w-[31px]">{{ qtyAmountPillow }}</td>
             <td class="min-w-[44px]">100 Baht</td>
+          </tr>
+          <tr class="flex py-1">
+            <td class="flex-1">Total</td>
+            <td class="min-w-[31px]"></td>
+            <td class="min-w-[44px]">{{ calculateTotalAmount }}Baht</td>
           </tr>
         </tbody>
       </table>
