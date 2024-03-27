@@ -157,18 +157,6 @@ const calculatePillowTotal = computed(() => {
         <!-- {{ dateRange[0] }} to {{ dateRange[1] }} ({{ nights }} nights) -->
       </div>
 
-      <!-- <div class="py-4 px-6">
-        <label class="block text-gray-700 font-bold mb-2" for="campground">
-          Select Campground
-        </label>
-        <select v-model="selectedCampground">
-          <option disabled value="">Please select a campground</option>
-          <option v-for="camp in campData" :key="camp.id" :value="camp.id">
-            {{ camp.name }}
-          </option>
-        </select>
-      </div> -->
-
       <div class="mb-4 py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="name">
           Zone {{ zoneId }} {{ zoneName }}
@@ -304,7 +292,9 @@ const calculatePillowTotal = computed(() => {
           <tfoot>
             <tr class="font-semibold text-gray-900 dark:text-white">
               <th scope="row" class="px-6 py-3 text-base">Total</th>
-              <td class="px-6 py-3">{{ nightAmount }}</td>
+              <td class="px-6 py-3"></td>
+              <td class="px-6 py-3"></td>
+              <td class="px-6 py-3"></td>
               <td class="px-6 py-3">{{ calculateTotalAmount }}</td>
             </tr>
           </tfoot>
