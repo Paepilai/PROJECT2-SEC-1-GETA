@@ -1,7 +1,6 @@
 <script setup>
 import { ref, defineProps, onMounted, watchEffect, computed } from "vue"
 import { useRouter } from "vue-router"
-import { calculateTotalAmount } from "../views/Booking.vue"
 
 const router = useRouter()
 
@@ -21,6 +20,9 @@ const qtyAmountSleepingBag = ref(0)
 const qtyAmountMattress = ref(0)
 const qtyAmountPillow = ref(0)
 const nightAmount = ref(0)
+const zoneId = ref(null)
+const zoneName = ref(null)
+const zoneDesc = ref(null)
 
 onMounted(() => {
   const route = router.currentRoute.value
@@ -35,7 +37,20 @@ onMounted(() => {
   qtyAmountPillow.value = parseInt(route.query.qtyAmountPillow) || 0
   nightAmount.value = parseInt(route.query.nightAmount) || 0
   selectedCampground.value = route.query.selectedCampground || null
+  zoneId.value = router.currentRoute.value.query.zoneId || null
+  zoneName.value = router.currentRoute.value.query.zoneName || null
+  zoneDesc.value = router.currentRoute.value.query.zoneDesc || null
+  // tentTotal.value = parseInt(route.query.tentTotal) || 0
+  // sleepingBagTotal.value = parseInt(route.query.sleepingBagTotal) || 0
+  // mattressTotal.value = parseInt(route.query.mattressTotal) || 0
+  // pillowTotal.value = parseInt(route.query.pillowTotal) || 0
 })
+// const props = defineProps({
+//   tentTotal: Number,
+//   sleepingBagTotal: Number,
+//   mattressTotal: Number,
+//   pillowTotal: Number,
+// })
 </script>
 
 <template>
@@ -61,7 +76,7 @@ onMounted(() => {
 
       <p class="flex justify-between">
         <span class="text-gray-400">Zone:</span>
-        <span>Zone,ZoneName</span>
+        <span>{{ zoneId }} {{ zoneName }}</span>
       </p>
 
       <p class="flex justify-between">
@@ -118,7 +133,7 @@ onMounted(() => {
           <tr class="flex py-1">
             <td class="flex-1">Total</td>
             <td class="min-w-[31px]"></td>
-            <td class="min-w-[44px]">{{ calculateTotalAmount }}Baht</td>
+            <td class="min-w-[44px]">Baht</td>
           </tr>
         </tbody>
       </table>

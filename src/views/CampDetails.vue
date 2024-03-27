@@ -91,11 +91,17 @@
         </div>
         <hr class="h-2 border-dashed border-gray-300" />
         <div class="flex justify-center p-5">
-          <RouterLink
+          <!-- <RouterLink
             to="/available"
             class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl"
             >Join Camp</RouterLink
+          > -->
+          <RouterLink
+            :to="{ path: '/available', query: { campId: campground.id } }"
+            class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl"
           >
+            Join Camp
+          </RouterLink>
         </div>
       </div>
     </div>

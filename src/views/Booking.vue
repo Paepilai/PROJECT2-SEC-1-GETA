@@ -20,6 +20,13 @@ const redirectToReceipt = () => {
       qtyAmountSleepingBag: qtyAmountSleepingBag.value,
       qtyAmountMattress: qtyAmountMattress.value,
       qtyAmountPillow: qtyAmountPillow.value,
+      zoneId: zoneId.value,
+      zoneName: zoneName.value,
+      zoneDesc: zoneDesc.value,
+      // tentTotal: calculateTentTotal.value,
+      // sleepingBagTotal: calculateSleepingBagTotal.value,
+      // mattressTotal: calculateMattressTotal.value,
+      // pillowTotal: calculatePillowTotal.value,
     },
   })
 }
@@ -31,7 +38,7 @@ const phoneValue = ref("")
 const specialValue = ref("")
 const selectedCampground = ref(null)
 
-import campData from "../../data/old-camp.json"
+import campData from "../../data/camp.json"
 
 const campground = ref(null)
 
@@ -42,14 +49,19 @@ const qtyAmountPillow = ref(0)
 
 const nightAmount = ref(0)
 
+const zoneId = ref(null)
+const zoneName = ref(null)
+const zoneDesc = ref(null)
+
 onMounted(() => {
   const route = router.currentRoute.value
   chosenDate.value = route.query.chosenDate || null
+  const campId = router.currentRoute.value.query.campId
+  selectedCampground.value = parseInt(campId)
+  zoneId.value = route.query.zoneId || null
+  zoneName.value = route.query.zoneName || null
+  zoneDesc.value = route.query.zoneDesc || null
 })
-
-// watchEffect(() => {
-//   calculateTotalAmount.value
-// })
 
 function getPrice(campId, item) {
   const camp = campData.find((camp) => camp.id === campId)
@@ -79,15 +91,29 @@ const calculateTotalAmount = computed(() => {
   return total
 })
 
-const tentTotal = computed(() => {
+// const equipmentPrices = computed(() => {
+//   const selectedCamp = campData.find(
+//     (camp) => camp.id === selectedCampground.value
+//   )
+//   if (!selectedCamp) return {}
+
+//   return {
+//     Tent: selectedCamp.price.tent,
+//     "Sleeping Bag": selectedCamp.price.sleeping_bag,
+//     Mattress: selectedCamp.price.mattress,
+//     Pillow: selectedCamp.price.pillow,
+//   }
+// })
+
+const calculateTentTotal = computed(() => {
   return (
     getPrice(selectedCampground.value, "tent") *
     nightAmount.value *
-    qtyAmount.tent.value
+    qtyAmountTent.value
   )
 })
 
-const sleepingBagTotal = computed(() => {
+const calculateSleepingBagTotal = computed(() => {
   return (
     getPrice(selectedCampground.value, "sleeping_bag") *
     nightAmount.value *
@@ -95,7 +121,7 @@ const sleepingBagTotal = computed(() => {
   )
 })
 
-const mattressTotal = computed(() => {
+const calculateMattressTotal = computed(() => {
   return (
     getPrice(selectedCampground.value, "mattress") *
     nightAmount.value *
@@ -103,36 +129,22 @@ const mattressTotal = computed(() => {
   )
 })
 
-const pillowTotal = computed(() => {
+const calculatePillowTotal = computed(() => {
   return (
     getPrice(selectedCampground.value, "pillow") *
     nightAmount.value *
     qtyAmountPillow.value
   )
 })
-
-const equipmentPrices = computed(() => {
-  const selectedCamp = campData.find(
-    (camp) => camp.id === selectedCampground.value
-  )
-  if (!selectedCamp) return {}
-
-  return {
-    Tent: selectedCamp.price.tent,
-    "Sleeping Bag": selectedCamp.price.sleeping_bag,
-    Mattress: selectedCamp.price.mattress,
-    Pillow: selectedCamp.price.pillow,
-  }
-})
 </script>
 
 <template>
   <div id="bookInfo">
     <div
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
     >
       <div
-        class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
+        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
       >
         <!-- Date, Nights -->
         {{ chosenDate }}
@@ -145,7 +157,7 @@ const equipmentPrices = computed(() => {
         <!-- {{ dateRange[0] }} to {{ dateRange[1] }} ({{ nights }} nights) -->
       </div>
 
-      <div class="py-4 px-6">
+      <!-- <div class="py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="campground">
           Select Campground
         </label>
@@ -155,13 +167,13 @@ const equipmentPrices = computed(() => {
             {{ camp.name }}
           </option>
         </select>
-      </div>
+      </div> -->
 
       <div class="mb-4 py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="name">
-          โซน
+          Zone {{ zoneId }} {{ zoneName }}
         </label>
-        <h1>คำอธิบาย</h1>
+        <h1>{{ zoneDesc }}</h1>
 
         <label class="block text-gray-700 font-bold mb-2" for="name">
           Nights
@@ -300,15 +312,15 @@ const equipmentPrices = computed(() => {
       </div>
     </div>
     <div
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
     >
       <div
-        class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
+        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
       >
         User Information
       </div>
 
-      <div class="mb-4">
+      <div class="py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="name">
           Name
         </label>
@@ -320,8 +332,8 @@ const equipmentPrices = computed(() => {
           v-model="nameValue"
         />
       </div>
-      <h1>Contact Information</h1>
-      <div class="mb-4">
+
+      <div class="py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="email">
           Email
         </label>
@@ -333,7 +345,7 @@ const equipmentPrices = computed(() => {
           v-model="emailValue"
         />
       </div>
-      <div class="mb-4">
+      <div class="py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="phone">
           Phone Number
         </label>
@@ -346,7 +358,7 @@ const equipmentPrices = computed(() => {
         />
       </div>
 
-      <div class="mb-4">
+      <div class="mb-4 py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="message">
           Special Requests
         </label>
@@ -360,7 +372,7 @@ const equipmentPrices = computed(() => {
       </div>
       <div class="flex items-center justify-center mb-4">
         <button
-          class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+          class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
           type="button"
           @click="redirectToReceipt()"
         >

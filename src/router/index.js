@@ -21,6 +21,7 @@ export const routes = [
     path: "/booking",
     name: "Booking",
     component: Booking,
+    props: (route) => ({ campId: parseInt(route.params.campId) }),
   },
   {
     path: "/available",
