@@ -1,4 +1,16 @@
-<script setup></script>
+<script setup>
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+
+const redirectToMyBooking = () => {
+  console.log("Routing..")
+
+  router.push({
+    path: "/mybooking",
+  })
+}
+</script>
 
 <template>
   <nav class="bg-navgreen p-4">
@@ -22,6 +34,7 @@
         <a
           href="#"
           class="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-[#3f5e56]"
+          @click="redirectToMyBooking"
           >My Booking</a
         >
         <a
