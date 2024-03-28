@@ -1,4 +1,5 @@
 <script setup>
+
 import campData from "../../data/camp.json";
 import Camplist from "../components/Navbar.vue";
 import CampCard from "../components/CampCard.vue";
@@ -18,16 +19,16 @@ const filteredItems = computed(() => {
 
 onMounted(async () => {
   try {
-    const response = await fetch("/data/camp.json");
+    const response = await fetch("/data/camp.json")
     if (!response.ok) {
-      throw new Error("Failed to fetch data");
+      throw new Error("Failed to fetch data")
     }
-    const data = await response.json();
-    campgrounds.value = data;
+    const data = await response.json()
+    campgrounds.value = data
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
-});
+})
 </script>
 
 <template>
