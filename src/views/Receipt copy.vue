@@ -1,12 +1,5 @@
 <script setup>
-import {
-  ref,
-  defineProps,
-  onMounted,
-  watchEffect,
-  computed,
-  defineComponent,
-} from "vue"
+import { ref, defineProps, onMounted, watchEffect, computed } from "vue"
 import { useRouter } from "vue-router"
 
 const router = useRouter()
@@ -47,11 +40,16 @@ onMounted(() => {
   zoneId.value = router.currentRoute.value.query.zoneId || null
   zoneName.value = router.currentRoute.value.query.zoneName || null
   zoneDesc.value = router.currentRoute.value.query.zoneDesc || null
+  const calculateTentTotal = router.currentRoute.query.calculateTentTotal || 0
+  const calculateSleepingBagTotal =
+    router.currentRoute.query.calculateSleepingBagTotal || 0
+  const calculateMattressTotal =
+    router.currentRoute.query.calculateMattressTotal || 0
+  const calculatePillowTotal =
+    router.currentRoute.query.calculatePillowTotal || 0
+  const calculateTotalAmount =
+    router.currentRoute.query.calculateTotalAmount || 0
 })
-
-import { useBookingStore } from "../store/BookingStore.js"
-
-const bookingStore = useBookingStore()
 </script>
 
 <template>
@@ -116,37 +114,27 @@ const bookingStore = useBookingStore()
           <tr class="flex">
             <td class="flex-1">Tent</td>
             <td class="min-w-[44px] py-2 px-28">{{ qtyAmountTent }}</td>
-            <td class="min-w-[44px]">
-              {{ bookingStore.calculateTentTotal }}Baht
-            </td>
+            <td class="min-w-[44px]">{{ calculateTentTotal }}Baht</td>
           </tr>
           <tr class="flex">
             <td class="flex-1">Sleeping bag</td>
             <td class="min-w-[44px] py-2 px-28">{{ qtyAmountSleepingBag }}</td>
-            <td class="min-w-[44px]">
-              {{ bookingStore.calculateSleepingBagTotal }} Baht
-            </td>
+            <td class="min-w-[44px]">100 Baht</td>
           </tr>
           <tr class="flex">
             <td class="flex-1">Mattress</td>
             <td class="min-w-[44px] py-2 px-28">{{ qtyAmountMattress }}</td>
-            <td class="min-w-[44px]">
-              {{ bookingStore.calculateMattressTotal }} Baht
-            </td>
+            <td class="min-w-[44px]">100 Baht</td>
           </tr>
           <tr class="flex">
             <td class="flex-1">Pillow</td>
             <td class="min-w-[44px] py-2 px-28">{{ qtyAmountPillow }}</td>
-            <td class="min-w-[44px]">
-              {{ bookingStore.calculatePillowTotal }} Baht
-            </td>
+            <td class="min-w-[44px]">100 Baht</td>
           </tr>
           <tr class="flex">
             <td class="flex-1">Total</td>
             <td class="min-w-[44px] py-2 px-28"></td>
-            <td class="min-w-[44px]">
-              {{ bookingStore.calculateTotalAmount }}Baht
-            </td>
+            <td class="min-w-[44px]">Baht</td>
           </tr>
         </tbody>
       </table>
