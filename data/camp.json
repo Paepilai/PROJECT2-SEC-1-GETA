@@ -115,7 +115,10 @@
         "ห้ามทิ้งขยะ",
         "ใครฝ่าฝืนปรับ 2 พันบาท"
       ],
-      "service": ["มีอุปกรณ์เต็นท์ให้เช่า", "มีร้านอาหารและกาแฟ"],
+      "service": [
+        "มีอุปกรณ์เต็นท์ให้เช่า",
+        "มีร้านอาหารและกาแฟ"
+      ],
       "contact": "087-2014247",
       "area": [
         {
@@ -389,39 +392,59 @@
     {
       "id": "1",
       "name": "John Doe",
+      "location": "Chiang Mai, Thailand",
+      "job": "Software Developer",
       "email": "johndoe@example.com",
-      "bio": "When I'm not developing software, you can find me exploring the great outdoors and camping under the stars."
+      "password": "password",
+      "phone": "0812345678",
+      "bio": "When I'm not immersed in the world of software development, you'll often find me wandering through lush forests, setting up camp beside glistening streams, and gazing at the star-studded sky. Nature's my playground, and I cherish every moment spent beneath the towering trees and beside crackling campfires.",
+      "favorite": [
+        1,
+        2
+      ]
     },
     {
       "id": "2",
       "name": "Jane Smith",
+      "location": "San Francisco, California",
+      "job": "Web Designer",
       "email": "janesmith@example.com",
       "password": "password",
-      "bio": "A coder by day and a camper by night, I find joy in the serenity of the wilderness.",
+      "phone": "0812345678",
+      "bio": "By day, I delve into the intricacies of code, but when the sun sets, my heart yearns for the tranquility of the great outdoors. Amidst the rugged beauty of nature, I find solace in pitching tents under the vast expanse of the night sky and listening to the whispering winds weaving through the wilderness.",
       "favorite": []
     },
     {
       "id": "3",
       "name": "Alice Johnson",
+      "location": "New York, USA",
+      "job": "Architect",
       "email": "alicejohnson@example.com",
       "password": "password",
-      "bio": "Technology enthusiast and avid camper, I believe in disconnecting to reconnect with nature.",
+      "phone": "0812345678",
+      "bio": "A fervent advocate for tech innovation and a devout nature enthusiast, I thrive on the simple joys of camping beneath the open sky. Disconnecting from the digital realm allows me to reconnect with the earth's untamed beauty, as I traverse winding trails and find serenity amidst towering trees and babbling brooks.",
       "favorite": []
     },
     {
       "id": "4",
       "name": "Bob Williams",
+      "location": "Seattle, Washington",
+      "job": "Data Scientist",
       "email": "bobwilliams@example.com",
       "password": "password",
-      "bio": "As a full stack developer, I stack my code high during the week and my camping gear even higher on the weekends.",
+      "phone": "0812345678",
+      "bio": "While my weekdays are filled with lines of code, my weekends are dedicated to scaling mountains, traversing untamed landscapes, and basking in the untethered freedom of camping. As I trade in my keyboard for hiking boots, I immerse myself in the raw majesty of nature, where the only bugs I encounter are the ones beneath the stars.",
       "favorite": []
     },
     {
       "id": "5",
       "name": "Emily Davis",
+      "location": "Austin, Texas",
+      "job": "Product Manager",
       "email": "emilydavis@example.com",
       "password": "password",
-      "bio": "Innovating solutions is my passion, but camping in the quiet woods is my way to recharge.",
+      "phone": "0812345678",
+      "bio": "While I thrive on the adrenaline of innovating solutions, my true passion lies in escaping the hustle and bustle of city life to seek refuge in the tranquil embrace of the wilderness. Camping beneath towering trees, listening to the symphony of chirping crickets, and breathing in the crisp, clean air rejuvenates my soul like nothing else.",
       "favorite": []
     }
   ]
