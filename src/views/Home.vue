@@ -9,7 +9,7 @@ import { ref, onMounted, computed } from "vue";
 const campgrounds = ref([]);
 
 const searchQuery = ref('');
-const items = ref(campData);
+const items = ref(campData.camp);
 
 const filteredItems = computed(() => {
   return items.value.filter(item => {
@@ -19,9 +19,7 @@ const filteredItems = computed(() => {
 
 onMounted(async () => {
   try {
-
-    const response = await fetch("/data/camp.json")
-
+    const response = await fetch("../../data/camp.json")
     if (!response.ok) {
       throw new Error("Failed to fetch data")
     }
