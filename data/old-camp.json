@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Beautiful Mountain Retreat",
+    "image": "../src/assets/images/FamilyCamping.jpg",
+    "description": "Enjoy the stunning views of the surrounding mountains in this peaceful retreat.",
+    "location": "Mountain Valley, USA",
+    "price": 50
+  },
+  {
+    "id": 2,
+    "name": "Riverside Campground",
+    "image": "../src/assets/images/Rimtara.jpeg",
+    "description": "Relax by the river and enjoy fishing and swimming in the crystal-clear waters.",
+    "location": "Riverbank, Canada",
+    "price": 40
+  },
+  {
+    "id": 3,
+    "name": "Seaside Paradise",
+    "image": "../src/assets/images/sea.jpg",
+    "description": "Experience the ultimate beach vacation with stunning ocean views and warm sandy beaches.",
+    "location": "Coastal Town, Australia",
+    "price": 60
+  },
+  {
+    "id": 4,
+    "name": "Seaside Paradise",
+    "image": "../src/assets/images/sea.jpg",
+    "description": "Experience the ultimate beach vacation with stunning ocean views and warm sandy beaches.",
+    "location": "Coastal Town, Australia",
+    "price": 60
+  },
+  {
+    "id": 5,
+    "name": "Seaside Paradise",
+    "image": "../src/assets/images/sea.jpg",
+    "description": "Experience the ultimate beach vacation with stunning ocean views and warm sandy beaches.",
+    "location": "Coastal Town, Australia",
+    "price": 60
+  }
+]
