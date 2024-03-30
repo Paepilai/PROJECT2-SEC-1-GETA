@@ -1,0 +1,14 @@
+{
+  "booking": [
+    {
+      "id": "173c",
+      "checkinDate": "2024-03-30",
+      "checkoutDate": "2024-04-05",
+      "name": "แพรพิไล ชัยมงคลงาม",
+      "email": "ioonooni@gmail.com",
+      "specialRequests": "aaaaaaaaaaa",
+      "numberOfNights": "6",
+      "totalPrice": "900"
+    }
+  ]
+}

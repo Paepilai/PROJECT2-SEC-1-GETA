@@ -1,374 +1,126 @@
-<script setup>
-import { ref, defineProps, onMounted, watchEffect, computed } from "vue"
-import { useRouter } from "vue-router"
-
-const router = useRouter()
-
-const redirectToReceipt = () => {
-  router.push({
-    path: "/receipt",
-    query: {
-      chosenDate: chosenDate.value,
-      nameValue: nameValue.value,
-      emailValue: emailValue.value,
-      phoneValue: phoneValue.value,
-      specialValue: specialValue.value,
-      nightAmount: nightAmount.value,
-      calculateTotalAmount: calculateTotalAmount.value,
-      selectedCampground: selectedCampground.value,
-      qtyAmountTent: qtyAmountTent.value,
-      qtyAmountSleepingBag: qtyAmountSleepingBag.value,
-      qtyAmountMattress: qtyAmountMattress.value,
-      qtyAmountPillow: qtyAmountPillow.value,
-    },
-  })
-}
-
-const chosenDate = ref(null)
-const nameValue = ref("")
-const emailValue = ref("")
-const phoneValue = ref("")
-const specialValue = ref("")
-const selectedCampground = ref(null)
-
-import campData from "../../data/old-camp.json"
-
-const campground = ref(null)
-
-const qtyAmountTent = ref(0)
-const qtyAmountSleepingBag = ref(0)
-const qtyAmountMattress = ref(0)
-const qtyAmountPillow = ref(0)
-
-const nightAmount = ref(0)
-
-onMounted(() => {
-  const route = router.currentRoute.value
-  chosenDate.value = route.query.chosenDate || null
-})
-
-// watchEffect(() => {
-//   calculateTotalAmount.value
-// })
-
-function getPrice(campId, item) {
-  const camp = campData.find((camp) => camp.id === campId)
-  return camp ? camp.price[item] : 0
-}
-
-const calculateTotalAmount = computed(() => {
-  let total = 0
-
-  total +=
-    getPrice(selectedCampground.value, "tent") *
-    nightAmount.value *
-    qtyAmountTent.value
-  total +=
-    getPrice(selectedCampground.value, "sleeping_bag") *
-    nightAmount.value *
-    qtyAmountSleepingBag.value
-  total +=
-    getPrice(selectedCampground.value, "mattress") *
-    nightAmount.value *
-    qtyAmountMattress.value
-  total +=
-    getPrice(selectedCampground.value, "pillow") *
-    nightAmount.value *
-    qtyAmountPillow.value
-
-  return total
-})
-
-const tentTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "tent") *
-    nightAmount.value *
-    qtyAmount.tent.value
-  )
-})
-
-const sleepingBagTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "sleeping_bag") *
-    nightAmount.value *
-    qtyAmountSleepingBag.value
-  )
-})
-
-const mattressTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "mattress") *
-    nightAmount.value *
-    qtyAmountMattress.value
-  )
-})
-
-const pillowTotal = computed(() => {
-  return (
-    getPrice(selectedCampground.value, "pillow") *
-    nightAmount.value *
-    qtyAmountPillow.value
-  )
-})
-
-const equipmentPrices = computed(() => {
-  const selectedCamp = campData.find(
-    (camp) => camp.id === selectedCampground.value
-  )
-  if (!selectedCamp) return {}
-
-  return {
-    Tent: selectedCamp.price.tent,
-    "Sleeping Bag": selectedCamp.price.sleeping_bag,
-    Mattress: selectedCamp.price.mattress,
-    Pillow: selectedCamp.price.pillow,
-  }
-})
-</script>
-
 <template>
-  <div id="bookInfo">
-    <div
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div
-        class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
-      >
-        <!-- Date, Nights -->
-        {{ chosenDate }}
-        <!-- <div v-if="chosenDates.length === 2">
-          <p>
-            Selected Date Range: {{ chosenDates[0] }} to {{ chosenDates[1] }}
-          </p>
-          <p>Nights: {{ nights }} night(s)</p>
-        </div> -->
-        <!-- {{ dateRange[0] }} to {{ dateRange[1] }} ({{ nights }} nights) -->
-      </div>
+  <div>
+    <h1>Booking Page</h1>
+    <h2>Zone ID: {{ zoneId }}</h2>
+    <h2>Zone Name: {{ zoneName }}</h2>
 
-      <div class="py-4 px-6">
-        <label class="block text-gray-700 font-bold mb-2" for="campground">
-          Select Campground
-        </label>
-        <select v-model="selectedCampground">
-          <option disabled value="">Please select a campground</option>
-          <option v-for="camp in campData" :key="camp.id" :value="camp.id">
-            {{ camp.name }}
-          </option>
-        </select>
-      </div>
-
-      <div class="mb-4 py-4 px-6">
-        <label class="block text-gray-700 font-bold mb-2" for="name">
-          โซน
-        </label>
-        <h1>คำอธิบาย</h1>
-
-        <label class="block text-gray-700 font-bold mb-2" for="name">
-          Nights
-        </label>
-        <h1><input type="number" v-model="nightAmount" /></h1>
-      </div>
-
-      <div class="relative overflow-x-auto">
-        <table
-          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-        >
-          <thead
-            class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
-          >
-            <tr>
-              <th scope="col" class="px-6 py-3 rounded-s-lg">List</th>
-
-              <th scope="col" class="px-6 py-3 rounded-s-lg">Price</th>
-              <th scope="col" class="px-6 py-3 rounded-s-lg">Net Price</th>
-
-              <th scope="col" class="px-6 py-3 rounded-s-lg">Qty</th>
-              <th scope="col" class="px-6 py-3 rounded-e-lg">Total</th>
-            </tr>
-          </thead>
-          <tbody class="bg-white dark:bg-gray-800">
-            <tr>
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Tent
-              </th>
-
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "tent") }}
-              </td>
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "tent") * nightAmount }}
-              </td>
-              <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountTent" />
-              </td>
-              <td class="px-6 py-4">
-                {{
-                  getPrice(selectedCampground, "tent") *
-                  nightAmount *
-                  qtyAmountTent
-                }}
-              </td>
-            </tr>
-
-            <tr class="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Sleeping bag
-              </th>
-
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "sleeping_bag") }}
-              </td>
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "sleeping_bag") * nightAmount }}
-              </td>
-              <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountSleepingBag" />
-              </td>
-              <td class="px-6 py-4">
-                {{
-                  getPrice(selectedCampground, "sleeping_bag") *
-                  nightAmount *
-                  qtyAmountSleepingBag
-                }}
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Mattress
-              </th>
-
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "mattress") }}
-              </td>
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "mattress") * nightAmount }}
-              </td>
-              <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountMattress" />
-              </td>
-              <td class="px-6 py-4">
-                {{
-                  getPrice(selectedCampground, "mattress") *
-                  nightAmount *
-                  qtyAmountMattress
-                }}
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Pillow
-              </th>
-
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "pillow") }}
-              </td>
-              <td class="px-6 py-4">
-                {{ getPrice(selectedCampground, "pillow") * nightAmount }}
-              </td>
-              <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountPillow" />
-              </td>
-              <td class="px-6 py-4">
-                {{
-                  getPrice(selectedCampground, "pillow") *
-                  nightAmount *
-                  qtyAmountPillow
-                }}
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="font-semibold text-gray-900 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">Total</th>
-              <td class="px-6 py-3">{{ nightAmount }}</td>
-              <td class="px-6 py-3">{{ calculateTotalAmount }}</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+    <div>
+      <label for="checkin">Check-in Date:</label>
+      <input
+        type="date"
+        id="checkin"
+        v-model="checkinDate"
+        :min="minCheckinDate"
+        @input="updateCheckoutMinDate"
+      />
     </div>
-    <div
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div
-        class="text-2xl py-4 px-6 bg-gray-900 text-white text-center font-bold uppercase"
-      >
-        User Information
+    <div>
+      <label for="checkout">Check-out Date:</label>
+      <input
+        type="date"
+        id="checkout"
+        v-model="checkoutDate"
+        :min="minCheckoutDate"
+      />
+    </div>
+    <div>Total Nights: {{ numberOfNights }}</div>
+    <div>Total Price: {{ totalPrice }}</div>
+    <div>
+      <h2>User Booking Information</h2>
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" v-model="nameValue" />
       </div>
-
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="name">
-          Name
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="name"
-          type="text"
-          placeholder="Enter your name"
-          v-model="nameValue"
-        />
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" v-model="emailValue" />
       </div>
-      <h1>Contact Information</h1>
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="email">
-          Email
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          v-model="emailValue"
-        />
+      <div>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" v-model="phoneValue" />
       </div>
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="phone">
-          Phone Number
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="phone"
-          type="tel"
-          placeholder="Enter your phone number"
-          v-model="phoneValue"
-        />
+      <div>
+        <label for="specialRequests">Special Requests:</label>
+        <textarea id="specialRequests" v-model="specialRequests"></textarea>
       </div>
-
-      <div class="mb-4">
-        <label class="block text-gray-700 font-bold mb-2" for="message">
-          Special Requests
-        </label>
-        <textarea
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="message"
-          rows="4"
-          placeholder="Enter any additional information"
-          v-model="specialValue"
-        ></textarea>
-      </div>
-      <div class="flex items-center justify-center mb-4">
-        <button
-          class="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-          type="button"
-          @click="redirectToReceipt()"
-        >
-          Book Camp
-        </button>
-      </div>
+      <button @click="submitBooking">Book</button>
     </div>
   </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { ref, computed, watch } from "vue"
+import { useRouter } from "vue-router"
+import campData from "../../data/camp.json"
+const router = useRouter()
+const zoneId = router.currentRoute.value.query.zoneId
+const zoneName = router.currentRoute.value.query.zoneName
+const selectedZone = router.currentRoute.value.query.campId
+
+const checkinDate = ref(null)
+const checkoutDate = ref(null)
+const nameValue = ref("")
+const emailValue = ref("")
+const phoneValue = ref("")
+const specialRequests = ref("")
+
+const calculateNightsAndTotal = () => {
+  const nights = numberOfNights.value
+  const price = CampgroundPrice.value
+  totalPrice.value = nights && price ? nights * price : 0
+}
+watch([checkinDate, checkoutDate], () => {
+  calculateNightsAndTotal()
+})
+
+const getPrice = (campId, item) => {
+  const camp = campData.find((camp) => camp.id === parseInt(campId))
+  return camp ? camp.price[item] : 0
+}
+
+const today = new Date().toISOString().split("T")[0]
+const minCheckinDate = computed(() => today)
+
+const minCheckoutDate = computed(() => {
+  const minDate = new Date(checkinDate.value)
+  minDate.setDate(minDate.getDate() + 1)
+  return minDate.toISOString().split("T")[0]
+})
+
+const numberOfNights = computed(() => {
+  if (!checkinDate.value || !checkoutDate.value) return 0
+  const startDate = new Date(checkinDate.value)
+  const endDate = new Date(checkoutDate.value)
+  const timeDifference = Math.abs(endDate.getTime() - startDate.getTime())
+  const numberOfNights = Math.ceil(timeDifference / (1000 * 3600 * 24))
+  return numberOfNights
+})
+
+const CampgroundPrice = computed(() => {
+  return selectedZone ? getPrice(selectedZone, "Campground") : 0
+})
+
+const totalPrice = ref(0)
+
+const updateCheckoutMinDate = () => {
+  checkoutDate.value = null
+}
+
+const submitBooking = () => {
+  const bookingData = {
+    checkinDate: checkinDate.value,
+    checkoutDate: checkoutDate.value,
+    nameValue: nameValue.value,
+    emailValue: emailValue.value,
+    phoneValue: phoneValue.value,
+    specialRequests: specialRequests.value,
+    numberOfNights: numberOfNights.value,
+    totalPrice: totalPrice.value,
+  }
+
+  router.push({
+    path: "/receipt",
+    query: bookingData,
+  })
+}
+</script>
