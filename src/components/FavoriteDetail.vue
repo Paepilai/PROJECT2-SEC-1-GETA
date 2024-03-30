@@ -39,9 +39,11 @@ async function deleteFav(idcamp) {
   newFav.value = { id: userNow[0].id, favorite: userNow[0].favorite }
   console.log(newFav.value.favorite)
 
-  if (userNow[0].favorite.includes(parseInt(idcamp))) {
-    //แก้
-    newFav.value.favorite.splice(newFav.value.favorite.indexOf(idcamp), 1)
+  const indexToRemove = userNow[0].favorite.findIndex(
+    (item) => item === parseInt(idcamp)
+  )
+  if (indexToRemove !== -1) {
+    newFav.value.favorite.splice(indexToRemove, 1)
   }
 
   const deleteCamp = await editItem(
@@ -51,7 +53,12 @@ async function deleteFav(idcamp) {
   )
   console.log(deleteCamp)
 
-  myUser.updateTodo(newFav.value.id, newFav.value.favorite)
+  favoriteUser.value.splice(
+    favoriteUser.value.findIndex((todo) => todo.id === idcamp),
+    1
+  )
+
+  // myUser.updateTodo(newFav.value.id, newFav.value.favorite)
 
   console.log(myUser.getTodos())
 
@@ -70,7 +77,6 @@ async function deleteFav(idcamp) {
           :id="slotProps.item.id"
         >
           <template v-slot:option>
-            {{ slotProps.item.id }}
             <button class="btn btn-sm" @click="openModal(slotProps.item.id)">
               X
             </button>
@@ -91,7 +97,6 @@ async function deleteFav(idcamp) {
                     class="btn btn-outline btn-error"
                     @click="deleteFav(campidref)"
                   >
-                    {{ campidref }}
                     Delete
                   </button>
                 </div>
