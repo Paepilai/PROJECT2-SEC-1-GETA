@@ -1,0 +1,24 @@
+{
+  "booking": [
+    {
+      "id": "f76f",
+      "checkinDate": "2024-03-30",
+      "checkoutDate": "2024-04-05",
+      "name": "แพรพิไล ชัยมงคลงาม",
+      "email": "ioonooni@gmail.com",
+      "specialRequests": "ดดดดดดดดด",
+      "numberOfNights": "6",
+      "totalPrice": "900"
+    },
+    {
+      "id": "d6f2",
+      "checkinDate": "2024-03-30",
+      "checkoutDate": "2024-04-05",
+      "name": "แพรพิไล ชัยมงคลงาม",
+      "email": "ioonooni@gmail.com",
+      "specialRequests": "ดดดดดดดดด",
+      "numberOfNights": "6",
+      "totalPrice": "900"
+    }
+  ]
+}
