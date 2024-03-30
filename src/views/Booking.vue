@@ -105,6 +105,10 @@ const sumQuantities = computed(() => {
   sum += qtyAmountPillow.value
   return sum
 })
+
+import { useBookingStore } from "../store/BookingStore.js"
+
+const bookingStore = useBookingStore()
 </script>
 
 <template>
