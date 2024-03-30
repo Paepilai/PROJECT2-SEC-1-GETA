@@ -8,48 +8,6 @@ async function getItems(url) {
     console.log(`error: ${error}`)
   }
 }
-async function getItemById(url, id) {
-  try {
-    const data = await fetch(`${url}/${id}`)
-    const item = await data.json()
-    return item
-  } catch (error) {
-    console.log(`error: ${error}`)
-  }
-}
-
-async function deleteItemById(url, id) {
-  //DELETE Method
-  console.log(`${url}/${id}`)
-
-  try {
-    const res = await fetch(`${url}/${id}`, {
-      method: "DELETE",
-    })
-    return res.status
-  } catch (error) {
-    console.log(`error: ${error}`)
-  }
-}
-
-async function addItem(url, newItem) {
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        //destrucuring
-        ...newItem,
-      }),
-    })
-    const addedItem = await res.json()
-    return addedItem
-  } catch (error) {
-    console.log(`error: ${error}`)
-  }
-}
 
 async function editItem(url, id, editItem) {
   try {
@@ -69,4 +27,4 @@ async function editItem(url, id, editItem) {
   }
 }
 
-export { getItems, getItemById, deleteItemById, addItem, editItem }
+export { getItems, editItem }
