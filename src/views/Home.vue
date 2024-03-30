@@ -3,7 +3,6 @@ import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
 import { ref, onMounted } from "vue"
 import { myUserTodo } from "../stores/users.js"
-import { getItems } from "../libs/fetchUtils"
 const campgrounds = ref([])
 
 const myUser = myUserTodo()
@@ -18,12 +17,6 @@ onMounted(async () => {
   } catch (error) {
     console.error(error)
   }
-
-  // //users
-  // const items = await getItems(`${import.meta.env.VITE_BASE_URL}users/102`)
-  // console.log(items)
-  // //ทำให้ค่าเป็น array จากที่ users/101 เป็น object
-  // myUser.addTodos([items])
 })
 </script>
 
@@ -58,7 +51,6 @@ onMounted(async () => {
           :location="slotProps.item.location"
           :id="slotProps.item.id"
         >
-          :
           <template v-slot:location>
             <img
               :src="slotProps.item.image"
