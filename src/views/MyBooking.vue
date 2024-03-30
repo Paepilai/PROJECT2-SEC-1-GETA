@@ -1,105 +1,62 @@
-<script setup>
-import { ref, defineProps, onMounted } from "vue"
-import { useRouter } from "vue-router"
-
-const router = useRouter()
-
-// const redirectToReceipt = () => {
-//   router.push({
-//     path: "/receipt",
-//     query: {
-//       chosenDate: chosenDate.value,
-//       nameValue: nameValue.value,
-//       emailValue: emailValue.value,
-//       phoneValue: phoneValue.value,
-//       specialValue: specialValue.value,
-//       totalPrice: calculateTotalPrice(),
-//     },
-//   })
-// }
-
-const chosenDate = ref(null)
-const nameValue = ref("")
-const emailValue = ref("")
-const phoneValue = ref("")
-const specialValue = ref("")
-
-onMounted(() => {
-  const route = router.currentRoute.value
-  chosenDate.value = route.query.chosenDate || null
-  nameValue.value = route.query.nameValue || ""
-  emailValue.value = route.query.emailValue || ""
-  phoneValue.value = route.query.phoneValue || ""
-  specialValue.value = route.query.specialValue || ""
-})
-</script>
-
 <template>
-  <div class="max-w-2xl mx-auto mt-10 rounded-lg overflow-hidden">
-    <a
-      href="#"
-      class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-    >
-      <img
-        class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-        src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm"
-        alt=""
-      />
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5
-          class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-        >
-          Noteworthy technology acquisitions 2021
-        </h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
-        </p>
+  <div>
+    <h1>Booking History</h1>
+    <div v-if="isLoading">Loading...</div>
+    <div v-else>
+      <div v-for="(booking, index) in bookings" :key="index" class="card">
+        <h2>{{ booking.name }}</h2>
+        <p>Check-in Date: {{ booking.checkinDate }}</p>
+        <p>Check-out Date: {{ booking.checkoutDate }}</p>
+        <p>Email: {{ booking.email }}</p>
+        <button @click="deleteHandler(booking.id, index)">Delete</button>
       </div>
-    </a>
-    <a
-      href="#"
-      class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-    >
-      <img
-        class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-        src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm"
-        alt=""
-      />
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5
-          class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-        >
-          Noteworthy technology acquisitions 2021
-        </h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
-        </p>
-      </div>
-    </a>
-    <a
-      href="#"
-      class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-    >
-      <img
-        class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-        src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSGfpQ3m-QWiXgCBJJbrcUFdNdWAhj7rcUqjeNUC6eKcXZDAtWm"
-        alt=""
-      />
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <h5
-          class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
-        >
-          Noteworthy technology acquisitions 2021
-        </h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
-        </p>
-      </div>
-    </a>
+    </div>
+    <router-link to="/">Go to Home Page</router-link>
   </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { fetchBookings, deleteBooking } from "../../libs/BookingFetch.js";
+
+const router = useRouter();
+const isLoading = ref(false);
+const bookings = ref([]);
+
+const fetchData = async () => {
+  try {
+    isLoading.value = true;
+    bookings.value = await fetchBookings();
+    isLoading.value = false;
+  } catch (error) {
+    console.error("Error fetching history:", error);
+    isLoading.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchData();
+});
+
+const deleteHandler = async (id, index) => {
+  try {
+    await deleteBooking(id);
+    bookings.value.splice(index, 1);
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+  }
+};
+
+const goToHomePage = () => {
+  router.push("/");
+};
+</script>
+
+<style scoped>
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+}
+</style>
