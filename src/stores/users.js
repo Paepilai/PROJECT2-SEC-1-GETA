@@ -24,18 +24,12 @@ const myUserTodo = defineStore("usertodo", () => {
     })
   }
 
-  const removeTodo = (removeId) => {
-    usertodo.value.splice(
-      usertodo.value.findIndex((todo) => todo.id === removeId),
-      1
-    )
-  }
   //views
   const getTodos = () => {
     return usertodo.value
   }
 
-  return { addTodo, addTodos, updateTodo, removeTodo, getTodos }
+  return { addTodo, addTodos, updateTodo, getTodos }
 })
 
 export { myUserTodo }
