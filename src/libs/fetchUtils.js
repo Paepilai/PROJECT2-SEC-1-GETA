@@ -61,8 +61,36 @@ async function editItem(url, id, editItem) {
     });
     const editedItem = await res.json();
     return editedItem;
+    // return res.status
   } catch (error) {
     console.log(`error: ${error}`);
   }
 }
-export { getItems, getItemById, deleteItemById, addItem, editItem };
+
+async function editFavorite(url, id, editItem) {
+  try {
+    const res = await fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        ...editItem,
+
+        favorite: editItem.favorite,
+      }),
+    });
+    const editedItem = await res.json();
+    return editedItem;
+  } catch (error) {
+    console.log(`error: ${error}`);
+  }
+}
+export {
+  getItems,
+  getItemById,
+  deleteItemById,
+  addItem,
+  editItem,
+  editFavorite,
+};
