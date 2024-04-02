@@ -115,7 +115,10 @@
         "ห้ามทิ้งขยะ",
         "ใครฝ่าฝืนปรับ 2 พันบาท"
       ],
-      "service": ["มีอุปกรณ์เต็นท์ให้เช่า", "มีร้านอาหารและกาแฟ"],
+      "service": [
+        "มีอุปกรณ์เต็นท์ให้เช่า",
+        "มีร้านอาหารและกาแฟ"
+      ],
       "contact": "087-2014247",
       "area": [
         {
@@ -388,14 +391,18 @@
   "user": [
     {
       "id": "1",
-      "name": "John 78923n",
+      "name": "John 78923eee",
       "location": "Chiang Mai, Thai",
       "job": "Software Developer",
       "email": "johndoe@example.com",
       "password": "password",
       "phone": "0812345678",
       "bio": "When I'm not immersed in the world of software development, you'll often find me wandering through lush forests, setting up camp beside glistening streams, and gazing at the star-studded sky. Nature's my playground, and I cherish every moment spent beneath the towering trees and beside crackling campfires.",
-      "favorite": [2, 3, 8]
+      "favorite": [
+        2,
+        3,
+        8
+      ]
     },
     {
       "id": "2",
