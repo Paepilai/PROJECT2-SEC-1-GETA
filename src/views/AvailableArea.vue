@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- Your existing code for displaying zones -->
+    <h1 class="text-3xl text-center font-bold mt-6">{{ campground.name }}</h1>
     <div
       v-for="(zone, index) in campground.area"
       :key="index"
@@ -24,29 +24,6 @@
         </button>
       </div>
     </div>
-
-    <!-- Receipt summary section -->
-    <div
-      v-if="selectedZone"
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div
-        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
-      >
-        Receipt Summary
-      </div>
-
-      <div class="py-4 px-6">
-        <p>
-          <strong>Zone {{ selectedZone.zoneId }}:</strong> {{ selectedZone.zoneName }}
-        </p>
-        <p>{{ selectedZone.zoneDesc }}</p>
-        <p><strong>Check-in Date:</strong> {{ checkinDate }}</p>
-        <p><strong>Check-out Date:</strong> {{ checkoutDate }}</p>
-        <p><strong>Number of Nights:</strong> {{ numberOfNights }}</p>
-        <!-- Add more details as needed -->
-      </div>
-    </div>
   </div>
 </template>
 
@@ -67,6 +44,7 @@ const redirectToBooking = (zone) => {
   router.push({
     path: "/booking",
     query: {
+      campgroundName: campground.name,
       chosenDate: checkinDate.value,
       checkoutDate: checkoutDate.value,
       campId: campId,

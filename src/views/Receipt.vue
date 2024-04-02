@@ -7,6 +7,8 @@ const booking = ref(null);
 const route = useRoute();
 const router = useRouter();
 
+const campgroundName = route.query.campgroundName;
+
 onMounted(() => {
   const routeQuery = route.query;
   if (routeQuery) {
@@ -19,8 +21,11 @@ onMounted(() => {
       specialRequests: routeQuery.specialRequests,
       numberOfNights: routeQuery.numberOfNights,
       totalPrice: routeQuery.totalPrice,
+      campgroundName: campgroundName,
+      zoneId: routeQuery.zoneId,
     };
     saveBooking(booking.value);
+    console.log("Campground Name:", campgroundName);
   }
 });
 
@@ -33,14 +38,8 @@ const submitReceipt = () => {
   <div>
     <template v-if="booking">
       <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
-          alt="chippz"
-          class="mx-auto w-16 py-4"
-        />
         <div class="flex flex-col justify-center items-center gap-2">
-          <h4 class="font-semibold text-4xl">selectedCampground</h4>
-          <p class="text-l">Location</p>
+          <h4 class="font-semibold text-4xl">{{ campgroundName }}</h4>
         </div>
         <div class="flex flex-col gap-3 border-b py-6 text-xl px-10">
           <p class="flex justify-between">

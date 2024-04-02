@@ -6,6 +6,7 @@ const router = useRouter();
 const zoneId = router.currentRoute.value.query.zoneId;
 const zoneName = router.currentRoute.value.query.zoneName;
 const selectedZone = router.currentRoute.value.query.campId;
+const campgroundName = router.currentRoute.value.query.campgroundName;
 
 const checkinDate = ref(null);
 const checkoutDate = ref(null);
@@ -72,6 +73,7 @@ const submitBooking = () => {
     sleepingBagQty: qtyAmountSleepingBag.value,
     mattressQty: qtyAmountMattress.value,
     pillowQty: qtyAmountPillow.value,
+    campgroundName: campgroundName,
   };
 
   router.push({
@@ -123,8 +125,9 @@ const bookingStore = useBookingStore();
       <div
         class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
       >
-        Zone {{ zoneId }} {{ zoneName }}
+        {{ campgroundName }}
       </div>
+      <div class="mt-4 mb-2 px-6">Zone:{{ zoneName }}</div>
 
       <div class="-mb-2 py-4 px-6">
         <label for="checkin">Check-in Date:</label>
