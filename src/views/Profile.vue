@@ -237,7 +237,9 @@ async function deleteFav(idcamp) {
           class="textarea textarea-bordered mb-3 w-full" placeholder="Bio"></textarea>
 
         <br /><label for="email" class="font-bold">Email: </label> <br /><input v-model="email" type="email" id="email"
-          class="input input-bordered mb-3 w-full" placeholder="Email" />
+          class="input input-bordered mb-
+          
+          3 w-full" placeholder="Email" />
 
         <br /><label for="password" class="font-bold">Password: </label>
         <br /><input v-model="password" :type="showPassword ? 'text' : 'password'" id="password"
