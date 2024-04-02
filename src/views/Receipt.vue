@@ -23,9 +23,9 @@ onMounted(() => {
       totalPrice: routeQuery.totalPrice,
       campgroundName: campgroundName,
       zoneId: routeQuery.zoneId,
+      zoneName: routeQuery.zoneName,
     };
     saveBooking(booking.value);
-    console.log("Campground Name:", campgroundName);
   }
 });
 

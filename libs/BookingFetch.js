@@ -42,5 +42,19 @@ export async function deleteBooking(id) {
   }
 }
 
+export const fetchCampgrounds = async () => {
+  try {
+    
+    const response = await fetch(`http://localhost:5001/camp/${name}`); 
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching campground data:", error);
+    throw error;
+  }
+};
+
+
+
 
 

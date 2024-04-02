@@ -114,17 +114,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
-import { useRoute } from "vue-router"
-import campData from "../../data/camp.json"
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import campData from "../../data/camp.json";
 
-const route = useRoute()
-const campground = ref(null)
+const route = useRoute();
+const campground = ref(null);
 
 onMounted(() => {
-  const id = route.params.id
-  campground.value = campData.find((camp) => camp.id === parseInt(id))
-})
+  const id = route.params.id;
+  campground.value = campData.find((camp) => camp.id === parseInt(id));
+});
 </script>
 
 <style scoped></style>
