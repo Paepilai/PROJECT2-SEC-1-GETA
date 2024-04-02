@@ -26,41 +26,41 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
-import { useRouter } from "vue-router"
-import { fetchBookings, deleteBooking } from "../../libs/BookingFetch.js"
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { fetchBookings, deleteBooking } from "../../libs/BookingFetch.js";
 
-const router = useRouter()
-const isLoading = ref(false)
-const bookings = ref([])
+const router = useRouter();
+const isLoading = ref(false);
+const bookings = ref([]);
 
 const fetchData = async () => {
   try {
-    isLoading.value = true
-    bookings.value = await fetchBookings()
-    isLoading.value = false
+    isLoading.value = true;
+    bookings.value = await fetchBookings();
+    isLoading.value = false;
   } catch (error) {
-    console.error("Error fetching history:", error)
-    isLoading.value = false
+    console.error("Error fetching history:", error);
+    isLoading.value = false;
   }
-}
+};
 
 onMounted(() => {
-  fetchData()
-})
+  fetchData();
+});
 
 const deleteHandler = async (id, index) => {
   try {
-    await deleteBooking(id)
-    bookings.value.splice(index, 1)
+    await deleteBooking(id);
+    bookings.value.splice(index, 1);
   } catch (error) {
-    console.error("Error deleting booking:", error)
+    console.error("Error deleting booking:", error);
   }
-}
+};
 
 const goToHomePage = () => {
-  router.push("/")
-}
+  router.push("/");
+};
 </script>
 
 <style scoped>
