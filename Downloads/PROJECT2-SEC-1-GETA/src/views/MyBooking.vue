@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="max-w-2xl mx-auto mt-10 bg-white rounded-lg overflow-hidden">
     <div v-if="isLoading">Loading...</div>
     <div v-else>
       <div v-for="(booking, index) in bookings" :key="index" class="card">
         <h2>Booking Number: {{ booking.id }}</h2>
         <p>Check-in Date: {{ booking.checkinDate }}</p>
         <p>Check-out Date: {{ booking.checkoutDate }}</p>
-        <p>Zone: ต้องการ</p>
+        <p>Zone: {{ booking.zoneI }}</p>
         <p>Nights: {{ booking.numberOfNights }}</p>
         <p>Name: {{ booking.name }}</p>
         <p>Email: {{ booking.email }}</p>

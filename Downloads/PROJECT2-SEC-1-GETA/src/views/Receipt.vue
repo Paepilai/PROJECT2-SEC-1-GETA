@@ -1,86 +1,80 @@
 <script setup>
-import { ref, onMounted } from "vue"
-import { useRoute, useRouter } from "vue-router"
-import { saveBooking } from "../../libs/BookingFetch.js"
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { saveBooking } from "../../libs/BookingFetch.js";
 
-const booking = ref(null)
-const route = useRoute()
-const router = useRouter()
+const booking = ref(null);
+const route = useRoute();
+const router = useRouter();
+
+const campgroundName = route.query.campgroundName;
 
 onMounted(() => {
-  const routeQuery = route.query
+  const routeQuery = route.query;
   if (routeQuery) {
     booking.value = {
       checkinDate: routeQuery.checkinDate,
       checkoutDate: routeQuery.checkoutDate,
       name: routeQuery.nameValue,
       email: routeQuery.emailValue,
+      phone: routeQuery.phoneValue,
       specialRequests: routeQuery.specialRequests,
       numberOfNights: routeQuery.numberOfNights,
       totalPrice: routeQuery.totalPrice,
-    }
-    saveBooking(booking.value)
+      campgroundName: campgroundName,
+      zoneId: routeQuery.zoneId,
+    };
+    saveBooking(booking.value);
+    console.log("Campground Name:", campgroundName);
   }
-})
+});
 
 const submitReceipt = () => {
-  router.push("/mybooking")
-}
+  router.push("/mybooking");
+};
 </script>
 
 <template>
   <div>
     <template v-if="booking">
-      <div
-        class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-      >
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg"
-          alt="chippz"
-          class="mx-auto w-16 py-4"
-        />
+      <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="flex flex-col justify-center items-center gap-2">
-          <h4 class="font-semibold text-4xl">selectedCampground</h4>
-          <p class="text-l">Location</p>
+          <h4 class="font-semibold text-4xl">{{ campgroundName }}</h4>
         </div>
         <div class="flex flex-col gap-3 border-b py-6 text-xl px-10">
           <p class="flex justify-between">
-            <span class="text-gray-400">Booking Number:</span>
-            <span>ไม่มา</span>
-          </p>
-          <p class="flex justify-between">
             <span class="text-gray-400">Check-in Date:</span>
-            <span>{{ booking.checkinDate }}</span>
+            <span>{{ $route.query.checkinDate }}</span>
           </p>
           <p class="flex justify-between">
             <span class="text-gray-400">Check-out Date:</span>
-            <span>{{ booking.checkoutDate }}</span>
+            <span>{{ $route.query.checkoutDate }}</span>
           </p>
 
           <p class="flex justify-between">
             <span class="text-gray-400">Zone:</span>
-            <span>ต้องการ zoneId,zoneName</span>
+            <span>{{ $route.query.zoneId }} {{ $route.query.zoneName }}</span>
           </p>
 
           <p class="flex justify-between">
             <span class="text-gray-400">Nights:</span>
-            <span>{{ booking.numberOfNights }}</span>
+            <span>{{ $route.query.numberOfNights }}</span>
           </p>
           <p class="flex justify-between">
             <span class="text-gray-400">Customer:</span>
-            <span>{{ booking.name }}</span>
+            <span>{{ $route.query.nameValue }}</span>
           </p>
           <p class="flex justify-between">
             <span class="text-gray-400">Email:</span>
-            <span>{{ booking.email }}</span>
+            <span> {{ $route.query.emailValue }}</span>
           </p>
           <p class="flex justify-between">
             <span class="text-gray-400">Phone Number:</span>
-            <span> ต้องการ</span>
+            <span> {{ $route.query.phoneValue }}</span>
           </p>
           <p class="flex justify-between">
             <span class="text-gray-400">Special Requests:</span>
-            <span>{{ booking.specialRequests }}</span>
+            <span>{{ $route.query.specialRequests }}</span>
           </p>
         </div>
         <div class="flex flex-col gap-3 pb-6 pt-2 text-xl px-10">
@@ -95,33 +89,23 @@ const submitReceipt = () => {
             <tbody>
               <tr class="flex">
                 <td class="flex-1">Sleeping bag</td>
-                <td class="min-w-[44px] py-2 px-28">ต้องการ</td>
-                <td class="min-w-[44px]">ต้องการ Baht</td>
+                <td class="min-w-[44px] py-2 px-28">{{ $route.query.sleepingBagQty }}</td>
+                <td class="min-w-[44px]"></td>
               </tr>
               <tr class="flex">
                 <td class="flex-1">Mattress</td>
-                <td class="min-w-[44px] py-2 px-28">ต้องการ</td>
-                <td class="min-w-[44px]">ต้องการ Baht</td>
+                <td class="min-w-[44px] py-2 px-28">{{ $route.query.mattressQty }}</td>
+                <td class="min-w-[44px]"></td>
               </tr>
               <tr class="flex">
                 <td class="flex-1">Pillow</td>
-                <td class="min-w-[44px] py-2 px-28">ต้องการ</td>
-                <td class="min-w-[44px]">ต้องการ Baht</td>
-              </tr>
-              <tr class="flex">
-                <td class="flex-1">Total Equipments Price</td>
-                <td class="min-w-[44px] py-2 px-28"></td>
-                <td class="min-w-[44px]">ต้องการ Baht</td>
-              </tr>
-              <tr class="flex">
-                <td class="flex-1">Total Nights Price</td>
-                <td class="min-w-[44px] py-2 px-28"></td>
-                <td class="min-w-[44px]">ต้องการ Baht</td>
+                <td class="min-w-[44px] py-2 px-28">{{ $route.query.pillowQty }}</td>
+                <td class="min-w-[44px]"></td>
               </tr>
               <tr class="flex">
                 <td class="flex-1">All Total</td>
                 <td class="min-w-[44px] py-2 px-28"></td>
-                <td class="min-w-[44px]">ต้องการ Baht</td>
+                <td class="min-w-[44px]">{{ $route.query.totalPrice }}</td>
               </tr>
             </tbody>
           </table>
