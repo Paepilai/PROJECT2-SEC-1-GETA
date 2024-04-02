@@ -391,7 +391,7 @@
   "user": [
     {
       "id": "1",
-      "name": "John 78923090",
+      "name": "John 78923nassss",
       "location": "Chiang Mai, Thai",
       "job": "Software Developer",
       "email": "johndoe@example.com",
@@ -399,9 +399,8 @@
       "phone": "0812345678",
       "bio": "When I'm not immersed in the world of software development, you'll often find me wandering through lush forests, setting up camp beside glistening streams, and gazing at the star-studded sky. Nature's my playground, and I cherish every moment spent beneath the towering trees and beside crackling campfires.",
       "favorite": [
-        1,
-        5,
-        9
+        2,
+        3
       ]
     },
     {

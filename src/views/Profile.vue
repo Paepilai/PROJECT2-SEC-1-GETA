@@ -2,13 +2,10 @@
 import { ref, onMounted, watchEffect, watch } from "vue"
 import { getItems, editItem, editFavorite } from "../libs/fetchUtils"
 import { myUserTodo } from "../stores/users.js"
-import data from "../../data/camp.json"
 import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
 
 //ค่อยทำ if ให้เป็นของ user ที่ login มา
-//const user = data.user[0]
-const mainUser = ref()
 const newFav = ref()
 
 const id = ref()
@@ -33,7 +30,6 @@ onMounted(async () => {
   const items = await getItems(import.meta.env.VITE_USER_BASE_URL)
 
   const userNow = myUser.getTodos()
-  console.log(userNow[0])
 
   newFav.value = {
     ...userNow[0],
@@ -63,7 +59,8 @@ const closeModal = () => {
   showModal.value = false
 }
 
-const updateProfile = async () => {
+const updateProfile = async (event) => {
+  // event.preventDefault()
   const userNow = myUser.getTodos()
   console.log(userNow)
   const updatedProfile = {
