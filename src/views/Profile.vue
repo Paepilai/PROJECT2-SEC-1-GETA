@@ -59,7 +59,7 @@ const closeModal = () => {
   showModal.value = false
 }
 
-const updateProfile = async (event) => {
+const updateProfile = async () => {
   // event.preventDefault()
   const userNow = myUser.getTodos()
   console.log(userNow)

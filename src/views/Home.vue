@@ -1,10 +1,12 @@
 <script setup>
-// import campData from "../../data/camp.json";
+import campData from "../../data/camp.json"
 // import Camplist from "../components/Navbar.vue";
 import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
-import { ref, onMounted } from "vue"
+import { ref, onMounted, computed } from "vue"
 const campgrounds = ref([])
+
+const searchQuery = ref("")
 
 onMounted(async () => {
   try {
@@ -18,6 +20,14 @@ onMounted(async () => {
     console.error(error)
   }
 })
+
+const filtercamp = computed(() => {
+  return campgrounds.value.filter((item) => {
+    return item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  })
+})
+
+console.log(filtercamp)
 </script>
 
 <template>
@@ -26,7 +36,12 @@ onMounted(async () => {
       <h1 class="ml-8 text-4xl font-bold">Hi [Name], welcome to your space!</h1>
 
       <label class="mr-8 input input-bordered- flex items-center gap-2">
-        <input type="text" class="grow" placeholder="Search" />
+        <input
+          type="text"
+          v-model="searchQuery"
+          class="grow"
+          placeholder="Search"
+        />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"
@@ -44,7 +59,7 @@ onMounted(async () => {
     <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
   </div>
   <div>
-    <ListCard :items="campgrounds">
+    <ListCard :items="filtercamp">
       <template #default="slotProps">
         <CampCard
           :name="slotProps.item.name"
