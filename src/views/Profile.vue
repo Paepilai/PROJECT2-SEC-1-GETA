@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue"
+import { ref, onMounted, watchEffect, watch } from "vue"
 import { getItems, editItem, editFavorite } from "../libs/fetchUtils"
 import { myUserTodo } from "../stores/users.js"
 import data from "../../data/camp.json"
@@ -7,7 +7,7 @@ import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
 
 //ค่อยทำ if ให้เป็นของ user ที่ login มา
-// const user = data.user[0]
+//const user = data.user[0]
 const mainUser = ref()
 const newFav = ref()
 
@@ -33,14 +33,15 @@ onMounted(async () => {
   const items = await getItems(import.meta.env.VITE_USER_BASE_URL)
 
   const userNow = myUser.getTodos()
-  mainUser.value = userNow[0]
+  console.log(userNow[0])
+
+  newFav.value = {
+    ...userNow[0],
+  }
 
   favoriteUser.value = items.filter((camp) =>
-    mainUser.value.favorite.includes(parseInt(camp.id))
+    userNow[0].favorite.includes(parseInt(camp.id))
   )
-  newFav.value = {
-    ...mainUser.value,
-  }
 
   id.value = newFav.value.id
   name.value = newFav.value.name
@@ -63,6 +64,8 @@ const closeModal = () => {
 }
 
 const updateProfile = async () => {
+  const userNow = myUser.getTodos()
+  console.log(userNow)
   const updatedProfile = {
     id: id.value,
     name: name.value,
@@ -74,13 +77,18 @@ const updateProfile = async () => {
     bio: bio.value,
     favorite: favorite.value,
   }
+  console.log(updatedProfile)
 
   const response = await editItem(
     import.meta.env.VITE_USER_BASE1_URL,
     id.value,
     updatedProfile
   )
+
   console.log(response)
+
+  myUser.updateTodoUser(updatedProfile.id, updatedProfile)
+  console.log(myUser.getTodos())
 
   showEditModal.value = false
 }
@@ -96,7 +104,7 @@ const deleteAccount = async () => {
 
 async function deleteFav(idcamp) {
   console.log(newFav.value.favorite)
-  const indexToRemove = mainUser.value.favorite.findIndex(
+  const indexToRemove = newFav.value.favorite.findIndex(
     (item) => item === parseInt(idcamp)
   )
   if (indexToRemove !== -1) {
@@ -110,6 +118,7 @@ async function deleteFav(idcamp) {
   )
   console.log(deleteCamp)
 
+  //frontend
   favoriteUser.value.splice(
     favoriteUser.value.findIndex((todo) => todo.id === idcamp),
     1

@@ -53,12 +53,18 @@ const myUserTodo = defineStore("usertodo", () => {
     })
   }
 
+  const updateTodoUser = (id, edit) => {
+    usertodo.value = usertodo.value.map((todo) => {
+      return todo.id === id ? { ...edit } : todo
+    })
+  }
+
   //views
   const getTodos = () => {
     return usertodo.value
   }
 
-  return { addTodo, addTodos, updateTodo, getTodos }
+  return { addTodo, addTodos, updateTodo, getTodos, updateTodoUser }
 })
 
 export { myUserTodo }
