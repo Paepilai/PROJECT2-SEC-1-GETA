@@ -54,12 +54,12 @@ const submitReceipt = () => {
 
           <p class="flex justify-between">
             <span class="text-gray-400">Zone:</span>
-            <span>{{ $route.query.zoneId }} {{ $route.query.zoneName }}</span>
+            <span>{{ $route.query.zoneName }}</span>
           </p>
 
           <p class="flex justify-between">
             <span class="text-gray-400">Nights:</span>
-            <span>{{ $route.query.numberOfNights }}</span>
+            <span>{{ $route.query.numberOfNights }} วัน </span>
           </p>
           <p class="flex justify-between">
             <span class="text-gray-400">Customer:</span>
