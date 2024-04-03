@@ -16,3 +16,4 @@ onMounted(async () => {
   <Navbar />
   <router-view />
 </template>
+
