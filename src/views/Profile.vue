@@ -31,10 +31,12 @@ onMounted(async () => {
   const items = await getItems(import.meta.env.VITE_USER_BASE_URL)
 
   const userNow = myUser.getTodos()
+  console.log(userNow[0].id)
 
   newFav.value = {
     ...userNow[0],
   }
+  console.log(userNow)
 
   favoriteUser.value = items.filter((camp) =>
     userNow[0].favorite.includes(parseInt(camp.id))
@@ -56,9 +58,12 @@ const openModal = (campid) => {
   showModal.value = true
 }
 
-const openLogoutModal = () => {
+const openLogoutModal = async () => {
   showModalLogout.value = true
   localStorage.removeItem("user")
+  const userNow = myUser.getTodos()
+  myUser.removeTodo(userNow[0].id)
+
   // window.location.href = "/login"
 }
 
@@ -97,16 +102,6 @@ const updateProfile = async () => {
   showEditModal.value = false
 }
 
-const deleteAccount = async () => {
-  const userNow = myUser.getTodos()
-  const response = await deleteItemById(
-    import.meta.env.VITE_USER_BASE1_URL,
-    id.value
-  )
-  // console.log(response)
-  // userNow.reUser()
-}
-
 async function deleteFav(idcamp) {
   console.log(newFav.value.favorite)
   const indexToRemove = newFav.value.favorite.findIndex(
@@ -128,8 +123,6 @@ async function deleteFav(idcamp) {
     favoriteUser.value.findIndex((todo) => todo.id === idcamp),
     1
   )
-
-  // myUser.updateTodo(newFav.value.id, newFav.value.favorite)
 
   console.log(myUser.getTodos())
 

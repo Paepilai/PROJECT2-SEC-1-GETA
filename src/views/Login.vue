@@ -6,7 +6,7 @@
         <label class="input input-bordered flex items-center gap-2 m-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
             class="w-4 h-4 opacity-70"></svg>
-          <input type="text" class="grow" v-model="username" placeholder="๊Username" />
+          <input type="text" class="grow" v-model="email" placeholder="Email" />
         </label>
         <label class="input input-bordered flex items-center gap-2 m-2">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
@@ -14,13 +14,12 @@
           <input type="password" class="grow" v-model="password" placeholder="Password" />
         </label>
         <button class="btn btn-outline btn-accent mr-5" @click="loginUser">
-          <!-- <router-link :to="{ name: 'Home', params: { id: users.id } }"> -->
           Login
-          <!-- </router-link> -->
         </button>
 
         <!-- Register -->
         <button class="btn" onclick="my_modal_1.showModal()">Register</button>
+
         <dialog id="my_modal_1" class="modal">
           <div class="modal-box">
             <h3 class="font-bold text-lg">Register</h3>
@@ -32,7 +31,7 @@
             <label class="input input-bordered flex items-center gap-2 m-2">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                 class="w-4 h-4 opacity-70"></svg>
-              <input type="text" class="grow" v-model="formData.email" placeholder="Username" />
+              <input type="text" class="grow" v-model="formData.email" placeholder="Email" />
             </label>
 
             <label class="input input-bordered flex items-center gap-2 m-2">
@@ -46,8 +45,8 @@
               <form @submit.prevent="register" method="dialog">
                 <!-- End register -->
                 <button class="btn m-2">Register</button>
-                <h5>*press esc to close</h5>
               </form>
+              <button class="btn m-2" @click="closeModal">Close</button>
             </div>
           </div>
         </dialog>
@@ -65,7 +64,7 @@ import { myUserTodo } from "../stores/users"
 const router = useRouter()
 const users = ref()
 
-const username = ref("")
+const email = ref("")
 const password = ref("")
 
 const showPassword = ref(false)
@@ -80,7 +79,9 @@ const formData = ref({
   bio: "",
   favorite: [],
 })
-
+const closeModal = () => {
+  my_modal_1.close()
+}
 const register = () => {
   const newUser = addItem(import.meta.env.VITE_USER_BASE1_URL, {
     name: formData.value.name,
@@ -95,6 +96,8 @@ const register = () => {
 
   console.log(newUser)
   alert("Registration successful!")
+  closeModal()
+  clearForm()
 }
 
 const loginUser = async () => {
@@ -112,7 +115,7 @@ const loginUser = async () => {
   console.log(users.value)
 
   const user = users.value.find(
-    (user) => user.email === username.value && user.password === password.value
+    (user) => user.email === email.value && user.password === password.value
   )
 
   console.log(user)
@@ -125,15 +128,14 @@ const loginUser = async () => {
 
     router.push("/home")
   } else {
-    alert("Invalid username or password")
+    alert("Invalid email or password")
   }
 }
-
 router.beforeEach(async (to, from) => {
   const myUser = myUserTodo()
   const emptyUser = myUser.getTodos()
 
-  if (emptyUser.length === 0) {
+  if (emptyUser.length === 0 && to.name !== "Login") {
     return "/"
   }
 })
