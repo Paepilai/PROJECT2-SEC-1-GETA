@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="py-4">
     <h1 class="text-3xl text-center font-bold mt-6">{{ campground.name }}</h1>
     <div
       v-for="(zone, index) in campground.area"

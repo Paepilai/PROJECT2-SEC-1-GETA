@@ -114,13 +114,18 @@
           </ul>
         </div>
         <hr class="h-2 border-dashed border-gray-300" />
+
         <div class="flex justify-center p-5">
-          <RouterLink
-            :to="{ path: '/available', query: { campId: campground.id } }"
-            class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl"
+          <div
+            class="transition-transform duration-300 hover:scale-105 cursor-pointer"
           >
-            Join Camp
-          </RouterLink>
+            <RouterLink
+              :to="{ path: '/available', query: { campId: campground.id } }"
+              class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl"
+            >
+              Join Camp
+            </RouterLink>
+          </div>
         </div>
       </div>
     </div>
@@ -179,4 +184,12 @@ async function saveFavorite() {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.transition-transform {
+  transition-property: transform;
+}
+
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+</style>

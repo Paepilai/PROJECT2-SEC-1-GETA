@@ -120,7 +120,7 @@ const bookingStore = useBookingStore()
 </script>
 
 <template>
-  <div id="bookInfo">
+  <div id="bookInfo py-6">
     <div
       class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
     >

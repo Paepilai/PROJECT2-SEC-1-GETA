@@ -36,7 +36,7 @@ const submitReceipt = () => {
 </script>
 
 <template>
-  <div>
+  <div class="py-4">
     <template v-if="booking">
       <div
         class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden text-black mb-6"
