@@ -1,5 +1,6 @@
 <script setup>
 import campData from "../../data/camp.json"
+
 import Camplist from "../components/Navbar.vue"
 import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
@@ -16,9 +17,10 @@ const filteredItems = computed(() => {
   })
 })
 
+
 onMounted(async () => {
   try {
-    const response = await fetch("/data/camp.json")
+    const response = await fetch(import.meta.env.VITE_USER_BASE_URL)
     if (!response.ok) {
       throw new Error("Failed to fetch data")
     }
@@ -28,6 +30,14 @@ onMounted(async () => {
     console.error(error)
   }
 })
+
+const filtercamp = computed(() => {
+  return campgrounds.value.filter((item) => {
+    return item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+  })
+})
+
+console.log(filtercamp)
 </script>
 
 <template>
@@ -44,11 +54,12 @@ onMounted(async () => {
           />
         </label>
       </div>
+
     </div>
     <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
   </div>
   <div>
-    <ListCard :items="filteredItems">
+    <ListCard :items="filtercamp">
       <template #default="slotProps">
         <CampCard
           :name="slotProps.item.name"
