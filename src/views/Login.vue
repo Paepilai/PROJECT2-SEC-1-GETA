@@ -4,32 +4,14 @@
       <div class="mt-5 text-2xl font-bold text-slate-950">Login</div>
       <div class="m-5">
         <label class="input input-bordered flex items-center gap-2 m-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            class="w-4 h-4 opacity-70"
-          ></svg>
-          <input
-            type="text"
-            class="grow"
-            v-model="username"
-            placeholder="Username"
-          />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+            class="w-4 h-4 opacity-70"></svg>
+          <input type="text" class="grow" v-model="username" placeholder="Username" />
         </label>
         <label class="input input-bordered flex items-center gap-2 m-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            class="w-4 h-4 opacity-70"
-          ></svg>
-          <input
-            type="password"
-            class="grow"
-            v-model="password"
-            placeholder="Password"
-          />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+            class="w-4 h-4 opacity-70"></svg>
+          <input type="password" class="grow" v-model="password" placeholder="Password" />
         </label>
         <button class="btn btn-outline btn-accent mr-5" @click="loginUser">
           <!-- <router-link :to="{ name: 'Home', params: { id: users.id } }"> -->
@@ -43,47 +25,21 @@
           <div class="modal-box">
             <h3 class="font-bold text-lg">Register</h3>
             <label class="input input-bordered flex items-center gap-2 m-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                class="w-4 h-4 opacity-70"
-              ></svg>
-              <input
-                type="text"
-                class="grow"
-                v-model="formData.name"
-                placeholder="Name"
-              />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                class="w-4 h-4 opacity-70"></svg>
+              <input type="text" class="grow" v-model="formData.name" placeholder="Name" />
             </label>
             <label class="input input-bordered flex items-center gap-2 m-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                class="w-4 h-4 opacity-70"
-              ></svg>
-              <input
-                type="text"
-                class="grow"
-                v-model="formData.email"
-                placeholder="Username"
-              />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                class="w-4 h-4 opacity-70"></svg>
+              <input type="text" class="grow" v-model="formData.email" placeholder="Username" />
             </label>
 
             <label class="input input-bordered flex items-center gap-2 m-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                class="w-4 h-4 opacity-70"
-              ></svg>
-              <input
-                v-model="formData.password"
-                :type="showPassword ? 'text' : 'password'"
-                class="grow"
-                placeholder="Password"
-              />
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                class="w-4 h-4 opacity-70"></svg>
+              <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" class="grow"
+                placeholder="Password" />
               <input type="checkbox" v-model="showPassword" class="ml-2" /> show
             </label>
             <div class="modal-action">
