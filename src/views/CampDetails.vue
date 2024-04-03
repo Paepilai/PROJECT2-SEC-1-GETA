@@ -4,9 +4,7 @@
       <div class="flex-col">
         <div class="font-bold text-4xl p-10 text-center inline flex-row">
           <div class="flex flex-row justify-between px-16">
-
             <!-- <RouterLink to="/" class="btn btn-circle text-bold"> < </RouterLink> -->
-
             <!-- ทำ data ลง backend -->
             <button
               @click="saveFavorite(), (isFavoriteClicked = true)"
@@ -61,6 +59,8 @@
         <div class="font-bold text-xl m-10 pl-20">
           <h3>Contact : {{ campground.contact }}</h3>
         </div>
+
+        <
       </div>
 
       <div class="col-start-3 border-2 rounded-md shadow-md m-5 h-auto">
@@ -88,47 +88,30 @@
           </ul>
         </div>
 
-
         <hr class="h-2 border-dashed border-gray-300" />
         <div class="font-bold text-2xl p-5 text-center">
           <h3>Price</h3>
         </div>
-        <!-- <div class="text-xl pl-10 pr-10 pb-5">
+        <div class="text-xl pl-10 pr-10 pb-5">
           <ul
             v-for="(price, index) in campground.price"
             :key="index"
             class="list-disc pl-10"
           >
-            <li>{{ item }}:{{ price }}</li>
-          </ul>
-        </div> -->
-        <!-- <div class="text-xl pl-10 pr-10 pb-5">
-          <ul v-for="(price, itemName) in campground.price" :key="itemName">
-            <li>{{ itemName }}: {{ price }} THB</li>
-          </ul>
-        </div> -->
-        <div class="text-xl pl-10 pr-10 pb-5">
-          <ul class="list-disc pl-10">
-            <li>Sleeping Bag {{ campground.price.sleeping_bag }} THB</li>
-
-            <li>Mattress {{ campground.price.mattress }} THB</li>
-
-            <li>Pillow {{ campground.price.pillow }} THB</li>
+            <li>{{ price }} บาท</li>
           </ul>
         </div>
         <hr class="h-2 border-dashed border-gray-300" />
-
         <div class="flex justify-center p-5">
-          <div
-            class="transition-transform duration-300 hover:scale-105 cursor-pointer"
+          <RouterLink
+            :to="{
+              path: '/available',
+              query: { campId: campground.id, campgroundName: campground.name },
+            }"
+            class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl"
           >
-            <RouterLink
-              :to="{ path: '/available', query: { campId: campground.id } }"
-              class="btn bg-[#F79C1D] hover:bg-[#F79C1D] text-white text-2xl"
-            >
-              Join Camp
-            </RouterLink>
-          </div>
+            Join Camp
+          </RouterLink>
         </div>
       </div>
     </div>
@@ -141,62 +124,50 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
-import { useRoute } from "vue-router"
-import { getItems, editItem, editFavorite } from "../libs/fetchUtils.js"
-import { myUserTodo } from "@/stores/users"
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { getItems, editItem, editFavorite } from "../libs/fetchUtils.js";
+import { myUserTodo } from "@/stores/users";
 
-const { params } = useRoute()
-const campground = ref(null)
-const newFav = ref({})
-const id = params.id
+const { params } = useRoute();
+const campground = ref(null);
+const newFav = ref({});
+const id = params.id;
 
-const isFavoriteClicked = ref(false)
+const isFavoriteClicked = ref(false);
 
-const myUser = myUserTodo()
+const myUser = myUserTodo();
 onMounted(async () => {
-  console.log(id)
+  console.log(id);
 
-  const items = await getItems(import.meta.env.VITE_USER_BASE_URL)
-  console.log(items)
+  const items = await getItems(import.meta.env.VITE_USER_BASE_URL);
+  console.log(items);
 
-  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id))
-  console.log(campground.value)
-})
+  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id));
+  console.log(campground.value);
+});
 
 async function saveFavorite() {
-  const userNow = myUser.getTodos()
-  console.log(userNow[0].favorite)
+  const userNow = myUser.getTodos();
+  console.log(userNow[0].favorite);
 
   newFav.value = {
     ...userNow[0],
-  }
+  };
 
   if (!userNow[0].favorite.includes(parseInt(id))) {
-    newFav.value.favorite.push(parseInt(id))
-
-
+    newFav.value.favorite.push(parseInt(id));
   }
 
   const addFav = await editFavorite(
     import.meta.env.VITE_USER_BASE1_URL,
     newFav.value.id,
     newFav.value
+  );
+  console.log(addFav);
 
-  )
-  console.log(addFav)
-
-  myUser.updateTodo(newFav.value.id, newFav.value.favorite)
+  myUser.updateTodo(newFav.value.id, newFav.value.favorite);
 }
 </script>
 
-<style scoped>
-.transition-transform {
-  transition-property: transform;
-}
-
-.hover\:scale-105:hover {
-  transform: scale(1.05);
-}
-</style>
-
+<style scoped></style>
