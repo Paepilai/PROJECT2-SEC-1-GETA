@@ -125,7 +125,6 @@ const bookingStore = useBookingStore()
       <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
         {{ campgroundName }}
       </div>
-
       <div class="text-gray-800 font-bold">
         <div class="mt-4 mb-2 px-6">Zone {{ zoneName }}</div>
 
@@ -139,13 +138,13 @@ const bookingStore = useBookingStore()
         </div>
         <div class="mb-4 px-6">Total Nights: {{ numberOfNights }}</div>
       </div>
-
       <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-6 py-3 rounded-s-lg">List</th>
               <th scope="col" class="px-6 py-3 rounded-s-lg">Qty</th>
+
               <th scope="col" class="px-6 py-3 rounded-s-lg">Price</th>
             </tr>
           </thead>
@@ -155,44 +154,55 @@ const bookingStore = useBookingStore()
                 Sleeping bag
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountSleepingBag" @input="validateInput('sleepingBag')" />
+                <input type="number" v-model="qtyAmountSleepingBag" />
               </td>
-              <td class="px-6 py-4">{{ getPrice(selectedZone, "sleeping_bag") }}</td>
+              <td class="px-6 py-4">
+                {{ getPrice(selectedZone, "sleeping_bag") }}
+              </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Mattress
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountMattress" @input="validateInput('mattress')" />
+                <input type="number" v-model="qtyAmountMattress" />
               </td>
-              <td class="px-6 py-4">{{ getPrice(selectedZone, "mattress") }}</td>
+              <td class="px-6 py-4">
+                {{ getPrice(selectedZone, "mattress") }}
+              </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Pillow
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountPillow" @input="validateInput('pillow')" />
+                <input type="number" v-model="qtyAmountPillow" />
               </td>
-              <td class="px-6 py-4">{{ getPrice(selectedZone, "pillow") }}</td>
+              <td class="px-6 py-4">
+                {{ getPrice(selectedZone, "pillow") }}
+              </td>
             </tr>
           </tbody>
           <tfoot>
+            <tr class="font-semibold text-gray-800 dark:text-white">
+              <th scope="row" class="px-6 py-3 text-base">
+                Total Equipments Price
+              </th>
 
-            <tr class="font-semibold text-gray-900 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">Total Equipments Price</th>
-              <td class="px-6 py-3"></td>
+              <td class="px-6 py-3">{{ sumQuantities }}</td>
               <td class="px-6 py-3">{{ calculateTotalAmount }}</td>
             </tr>
-            <tr class="font-semibold text-gray-900 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">Total Nights Price</th>
+            <tr class="font-semibold text-gray-800 dark:text-white">
+              <th scope="row" class="px-6 py-3 text-base">
+                Total Nights Price
+              </th>
 
               <td class="px-6 py-3">{{ numberOfNights }}</td>
               <td class="px-6 py-3">{{ totalPrice }}</td>
             </tr>
             <tr class="font-semibold text-gray-800 dark:text-white">
               <th scope="row" class="px-6 py-3 text-base">All Total</th>
+
               <td class="px-6 py-3"></td>
               <td class="px-6 py-3">{{ sumAllTotal }}</td>
             </tr>
@@ -246,9 +256,8 @@ const bookingStore = useBookingStore()
           Book Camp
         </button>
       </div>
-      <div v-if="!isFormValid" class="text-red-500 text-center">
-        Please fill in all required fields
-      </div>
     </div>
   </div>
 </template>
+
+<style scoped></style>

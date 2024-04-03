@@ -1,8 +1,6 @@
 <template>
-
   <div class="py-4">
     <h1 class="text-3xl text-center font-bold mt-6">{{ campground.name }}</h1>
-
     <div v-for="(zone, index) in campground.area" :key="index"
       class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">

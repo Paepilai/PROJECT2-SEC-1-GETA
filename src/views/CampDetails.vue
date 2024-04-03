@@ -4,16 +4,15 @@
       <div class="flex-col">
         <div class="font-bold text-4xl p-10 text-center inline flex-row">
           <div class="flex flex-row justify-between px-16">
-
-            <!-- <RouterLink to="/" class="btn btn-circle text-bold"> < </RouterLink> -->
-
-            <!-- ทำ data ลง backend -->
-            <button @click="saveFavorite(), (isFavoriteClicked = true)" :class="{
+            <RouterLink to="/home" class="btn btn-circle text-bold">
+              < </RouterLink>
+                <!-- ทำ data ลง backend -->
+                <button @click="saveFavorite(), (isFavoriteClicked = true)" :class="{
     'btn hover:bg-red-500 hover:text-white': true,
     'btn bg-red-500 text-white': isFavoriteClicked,
   }">
-              Favorite
-            </button>
+                  Favorite
+                </button>
           </div>
 
           <h1>{{ campground.name }}</h1>
@@ -73,7 +72,6 @@
             <li>{{ service }}</li>
           </ul>
         </div>
-
 
         <hr class="h-2 border-dashed border-gray-300" />
         <div class="font-bold text-2xl p-5 text-center">
@@ -162,8 +160,6 @@ async function saveFavorite() {
     import.meta.env.VITE_USER_BASE1_URL,
     newFav.value.id,
     newFav.value
-
-
   )
   console.log(addFav)
 

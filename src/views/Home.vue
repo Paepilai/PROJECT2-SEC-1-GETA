@@ -5,7 +5,6 @@ import Camplist from "../components/Navbar.vue"
 import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
 import { ref, onMounted, computed } from "vue"
-import { myUserTodo } from "../stores/users"
 
 const campgrounds = ref([])
 
@@ -18,8 +17,6 @@ const filteredItems = computed(() => {
   })
 })
 
-const myUser = myUserTodo()
-
 onMounted(async () => {
   try {
     const response = await fetch(import.meta.env.VITE_USER_BASE_URL)
@@ -31,8 +28,6 @@ onMounted(async () => {
   } catch (error) {
     console.error(error)
   }
-
-  console.log(myUser.getTodos())
 })
 
 const filtercamp = computed(() => {
@@ -57,7 +52,6 @@ console.log(filtercamp)
           </label>
         </div>
       </div>
-
       <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
     </div>
     <div class="text-gray-900">
@@ -75,11 +69,9 @@ console.log(filtercamp)
           </div>
         </template>
       </ListCard>
-
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .transition-transform {
@@ -90,4 +82,3 @@ console.log(filtercamp)
   transform: scale(1.05);
 }
 </style>
-
