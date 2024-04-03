@@ -176,12 +176,12 @@ async function deleteFav(idcamp) {
             </button>
 
             <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto">
-              <div class="flex items-center justify-center min-h-screen">
+              <div class="flex items-center justify-center min-h-screen bg-black/[.05]">
                 <div class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative">
-                  <button class="absolute top-0 right-0 m-4" @click="closeModal()">
+                  <button class="text-black absolute top-0 right-0 m-4" @click="closeModal()">
                     x
                   </button>
-                  <h2 class="pb-5">Are you sure?</h2>
+                  <h2 class="text-black pb-5">Are you sure?</h2>
                   <button class="btn btn-outline btn-error" @click="deleteFav(campidref)">
                     Delete
                   </button>
@@ -189,13 +189,13 @@ async function deleteFav(idcamp) {
               </div>
             </div>
 
-            <div v-if="showModalLogout" class="fixed z-10 inset-0 overflow-y-auto">
-              <div class="flex items-center justify-center min-h-screen">
+            <div v-if="showModalLogout" class="fixed z-10 inset-0 overflow-y-auto ">
+              <div class="flex items-center justify-center min-h-screen bg-black/[.05]">
                 <div class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative">
-                  <button class="absolute top-0 right-0 m-4" @click="showModalLogout = false">
+                  <button class="text-black absolute top-0 right-0 m-4" @click="showModalLogout = false">
                     x
                   </button>
-                  <h2 class="pb-5">Do you want to log out?</h2>
+                  <h2 class="text-black pb-5">Do you want to log out?</h2>
                   <RouterLink to="/" class="btn btn-outline btn-error">
                     Yes
                   </RouterLink>
@@ -212,7 +212,7 @@ async function deleteFav(idcamp) {
     </ListCard>
   </div>
 
-  <div v-if="showEditModal" class="fixed z-10 inset-0 overflow-y-auto">
+  <div v-if="showEditModal" class="text-black fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen bg-black/[.05]">
       <div class="bg-white w-1/2 p-6 rounded shadow-lg">
         <h2 class="text-2xl font-bold mb-4">Edit Mode</h2>

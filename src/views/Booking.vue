@@ -1,21 +1,22 @@
 <template>
-  <div id="bookInfo">
+  <div id="bookInfo py-6">
     <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
         {{ campgroundName }}
       </div>
-      <div class="text-black mt-4 mb-2 px-6">Zone: {{ zoneName }}</div>
+      <div class="text-gray-800 font-bold">
+        <div class="mt-4 mb-2 px-6">Zone: {{ zoneName }}</div>
 
-      <div class="text-black -mb-2 py-4 px-6">
-        <label for="checkin">Check-in Date:</label>
-        <input type="date" id="checkin" v-model="checkinDate" :min="minCheckinDate" @input="updateCheckoutMinDate" />
+        <div class="-mb-2 py-4 px-6">
+          <label for="checkin">Check-in Date:</label>
+          <input type="date" id="checkin" v-model="checkinDate" :min="minCheckinDate" @input="updateCheckoutMinDate" />
+        </div>
+        <div class="mb-6 px-6">
+          <label for="checkout">Check-out Date:</label>
+          <input type="date" id="checkout" v-model="checkoutDate" :min="minCheckoutDate" />
+        </div>
+        <div class="mb-4 px-6">Total Nights: {{ numberOfNights }}</div>
       </div>
-      <div class="text-black mb-6 px-6">
-        <label for="checkout">Check-out Date:</label>
-        <input type="date" id="checkout" v-model="checkoutDate" :min="minCheckoutDate" />
-      </div>
-      <div class="text-black mb-4 px-6">Total Nights: {{ numberOfNights }} วัน</div>
-
       <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
@@ -33,7 +34,9 @@
               <td class="px-6 py-4">
                 <input type="number" v-model="qtyAmountSleepingBag" @input="validateInput('sleepingBag')" />
               </td>
-              <td class="px-6 py-4">{{ getPrice(selectedZone, "sleeping_bag") }}</td>
+              <td class="px-6 py-4">
+                {{ getPrice(selectedZone, "sleeping_bag") }}
+              </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -42,7 +45,9 @@
               <td class="px-6 py-4">
                 <input type="number" v-model="qtyAmountMattress" @input="validateInput('mattress')" />
               </td>
-              <td class="px-6 py-4">{{ getPrice(selectedZone, "mattress") }}</td>
+              <td class="px-6 py-4">
+                {{ getPrice(selectedZone, "mattress") }}
+              </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -56,12 +61,16 @@
           </tbody>
           <tfoot>
             <tr class="font-semibold text-gray-900 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">Total Equipments Price</th>
-              <td class="px-6 py-3"></td>
+              <th scope="row" class="px-6 py-3 text-base">
+                Total Equipments Price
+              </th>
+              <td class="px-6 py-3">{{ sumQuantities }}</td>
               <td class="px-6 py-3">{{ calculateTotalAmount }}</td>
             </tr>
             <tr class="font-semibold text-gray-900 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">Total Nights Price</th>
+              <th scope="row" class="px-6 py-3 text-base">
+                Total Nights Price
+              </th>
               <td class="px-6 py-3">{{ numberOfNights }}</td>
               <td class="px-6 py-3">{{ totalPrice }}</td>
             </tr>
