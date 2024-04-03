@@ -1,0 +1,17 @@
+{
+  "booking": [
+    {
+      "id": "6adc",
+      "checkinDate": "2024-04-05",
+      "checkoutDate": "2024-04-18",
+      "name": "Paepilai Chaimongkolngam",
+      "email": "ioonooni@gmail.com",
+      "phone": "0926584899",
+      "specialRequests": "",
+      "numberOfNights": "13",
+      "totalPrice": "2110",
+      "campgroundName": "แก่งกระจาน",
+      "zoneId": "1"
+    }
+  ]
+}
