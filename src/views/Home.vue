@@ -17,7 +17,6 @@ const filteredItems = computed(() => {
   })
 })
 
-
 onMounted(async () => {
   try {
     const response = await fetch(import.meta.env.VITE_USER_BASE_URL)
@@ -54,11 +53,10 @@ console.log(filtercamp)
           />
         </label>
       </div>
-
     </div>
     <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
   </div>
-  <div>
+  <div class="text-gray-900">
     <ListCard :items="filtercamp">
       <template #default="slotProps">
         <CampCard

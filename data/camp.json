@@ -8,7 +8,7 @@
       "location": "อุทยานแห่งชาติแก่งกระจาน ต.แก่งกระจาน อ.แก่งกระจาน จ.เพชรบุรี",
       "price": {
         "Campground": 60,
-        "tent": 225,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
@@ -60,7 +60,7 @@
       "location": "ศูนย์ศึกษาธรรมชาติและท่องเที่ยวเชิงนิเวศเจ็ดคด-โป่งก้อนเส้า ต.ท่ามะปราง อ.แก่งคอย จ.สระบุรี",
       "price": {
         "Campground": 40,
-        "tent": 300,
+
         "pillow": 20,
         "sleeping_bag": 50,
         "mattress": 20
@@ -107,7 +107,7 @@
       "location": "ลานกางเต็นท์ วิสาหกิจชุมชนท่องเที่ยวภูทับเบิก ต.วังบาล อ.หล่มเก่า จ.เพชรบูรณ์",
       "price": {
         "Campground": 30,
-        "tent": 500,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
@@ -147,7 +147,7 @@
       "location": "อุทยานแห่งชาติศรีน่าน อ.นาน้อย จ.น่าน",
       "price": {
         "Campground": 50,
-        "tent": 225,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
@@ -189,7 +189,7 @@
       "location": "ดอยอ่างขาง อุทยานแห่งชาติดอยฟ้าห่มปก อ.ฝาง จ.เชียงใหม่",
       "price": {
         "Campground": 120,
-        "tent": 200,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
@@ -228,7 +228,7 @@
       "location": "อยู่ในเขตอุทยานแห่งชาติทับลาน  ฝั่งอ.วังน้ำเขียว จ.นครราชสีมา",
       "price": {
         "Campground": 50,
-        "tent": 350,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
@@ -271,7 +271,7 @@
       "location": "หน่วยพิทักษ์อุทยานแห่งชาติที่ สล.8 (หนองแม่นา) อุทยานแห่งชาติทุ่งแสลงหลวง อ.เขาค้อ จ.เพชรบูรณ์",
       "price": {
         "Campground": 30,
-        "tent": 435,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
@@ -311,7 +311,7 @@
       "location": "อุทยานแห่งชาติเขื่อนศรีนครินทร์ อ.ศรีสวัสดิ์ จ.กาญจนบุรี",
       "price": {
         "Campground": 40,
-        "tent": 225,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
@@ -350,7 +350,7 @@
       "location": "หมู่บ้านรวมไทย อ.เมือง จ.แม่ฮ่องสอน",
       "price": {
         "Campground": 60,
-        "tent": 400,
+
         "pillow": 10,
         "sleeping_bag": 30,
         "mattress": 20
