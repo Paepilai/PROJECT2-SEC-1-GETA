@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     
-    "backend": "json-server --watch ./data/camp.json --port 5000",
+    "backend": "json-server --watch ./data/camp.json --port 5001",
     "booking": "json-server --watch ./data/history.json --port 5002"
 
   },
