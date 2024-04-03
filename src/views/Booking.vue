@@ -1,3 +1,4 @@
+
 <script setup>
 import { ref, computed, watch } from "vue"
 import { useRouter } from "vue-router"
@@ -129,6 +130,7 @@ const bookingStore = useBookingStore()
       >
         {{ campgroundName }}
       </div>
+
       <div class="text-gray-800 font-bold">
         <div class="mt-4 mb-2 px-6">Zone {{ zoneName }}</div>
 
@@ -153,6 +155,7 @@ const bookingStore = useBookingStore()
         </div>
         <div class="mb-4 px-6">Total Nights: {{ numberOfNights }}</div>
       </div>
+
       <div class="relative overflow-x-auto">
         <table
           class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
@@ -163,7 +166,6 @@ const bookingStore = useBookingStore()
             <tr>
               <th scope="col" class="px-6 py-3 rounded-s-lg">List</th>
               <th scope="col" class="px-6 py-3 rounded-s-lg">Qty</th>
-
               <th scope="col" class="px-6 py-3 rounded-s-lg">Price</th>
             </tr>
           </thead>
@@ -176,11 +178,13 @@ const bookingStore = useBookingStore()
                 Sleeping bag
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountSleepingBag" />
+                <input
+                  type="number"
+                  v-model="qtyAmountSleepingBag"
+                  @input="validateInput('sleepingBag')"
+                />
               </td>
-              <td class="px-6 py-4">
-                {{ getPrice(selectedZone, "sleeping_bag") }}
-              </td>
+              <td class="px-6 py-4">{{ getPrice(selectedZone, "sleeping_bag") }}</td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
               <th
@@ -190,11 +194,13 @@ const bookingStore = useBookingStore()
                 Mattress
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountMattress" />
+                <input
+                  type="number"
+                  v-model="qtyAmountMattress"
+                  @input="validateInput('mattress')"
+                />
               </td>
-              <td class="px-6 py-4">
-                {{ getPrice(selectedZone, "mattress") }}
-              </td>
+              <td class="px-6 py-4">{{ getPrice(selectedZone, "mattress") }}</td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
               <th
@@ -204,33 +210,30 @@ const bookingStore = useBookingStore()
                 Pillow
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountPillow" />
+                <input
+                  type="number"
+                  v-model="qtyAmountPillow"
+                  @input="validateInput('pillow')"
+                />
               </td>
-              <td class="px-6 py-4">
-                {{ getPrice(selectedZone, "pillow") }}
-              </td>
+              <td class="px-6 py-4">{{ getPrice(selectedZone, "pillow") }}</td>
             </tr>
           </tbody>
           <tfoot>
-            <tr class="font-semibold text-gray-800 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">
-                Total Equipments Price
-              </th>
 
-              <td class="px-6 py-3">{{ sumQuantities }}</td>
+            <tr class="font-semibold text-gray-900 dark:text-white">
+              <th scope="row" class="px-6 py-3 text-base">Total Equipments Price</th>
+              <td class="px-6 py-3"></td>
               <td class="px-6 py-3">{{ calculateTotalAmount }}</td>
             </tr>
-            <tr class="font-semibold text-gray-800 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">
-                Total Nights Price
-              </th>
+            <tr class="font-semibold text-gray-900 dark:text-white">
+              <th scope="row" class="px-6 py-3 text-base">Total Nights Price</th>
 
               <td class="px-6 py-3">{{ numberOfNights }}</td>
               <td class="px-6 py-3">{{ totalPrice }}</td>
             </tr>
             <tr class="font-semibold text-gray-800 dark:text-white">
               <th scope="row" class="px-6 py-3 text-base">All Total</th>
-
               <td class="px-6 py-3"></td>
               <td class="px-6 py-3">{{ sumAllTotal }}</td>
             </tr>
@@ -299,15 +302,173 @@ const bookingStore = useBookingStore()
       </div>
       <div class="flex items-center justify-center mb-4">
         <button
+
           class="font-bold bg-[#E6BB96] text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+
           type="button"
           @click="submitBooking"
         >
           Book Camp
         </button>
       </div>
+      <div v-if="!isFormValid" class="text-red-500 text-center">
+        Please fill in all required fields
+      </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, computed, watch } from "vue";
+import { useRouter } from "vue-router";
+import campData from "../../data/camp.json";
+const router = useRouter();
+const zoneId = router.currentRoute.value.query.zoneId;
+const zoneName = router.currentRoute.value.query.zoneName;
+const selectedZone = router.currentRoute.value.query.campId;
+const campgroundName = router.currentRoute.value.query.campgroundName;
+
+const checkinDate = ref(null);
+const checkoutDate = ref(null);
+const nameValue = ref("");
+const emailValue = ref("");
+const phoneValue = ref("");
+const specialRequests = ref("");
+
+const calculateNightsAndTotal = () => {
+  const nights = numberOfNights.value;
+  const price = CampgroundPrice.value;
+  totalPrice.value = nights && price ? nights * price : 0;
+};
+watch([checkinDate, checkoutDate], () => {
+  calculateNightsAndTotal();
+});
+
+const getPrice = (campId, item) => {
+  const camp = campData.camp.find((camp) => camp.id === parseInt(campId));
+  return camp ? camp.price[item] : 0;
+};
+
+const today = new Date().toISOString().split("T")[0];
+const minCheckinDate = computed(() => today);
+
+const minCheckoutDate = computed(() => {
+  const minDate = new Date(checkinDate.value);
+  minDate.setDate(minDate.getDate() + 1);
+  return minDate.toISOString().split("T")[0];
+});
+
+const numberOfNights = computed(() => {
+  if (!checkinDate.value || !checkoutDate.value) return 0;
+  const startDate = new Date(checkinDate.value);
+  const endDate = new Date(checkoutDate.value);
+  const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+  const numberOfNights = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  return numberOfNights;
+});
+
+const CampgroundPrice = computed(() => {
+  return selectedZone ? getPrice(selectedZone, "Campground") : 0;
+});
+
+const totalPrice = ref(0);
+
+const updateCheckoutMinDate = () => {
+  checkoutDate.value = null;
+};
+
+const submitBooking = () => {
+  if (!isFormValid.value) {
+    return;
+  }
+
+  const bookingData = {
+    checkinDate: checkinDate.value,
+    checkoutDate: checkoutDate.value,
+    nameValue: nameValue.value,
+    emailValue: emailValue.value,
+    phoneValue: phoneValue.value,
+    specialRequests: specialRequests.value,
+    numberOfNights: numberOfNights.value,
+    zoneId: zoneId,
+    zoneName: zoneName,
+    totalPrice: sumAllTotal.value,
+    equipmentPrice: calculateTotalAmount.value,
+    sleepingBagQty: qtyAmountSleepingBag.value,
+    mattressQty: qtyAmountMattress.value,
+    pillowQty: qtyAmountPillow.value,
+    campgroundName: campgroundName,
+  };
+
+  router.push({
+    path: "/receipt",
+    query: bookingData,
+  });
+};
+
+const qtyAmountTent = ref(0);
+const qtyAmountSleepingBag = ref(0);
+const qtyAmountMattress = ref(0);
+const qtyAmountPillow = ref(0);
+
+const validateInput = (item) => {
+  switch (item) {
+    case "sleepingBag":
+      if (qtyAmountSleepingBag.value < 0) {
+        qtyAmountSleepingBag.value = 0;
+      }
+      break;
+    case "mattress":
+      if (qtyAmountMattress.value < 0) {
+        qtyAmountMattress.value = 0;
+      }
+      break;
+    case "pillow":
+      if (qtyAmountPillow.value < 0) {
+        qtyAmountPillow.value = 0;
+      }
+      break;
+    default:
+      break;
+  }
+};
+
+const calculateTotalAmount = computed(() => {
+  let total = 0;
+
+  total += getPrice(selectedZone, "sleeping_bag") * qtyAmountSleepingBag.value;
+  total += getPrice(selectedZone, "mattress") * qtyAmountMattress.value;
+  total += getPrice(selectedZone, "pillow") * qtyAmountPillow.value;
+
+  return total;
+});
+
+const sumAllTotal = computed(() => {
+  let sum = 0;
+
+  sum += calculateTotalAmount.value;
+  sum += totalPrice.value;
+  return sum;
+});
+
+const sumQuantities = computed(() => {
+  let sum = 0;
+
+  sum += qtyAmountSleepingBag.value;
+  sum += qtyAmountMattress.value;
+  sum += qtyAmountPillow.value;
+  return sum;
+});
+
+const isFormValid = computed(() => {
+  return (
+    checkinDate.value &&
+    checkoutDate.value &&
+    nameValue.value &&
+    emailValue.value &&
+    phoneValue.value
+  );
+});
+</script>
 
 <style scoped></style>

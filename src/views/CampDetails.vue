@@ -4,7 +4,9 @@
       <div class="flex-col">
         <div class="font-bold text-4xl p-10 text-center inline flex-row">
           <div class="flex flex-row justify-between px-16">
-            <RouterLink to="/" class="btn btn-circle text-bold"> </RouterLink>
+
+            <!-- <RouterLink to="/" class="btn btn-circle text-bold"> < </RouterLink> -->
+
             <!-- ทำ data ลง backend -->
             <button
               @click="saveFavorite(), (isFavoriteClicked = true)"
@@ -85,6 +87,7 @@
             <li>{{ service }}</li>
           </ul>
         </div>
+
 
         <hr class="h-2 border-dashed border-gray-300" />
         <div class="font-bold text-2xl p-5 text-center">
@@ -171,12 +174,15 @@ async function saveFavorite() {
 
   if (!userNow[0].favorite.includes(parseInt(id))) {
     newFav.value.favorite.push(parseInt(id))
+
+
   }
 
   const addFav = await editFavorite(
     import.meta.env.VITE_USER_BASE1_URL,
     newFav.value.id,
     newFav.value
+
   )
   console.log(addFav)
 
@@ -193,3 +199,4 @@ async function saveFavorite() {
   transform: scale(1.05);
 }
 </style>
+
