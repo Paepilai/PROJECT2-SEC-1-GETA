@@ -1,16 +1,16 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { saveBooking } from "../../libs/BookingFetch.js";
+import { ref, onMounted } from "vue"
+import { useRoute, useRouter } from "vue-router"
+import { saveBooking } from "../../libs/BookingFetch.js"
 
-const booking = ref(null);
-const route = useRoute();
-const router = useRouter();
+const booking = ref(null)
+const route = useRoute()
+const router = useRouter()
 
-const campgroundName = route.query.campgroundName;
+const campgroundName = route.query.campgroundName
 
 onMounted(() => {
-  const routeQuery = route.query;
+  const routeQuery = route.query
   if (routeQuery) {
     booking.value = {
       checkinDate: routeQuery.checkinDate,
@@ -23,21 +23,23 @@ onMounted(() => {
       totalPrice: routeQuery.totalPrice,
       campgroundName: campgroundName,
       zoneId: routeQuery.zoneId,
-    };
-    saveBooking(booking.value);
-    console.log("Campground Name:", campgroundName);
+    }
+    saveBooking(booking.value)
+    console.log("Campground Name:", campgroundName)
   }
-});
+})
 
 const submitReceipt = () => {
-  router.push("/mybooking");
-};
+  router.push("/mybooking")
+}
 </script>
 
 <template>
   <div>
     <template v-if="booking">
-      <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div
+        class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+      >
         <div class="flex flex-col justify-center items-center gap-2">
           <h4 class="font-semibold text-4xl">{{ campgroundName }}</h4>
         </div>
@@ -89,17 +91,23 @@ const submitReceipt = () => {
             <tbody>
               <tr class="flex">
                 <td class="flex-1">Sleeping bag</td>
-                <td class="min-w-[44px] py-2 px-28">{{ $route.query.sleepingBagQty }}</td>
+                <td class="min-w-[44px] py-2 px-28">
+                  {{ $route.query.sleepingBagQty }}
+                </td>
                 <td class="min-w-[44px]"></td>
               </tr>
               <tr class="flex">
                 <td class="flex-1">Mattress</td>
-                <td class="min-w-[44px] py-2 px-28">{{ $route.query.mattressQty }}</td>
+                <td class="min-w-[44px] py-2 px-28">
+                  {{ $route.query.mattressQty }}
+                </td>
                 <td class="min-w-[44px]"></td>
               </tr>
               <tr class="flex">
                 <td class="flex-1">Pillow</td>
-                <td class="min-w-[44px] py-2 px-28">{{ $route.query.pillowQty }}</td>
+                <td class="min-w-[44px] py-2 px-28">
+                  {{ $route.query.pillowQty }}
+                </td>
                 <td class="min-w-[44px]"></td>
               </tr>
               <tr class="flex">
