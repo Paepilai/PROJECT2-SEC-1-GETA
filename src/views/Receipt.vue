@@ -1,16 +1,16 @@
 <script setup>
-import { ref, onMounted } from "vue"
-import { useRoute, useRouter } from "vue-router"
-import { saveBooking } from "../../libs/BookingFetch.js"
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { saveBooking } from "../../libs/BookingFetch.js";
 
-const booking = ref(null)
-const route = useRoute()
-const router = useRouter()
+const booking = ref(null);
+const route = useRoute();
+const router = useRouter();
 
-const campgroundName = route.query.campgroundName
+const campgroundName = route.query.campgroundName;
 
 onMounted(() => {
-  const routeQuery = route.query
+  const routeQuery = route.query;
   if (routeQuery) {
     booking.value = {
       checkinDate: routeQuery.checkinDate,
@@ -23,23 +23,22 @@ onMounted(() => {
       totalPrice: routeQuery.totalPrice,
       campgroundName: campgroundName,
       zoneId: routeQuery.zoneId,
-    }
-    saveBooking(booking.value)
-    console.log("Campground Name:", campgroundName)
+      zoneName: routeQuery.zoneName,
+    };
+    saveBooking(booking.value);
+    console.log("Campground Name:", campgroundName);
   }
-})
+});
 
 const submitReceipt = () => {
-  router.push("/mybooking")
-}
+  router.push("/mybooking");
+};
 </script>
 
 <template>
   <div>
     <template v-if="booking">
-      <div
-        class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-      >
+      <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
         <div class="flex flex-col justify-center items-center gap-2">
           <h4 class="font-semibold text-4xl">{{ campgroundName }}</h4>
         </div>
