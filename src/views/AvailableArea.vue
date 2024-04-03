@@ -9,7 +9,7 @@
       <div class="py-4 px-6">
         <div class="mb-4">
           <label class="block text-gray-700 font-bold mb-2">{{ zone.zoneName }}</label>
-          <h1>{{ zone.zoneDesc }}</h1>
+          <h1 class="text-black">{{ zone.zoneDesc }}</h1>
         </div>
         <button
           class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"

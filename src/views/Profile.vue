@@ -132,14 +132,14 @@ async function deleteFav(idcamp) {
 </script>
 
 <template>
-  <div class="flex items-center justify-center">
-    <div class="border-2 rounded-md shadow-md m-3 p-3 mt-4 h-auto w-1/2 flex">
+  <div class="flex items-center justify-center ">
+    <div class="border-2 rounded-md shadow-md m-3 p-3 mt-4 h-auto w-1/2 flex bg-white">
       <div class="flex p-5">
         <img
           src="https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg"
           alt="Profile Image" class="h-40 w-40 object-cover rounded-t" />
         <div>
-          <h1 class="text-3xl font-bold mb-4">{{ name }}</h1>
+          <h1 class="text-black text-3xl font-bold mb-4">{{ name }}</h1>
           <p class="text-gray-600 mb-2">💼 {{ job }}</p>
           <p class="text-gray-600 mb-4">📍{{ location }}</p>
           <hr class="border border-dotted" />
