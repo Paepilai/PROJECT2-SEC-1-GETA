@@ -1,16 +1,16 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import { saveBooking } from "../../libs/BookingFetch.js";
+import { ref, onMounted } from "vue"
+import { useRoute, useRouter } from "vue-router"
+import { saveBooking } from "../../libs/BookingFetch.js"
 
-const booking = ref(null);
-const route = useRoute();
-const router = useRouter();
+const booking = ref(null)
+const route = useRoute()
+const router = useRouter()
 
-const campgroundName = route.query.campgroundName;
+const campgroundName = route.query.campgroundName
 
 onMounted(() => {
-  const routeQuery = route.query;
+  const routeQuery = route.query
   if (routeQuery) {
     booking.value = {
       checkinDate: routeQuery.checkinDate,
@@ -24,21 +24,23 @@ onMounted(() => {
       campgroundName: campgroundName,
       zoneId: routeQuery.zoneId,
       zoneName: routeQuery.zoneName,
-    };
-    saveBooking(booking.value);
-    console.log("Campground Name:", campgroundName);
+    }
+    saveBooking(booking.value)
+    console.log("Campground Name:", campgroundName)
   }
-});
+})
 
 const submitReceipt = () => {
-  router.push("/mybooking");
-};
+  router.push("/mybooking")
+}
 </script>
 
 <template>
-  <div>
+  <div class="py-4">
     <template v-if="booking">
-      <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div
+        class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden text-black mb-6"
+      >
         <div class="flex flex-col justify-center items-center gap-2">
           <h4 class="font-semibold text-4xl">{{ campgroundName }}</h4>
         </div>
@@ -119,7 +121,7 @@ const submitReceipt = () => {
 
           <div class="py-4 justify-center items-center flex flex-col gap-2">
             <button
-              class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+              class="font-bold bg-[#E6BB96] text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
               type="submit"
               @click="submitReceipt"
             >
