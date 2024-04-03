@@ -35,7 +35,6 @@ onMounted(async () => {
   newFav.value = {
     ...userNow[0],
   }
-  console.log(userNow)
 
   favoriteUser.value = items.filter((camp) =>
     userNow[0].favorite.includes(parseInt(camp.id))
