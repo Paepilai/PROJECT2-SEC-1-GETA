@@ -1,32 +1,40 @@
 async function getItems(url) {
   try {
+
     const data = await fetch(url); //GET Method
     const items = await data.json();
     return items;
   } catch (error) {
     console.log(`error: ${error}`);
+
   }
 }
 async function getItemById(url, id) {
   try {
+
     const data = await fetch(`${url}/${id}`);
     const item = await data.json();
     return item;
   } catch (error) {
     console.log(`error: ${error}`);
+
   }
 }
 
 async function deleteItemById(url, id) {
+
   console.log(`${url}/${id}`);
+
 
   try {
     const res = await fetch(`${url}/${id}`, {
       method: "DELETE",
+
     });
     return res.status;
   } catch (error) {
     console.log(`error: ${error}`);
+
   }
 }
 
@@ -40,11 +48,13 @@ async function addItem(url, newItem) {
       body: JSON.stringify({
         ...newItem,
       }),
+
     });
     const addedItem = await res.json();
     return addedItem;
   } catch (error) {
     console.log(`error: ${error}`);
+
   }
 }
 
@@ -58,12 +68,14 @@ async function editItem(url, id, editItem) {
       body: JSON.stringify({
         ...editItem,
       }),
+
     });
     const editedItem = await res.json();
     return editedItem;
     // return res.status
   } catch (error) {
     console.log(`error: ${error}`);
+
   }
 }
 
@@ -79,11 +91,13 @@ async function editFavorite(url, id, editItem) {
 
         favorite: editItem.favorite,
       }),
+
     });
     const editedItem = await res.json();
     return editedItem;
   } catch (error) {
     console.log(`error: ${error}`);
+
   }
 }
 export {
@@ -93,4 +107,6 @@ export {
   addItem,
   editItem,
   editFavorite,
+
 };
+

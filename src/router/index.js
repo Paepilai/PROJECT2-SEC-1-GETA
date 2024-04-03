@@ -6,6 +6,7 @@ import Booking from "../views/Booking.vue";
 import AvailableArea from "../views/AvailableArea.vue";
 import Receipt from "../views/Receipt.vue";
 import MyBooking from "../views/MyBooking.vue";
+import Login from "../views/Login.vue"
 
 export const routes = [
   {
@@ -17,6 +18,11 @@ export const routes = [
     path: "/camp/:id",
     name: "CampDetail",
     component: CampDetail,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login,
   },
   {
     path: "/profile",
@@ -46,9 +52,12 @@ export const routes = [
   },
 ];
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+
 });
 
 export default router;
+
