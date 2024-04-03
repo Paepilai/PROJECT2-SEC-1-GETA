@@ -13,7 +13,7 @@
         <p>Email: {{ booking.email }}</p>
         <p>Phone Number: {{ booking.email }}</p>
         <p>Special Requests: {{ booking.specialRequests }}</p>
-        <p>Total Price: {{ booking.totalPrice }}</p>
+        <p>Total Price: {{ booking.totalPrice }} บาท</p>
 
         <img
           :src="getCampgroundImage(booking.campgroundName)"
@@ -24,7 +24,7 @@
         <button @click="deleteHandler(booking.id, index)">Delete</button>
       </div>
     </div>
-    <router-link to="/">Go to Home Page</router-link>
+    <!-- <router-link to="/">Go to Home Page</router-link> -->
   </div>
 </template>
 
