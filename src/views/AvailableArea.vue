@@ -1,40 +1,29 @@
 <template>
   <div>
     <!-- Your existing code for displaying zones -->
-    <div
-      v-for="(zone, index) in campground.area"
-      :key="index"
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div
-        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
-      >
+    <div v-for="(zone, index) in campground.area" :key="index"
+      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
         Zone {{ zone.zoneId }}
       </div>
       <div class="py-4 px-6">
         <div class="mb-4">
           <label class="block text-gray-700 font-bold mb-2">{{
-            zone.zoneName
-          }}</label>
+      zone.zoneName
+    }}</label>
           <h1>{{ zone.zoneDesc }}</h1>
         </div>
         <button
           class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
-          @click="redirectToBooking(zone)"
-        >
+          @click="redirectToBooking(zone)">
           Book
         </button>
       </div>
     </div>
 
     <!-- Receipt summary section -->
-    <div
-      v-if="selectedZone"
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div
-        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
-      >
+    <div v-if="selectedZone" class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
         Receipt Summary
       </div>
 
@@ -60,7 +49,7 @@ import { useRouter } from "vue-router"
 
 const router = useRouter()
 const campId = router.currentRoute.value.query.campId
-const campground = campData[0]
+const campground = campData.camp[0]
 const checkinDate = ref(null)
 const checkoutDate = ref(null)
 const selectedZone = ref(null)

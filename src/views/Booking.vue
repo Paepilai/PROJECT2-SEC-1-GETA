@@ -25,7 +25,7 @@ watch([checkinDate, checkoutDate], () => {
 })
 
 const getPrice = (campId, item) => {
-  const camp = campData.find((camp) => camp.id === parseInt(campId))
+  const camp = campData.camp.find((camp) => camp.id === parseInt(campId))
   return camp ? camp.price[item] : 0
 }
 
@@ -121,44 +121,25 @@ const bookingStore = useBookingStore()
 
 <template>
   <div id="bookInfo">
-    <div
-      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div
-        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
-      >
+    <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
         {{ campgroundName }}
       </div>
       <div class="mt-4 mb-2 px-6">Zone:{{ zoneName }}</div>
 
       <div class="-mb-2 py-4 px-6">
         <label for="checkin">Check-in Date:</label>
-        <input
-          type="date"
-          id="checkin"
-          v-model="checkinDate"
-          :min="minCheckinDate"
-          @input="updateCheckoutMinDate"
-        />
+        <input type="date" id="checkin" v-model="checkinDate" :min="minCheckinDate" @input="updateCheckoutMinDate" />
       </div>
       <div class="mb-6 px-6">
         <label for="checkout">Check-out Date:</label>
-        <input
-          type="date"
-          id="checkout"
-          v-model="checkoutDate"
-          :min="minCheckoutDate"
-        />
+        <input type="date" id="checkout" v-model="checkoutDate" :min="minCheckoutDate" />
       </div>
       <div class="mb-4 px-6">Total Nights: {{ numberOfNights }}</div>
 
       <div class="relative overflow-x-auto">
-        <table
-          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-        >
-          <thead
-            class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
-          >
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="px-6 py-3 rounded-s-lg">List</th>
               <th scope="col" class="px-6 py-3 rounded-s-lg">Qty</th>
@@ -168,10 +149,7 @@ const bookingStore = useBookingStore()
           </thead>
           <tbody class="bg-white dark:bg-gray-800">
             <tr class="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Sleeping bag
               </th>
               <td class="px-6 py-4">
@@ -182,10 +160,7 @@ const bookingStore = useBookingStore()
               </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Mattress
               </th>
               <td class="px-6 py-4">
@@ -196,10 +171,7 @@ const bookingStore = useBookingStore()
               </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
-              <th
-                scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 Pillow
               </th>
               <td class="px-6 py-4">
@@ -237,12 +209,8 @@ const bookingStore = useBookingStore()
         </table>
       </div>
     </div>
-    <div
-      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
-      <div
-        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
-      >
+    <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
         User Information
       </div>
 
@@ -252,11 +220,7 @@ const bookingStore = useBookingStore()
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="name"
-          type="text"
-          placeholder="Enter your name"
-          v-model="nameValue"
-        />
+          id="name" type="text" placeholder="Enter your name" v-model="nameValue" />
       </div>
 
       <div class="py-4 px-6">
@@ -265,11 +229,7 @@ const bookingStore = useBookingStore()
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          v-model="emailValue"
-        />
+          id="email" type="email" placeholder="Enter your email" v-model="emailValue" />
       </div>
       <div class="py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="phone">
@@ -277,11 +237,7 @@ const bookingStore = useBookingStore()
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="phone"
-          type="tel"
-          placeholder="Enter your phone number"
-          v-model="phoneValue"
-        />
+          id="phone" type="tel" placeholder="Enter your phone number" v-model="phoneValue" />
       </div>
 
       <div class="mb-4 py-4 px-6">
@@ -290,18 +246,12 @@ const bookingStore = useBookingStore()
         </label>
         <textarea
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="message"
-          rows="4"
-          placeholder="Enter any additional information"
-          v-model="specialRequests"
-        ></textarea>
+          id="message" rows="4" placeholder="Enter any additional information" v-model="specialRequests"></textarea>
       </div>
       <div class="flex items-center justify-center mb-4">
         <button
           class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
-          type="button"
-          @click="submitBooking"
-        >
+          type="button" @click="submitBooking">
           Book Camp
         </button>
       </div>
