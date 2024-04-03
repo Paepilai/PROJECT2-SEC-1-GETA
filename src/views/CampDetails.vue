@@ -156,14 +156,13 @@ async function saveFavorite() {
 
   if (!userNow[0].favorite.includes(parseInt(id))) {
     newFav.value.favorite.push(parseInt(id))
-
-
   }
 
   const addFav = await editFavorite(
     import.meta.env.VITE_USER_BASE1_URL,
     newFav.value.id,
     newFav.value
+
 
   )
   console.log(addFav)
