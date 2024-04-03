@@ -59,6 +59,10 @@ const myUserTodo = defineStore("usertodo", () => {
     });
   };
 
+  const reUser = () => {
+    usertodo.value = []
+  }
+
   //views
   const getTodos = () => {
     return usertodo.value;

@@ -32,7 +32,9 @@
           />
         </label>
         <button class="btn btn-outline btn-accent mr-5" @click="loginUser">
+          <!-- <router-link :to="{ name: 'Home', params: { id: users.id } }"> -->
           Login
+          <!-- </router-link> -->
         </button>
 
         <!-- Register -->
@@ -102,6 +104,7 @@
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { addItem } from "../libs/fetchUtils"
+import { myUserTodo } from "../stores/users"
 
 const router = useRouter()
 const users = ref()
@@ -155,12 +158,29 @@ const loginUser = async () => {
   const user = users.value.find(
     (user) => user.email === username.value && user.password === password.value
   )
+
+  console.log(user)
   if (user) {
+    const myUser = myUserTodo()
+    console.log(myUser.getTodos())
+    myUser.addTodos([user])
+
+    console.log(myUser.getTodos())
+
     router.push("/home")
   } else {
     alert("Invalid username or password")
   }
 }
+
+router.beforeEach(async (to, from) => {
+  const myUser = myUserTodo()
+  const emptyUser = myUser.getTodos()
+
+  if (emptyUser.length === 0) {
+    return "/"
+  }
+})
 </script>
 
 <style scoped>
@@ -171,7 +191,7 @@ const loginUser = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #bd6060;
+  background-color: #4a504b;
 }
 
 .box-center {

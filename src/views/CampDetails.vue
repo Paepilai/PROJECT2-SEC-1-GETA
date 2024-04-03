@@ -59,8 +59,6 @@
         <div class="font-bold text-xl m-10 pl-20">
           <h3>Contact : {{ campground.contact }}</h3>
         </div>
-
-        <
       </div>
 
       <div class="col-start-3 border-2 rounded-md shadow-md m-5 h-auto">
@@ -124,49 +122,49 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import { getItems, editItem, editFavorite } from "../libs/fetchUtils.js";
-import { myUserTodo } from "@/stores/users";
+import { ref, onMounted } from "vue"
+import { useRoute } from "vue-router"
+import { getItems, editItem, editFavorite } from "../libs/fetchUtils.js"
+import { myUserTodo } from "@/stores/users"
 
-const { params } = useRoute();
-const campground = ref(null);
-const newFav = ref({});
-const id = params.id;
+const { params } = useRoute()
+const campground = ref(null)
+const newFav = ref({})
+const id = params.id
 
-const isFavoriteClicked = ref(false);
+const isFavoriteClicked = ref(false)
 
-const myUser = myUserTodo();
+const myUser = myUserTodo()
 onMounted(async () => {
-  console.log(id);
+  console.log(id)
 
-  const items = await getItems(import.meta.env.VITE_USER_BASE_URL);
-  console.log(items);
+  const items = await getItems(import.meta.env.VITE_USER_BASE_URL)
+  console.log(items)
 
-  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id));
-  console.log(campground.value);
-});
+  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id))
+  console.log(campground.value)
+})
 
 async function saveFavorite() {
-  const userNow = myUser.getTodos();
-  console.log(userNow[0].favorite);
+  const userNow = myUser.getTodos()
+  console.log(userNow[0].favorite)
 
   newFav.value = {
     ...userNow[0],
-  };
+  }
 
   if (!userNow[0].favorite.includes(parseInt(id))) {
-    newFav.value.favorite.push(parseInt(id));
+    newFav.value.favorite.push(parseInt(id))
   }
 
   const addFav = await editFavorite(
     import.meta.env.VITE_USER_BASE1_URL,
     newFav.value.id,
     newFav.value
-  );
-  console.log(addFav);
+  )
+  console.log(addFav)
 
-  myUser.updateTodo(newFav.value.id, newFav.value.favorite);
+  myUser.updateTodo(newFav.value.id, newFav.value.favorite)
 }
 </script>
 

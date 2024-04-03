@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watchEffect, watch } from "vue"
+import { ref, onMounted } from "vue"
 import { getItems, editItem, editFavorite } from "../libs/fetchUtils"
 import { myUserTodo } from "../stores/users.js"
 import CampCard from "../components/CampCard.vue"
@@ -35,6 +35,7 @@ onMounted(async () => {
   newFav.value = {
     ...userNow[0],
   }
+  console.log(userNow)
 
   favoriteUser.value = items.filter((camp) =>
     userNow[0].favorite.includes(parseInt(camp.id))
@@ -103,8 +104,8 @@ const deleteAccount = async () => {
     import.meta.env.VITE_USER_BASE1_URL,
     id.value
   )
-  console.log(response)
-  //ไปหน้า login ต่อ
+  // console.log(response)
+  // userNow.reUser()
 }
 
 async function deleteFav(idcamp) {
@@ -144,7 +145,9 @@ async function deleteFav(idcamp) {
       <div class="flex p-5">
         <img
           src="https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg"
-          alt="Profile Image" class="h-40 w-40 object-cover rounded-t" />
+          alt="Profile Image"
+          class="h-40 w-40 object-cover rounded-t"
+        />
         <div>
           <h1 class="text-3xl font-bold mb-4">{{ name }}</h1>
           <p class="text-gray-600 mb-2">💼 {{ job }}</p>
@@ -156,13 +159,22 @@ async function deleteFav(idcamp) {
     </div>
   </div>
   <div class="flex items-center justify-center">
-    <button @click="showEditModal = true" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">
+    <button
+      @click="showEditModal = true"
+      class="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+    >
       Edit Profile
     </button>
-    <!-- <button @click.prevent="deleteAccount" class="bg-red-500 text-white font-bold py-2 px-4 my-4 ml-4 rounded">
+    <!-- <button
+      @click.prevent="deleteAccount"
+      class="bg-red-500 text-white font-bold py-2 px-4 my-4 ml-4 rounded"
+    >
       Delete Account
     </button> -->
-    <button class="bg-red-500 text-white font-bold py-2 px-4 my-4 ml-4 rounded" @click="openLogoutModal()">
+    <button
+      class="bg-red-500 text-white font-bold py-2 px-4 my-4 ml-4 rounded"
+      @click="openLogoutModal()"
+    >
       Log out
     </button>
   </div>
@@ -173,7 +185,11 @@ async function deleteFav(idcamp) {
   <div>
     <ListCard :items="favoriteUser">
       <template #default="slotProps">
-        <CampCard :name="slotProps.item.name" :location="slotProps.item.location" :id="slotProps.item.id">
+        <CampCard
+          :name="slotProps.item.name"
+          :location="slotProps.item.location"
+          :id="slotProps.item.id"
+        >
           <template v-slot:option>
             <button class="btn btn-sm" @click="openModal(slotProps.item.id)">
               X
@@ -181,26 +197,42 @@ async function deleteFav(idcamp) {
 
             <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto">
               <div class="flex items-center justify-center min-h-screen">
-                <div class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative">
-                  <button class="absolute top-0 right-0 m-4" @click="closeModal()">
+                <div
+                  class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative"
+                >
+                  <button
+                    class="absolute top-0 right-0 m-4"
+                    @click="closeModal()"
+                  >
                     x
                   </button>
                   <h2 class="pb-5">Are you sure?</h2>
-                  <button class="btn btn-outline btn-error" @click="deleteFav(campidref)">
+                  <button
+                    class="btn btn-outline btn-error"
+                    @click="deleteFav(campidref)"
+                  >
                     Delete
                   </button>
                 </div>
               </div>
             </div>
 
-            <div v-if="showModalLogout" class="fixed z-10 inset-0 overflow-y-auto">
+            <div
+              v-if="showModalLogout"
+              class="fixed z-10 inset-0 overflow-y-auto"
+            >
               <div class="flex items-center justify-center min-h-screen">
-                <div class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative">
-                  <button class="absolute top-0 right-0 m-4" @click="showModalLogout = false">
+                <div
+                  class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative"
+                >
+                  <button
+                    class="absolute top-0 right-0 m-4"
+                    @click="showModalLogout = false"
+                  >
                     x
                   </button>
                   <h2 class="pb-5">Do you want to log out?</h2>
-                  <RouterLink to="/login" class="btn btn-outline btn-error">
+                  <RouterLink to="/" class="btn btn-outline btn-error">
                     Yes
                   </RouterLink>
                 </div>
@@ -209,7 +241,11 @@ async function deleteFav(idcamp) {
           </template>
 
           <template v-slot:location>
-            <img :src="slotProps.item.image" alt="Location Image" class="h-60 w-80 object-cover rounded-t pt-3" />
+            <img
+              :src="slotProps.item.image"
+              alt="Location Image"
+              class="h-60 w-80 object-cover rounded-t pt-3"
+            />
           </template>
         </CampCard>
       </template>
@@ -221,39 +257,77 @@ async function deleteFav(idcamp) {
       <div class="bg-white w-1/2 p-6 rounded shadow-lg">
         <h2 class="text-2xl font-bold mb-4">Edit Mode</h2>
         <label for="name" class="font-bold">Name: </label>
-        <br /><input v-model="name" type="text" id="name" class="input input-bordered mb-3 w-full" placeholder="Name" />
+        <br /><input
+          v-model="name"
+          type="text"
+          id="name"
+          class="input input-bordered mb-3 w-full"
+          placeholder="Name"
+        />
 
-        <br /><label for="job" class="font-bold">Job: </label> <br /><input v-model="job" type="text" id="job"
-          class="input input-bordered mb-3 w-full" placeholder="Job" />
+        <br /><label for="job" class="font-bold">Job: </label> <br /><input
+          v-model="job"
+          type="text"
+          id="job"
+          class="input input-bordered mb-3 w-full"
+          placeholder="Job"
+        />
 
         <br /><label for="location" class="font-bold">Location: </label>
-        <br /><input v-model="location" type="text" id="location" class="input input-bordered mb-3 w-full"
-          placeholder="Location" />
+        <br /><input
+          v-model="location"
+          type="text"
+          id="location"
+          class="input input-bordered mb-3 w-full"
+          placeholder="Location"
+        />
 
         <br /><label for="location" class="font-bold">Phone: </label>
-        <br /><input v-model="phone" type="text" class="input input-bordered mb-3 w-full" placeholder="Phone" />
+        <br /><input
+          v-model="phone"
+          type="text"
+          class="input input-bordered mb-3 w-full"
+          placeholder="Phone"
+        />
 
-        <br /><label for="bio" class="font-bold">Bio: </label> <br /><textarea v-model="bio" id="bio"
-          class="textarea textarea-bordered mb-3 w-full" placeholder="Bio"></textarea>
+        <br /><label for="bio" class="font-bold">Bio: </label> <br /><textarea
+          v-model="bio"
+          id="bio"
+          class="textarea textarea-bordered mb-3 w-full"
+          placeholder="Bio"
+        ></textarea>
 
-        <br /><label for="email" class="font-bold">Email: </label> <br /><input v-model="email" type="email" id="email"
-          class="input input-bordered mb-
-          
-          3 w-full" placeholder="Email" />
+        <br /><label for="email" class="font-bold">Email: </label> <br /><input
+          v-model="email"
+          type="email"
+          id="email"
+          class="input input-bordered mb- 3 w-full"
+          placeholder="Email"
+        />
 
         <br /><label for="password" class="font-bold">Password: </label>
-        <br /><input v-model="password" :type="showPassword ? 'text' : 'password'" id="password"
-          class="input input-bordered mb-3 w-full" placeholder="Password" />
+        <br /><input
+          v-model="password"
+          :type="showPassword ? 'text' : 'password'"
+          id="password"
+          class="input input-bordered mb-3 w-full"
+          placeholder="Password"
+        />
         <br /><input type="checkbox" v-model="showPassword" class="ml-2" /> Show
         Password
 
         <div class="flex justify-end">
-          <button type="submit" @click.prevent="updateProfile"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            type="submit"
+            @click.prevent="updateProfile"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
             Save
           </button>
-          <button @click="showEditModal = false"
-            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2">
+          <button
+            @click="showEditModal = false"
+            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2"
+          >
             Close
           </button>
         </div>
