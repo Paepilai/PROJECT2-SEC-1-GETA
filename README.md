@@ -3,16 +3,16 @@
 ## 🛸 Member Responsiblities | สมาชิกและหน้าที่ความรับผิดชอบ
 
 - 65130500007 นายจักรธร สอวิเศษ (20%)
-  - หน้าที่: Login and Register page, Search bar
+  - หน้าที่: Login and Register page, Search bar, Fetch Login and register Data
 - 65130500028 นางสาวธมลวรรณ ซิ้มเจริญ (20%)
-  - หน้าที่: Camp Detail, Profile page, Card style and Favorite path
+  - หน้าที่: Camp Detail, Profile page, Card style and Favorite path, Fetch Favorite Data
 - 65130500049 นางสาวพัชรนันท์ จันทร์ศิริ (20%)
-  - หน้าที่: Home, Available Area page, Booking page and Mybooking page
+  - หน้าที่: Home, Booking page, Receipt page, MyBooking page, Fetch Booking Data
 - 65130500051 นางสาวพิณงาม สมบัติศรี (20%)
-  - หน้าที่: Camp Detail, Profile page, Navbar and Readme file
+  - หน้าที่: Camp Detail, Profile page, Navbar, Readme file, Fetch User Data
 - 65130500055 นางสาวแพรพิไล ชัยมงคลงาม (20%)
-  - หน้าที่: Available Area page, Booking page, Readme file
-
+  - หน้าที่: Available Area page, Booking page, Receipt page, MyBooking page, Settings
+    
 ## 🛸 User Manual | คู่มือการใช้งาน
 
 ### App Infomation
