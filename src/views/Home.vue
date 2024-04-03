@@ -5,19 +5,17 @@ import Camplist from "../components/Navbar.vue"
 import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
 import { ref, onMounted, computed } from "vue"
+import { myUserTodo } from "../stores/users"
 
 const campgrounds = ref([])
 
 const searchQuery = ref("")
 const items = ref(campData)
 
-const filteredItems = computed(() => {
-  return items.value.filter((item) => {
-    return item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  })
-})
-
-
+const myUser = myUserTodo()
+const userName = myUser.getTodos()
+const name = ref(userName[0].name)
+console.log(name.value)
 onMounted(async () => {
   try {
     const response = await fetch(import.meta.env.VITE_USER_BASE_URL)
@@ -43,13 +41,12 @@ console.log(filtercamp)
 <template>
   <div class="grid-container">
     <div class="flex items-center justify-between px-3 py-5">
-      <h1 class="ml-8 text-4xl font-bold">Hi [Name], welcome to your space!</h1>
+      <h1 class="ml-8 text-4xl font-bold">Hi {{ name }}, welcome to your space!</h1>
       <div id="app">
         <label class="mr-8 input input-bordered- flex items-center gap-2">
           <input type="text" v-model="searchQuery" class="grow" placeholder="Search" />
         </label>
       </div>
-
     </div>
     <h1 class="ml-9 text-3xl font-bold">Campgrounds</h1>
   </div>

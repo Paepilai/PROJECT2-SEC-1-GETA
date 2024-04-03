@@ -82,6 +82,18 @@ const formData = ref({
 const closeModal = () => {
   my_modal_1.close()
 }
+
+const clearRegistrationForm = () => {
+  formData.value.name = ""
+  formData.value.location = ""
+  formData.value.job = ""
+  formData.value.email = ""
+  formData.value.password = ""
+  formData.value.phone = ""
+  formData.value.bio = ""
+  formData.value.favorite = []
+}
+
 const register = () => {
   const newUser = addItem(import.meta.env.VITE_USER_BASE1_URL, {
     name: formData.value.name,
@@ -97,7 +109,7 @@ const register = () => {
   console.log(newUser)
   alert("Registration successful!")
   closeModal()
-  clearForm()
+  clearRegistrationForm()
 }
 
 const loginUser = async () => {

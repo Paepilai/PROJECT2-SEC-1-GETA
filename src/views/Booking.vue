@@ -83,7 +83,7 @@
         <label class="block text-gray-700 font-bold mb-2" for="name"> Name </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="name" type="text" placeholder="Enter your name" v-model="nameValue" />
+          id="name" type="text" value="name" placeholder="Enter your name" v-model="nameValue" />
       </div>
 
       <div class="py-4 px-6">
