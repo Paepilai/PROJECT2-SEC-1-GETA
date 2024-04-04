@@ -14,7 +14,7 @@
           <input :type="showPassword ? 'text' : 'password'" class="grow" v-model="password" placeholder="Password" />
         </label>
 
-        <input type="checkbox" v-model="showPassword" class="ml-2 mb-5 mb-5 " />
+        <input type="checkbox" v-model="showPassword" class="ml-2 mb-5 " />
         Show Password
         <button class="btn btn-outline btn-accent mr-5" @click="loginUser">
           Login
@@ -44,7 +44,7 @@
                 placeholder="Password" />
 
             </label>
-            <input type="checkbox" v-model="showPassword" class="ml-2 mb-5 mb-5 text-left" />
+            <input type="checkbox" v-model="showPassword" class="ml-2 mb-5 text-left" />
             Show Password
             <div class="modal-action">
               <form @submit.prevent="register" method="dialog">
