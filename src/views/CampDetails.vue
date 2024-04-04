@@ -1,47 +1,47 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import { getItems, editFavorite } from "../libs/fetchUtils.js";
-import { myUserTodo } from "../stores/users";
+import { ref, onMounted } from "vue"
+import { useRoute } from "vue-router"
+import { getItems, editFavorite } from "../libs/fetchUtils.js"
+import { myUserTodo } from "../stores/users"
 
-const { params } = useRoute();
-const campground = ref(null);
-const newFav = ref({});
-const id = params.id;
+const { params } = useRoute()
+const campground = ref(null)
+const newFav = ref({})
+const id = params.id
 
-const isFavoriteClicked = ref(false);
+const isFavoriteClicked = ref(false)
 
-const myUser = myUserTodo();
+const myUser = myUserTodo()
 onMounted(async () => {
-  console.log(id);
+  console.log(id)
 
-  const items = await getItems(import.meta.env.VITE_CAMP_BASE_URL);
-  console.log(items);
+  const items = await getItems(import.meta.env.VITE_CAMP_BASE_URL)
+  console.log(items)
 
-  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id));
-  console.log(campground.value);
-});
+  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id))
+  console.log(campground.value)
+})
 
 async function saveFavorite() {
-  const userNow = myUser.getTodos();
-  console.log(userNow[0].favorite);
+  const userNow = myUser.getTodos()
+  console.log(userNow[0].favorite)
 
   newFav.value = {
     ...userNow[0],
-  };
+  }
 
   if (!userNow[0].favorite.includes(parseInt(id))) {
-    newFav.value.favorite.push(parseInt(id));
+    newFav.value.favorite.push(parseInt(id))
   }
 
   const addFav = await editFavorite(
     import.meta.env.VITE_USER_BASE_URL,
     newFav.value.id,
     newFav.value
-  );
-  console.log(addFav);
+  )
+  console.log(addFav)
 
-  myUser.updateTodo(newFav.value.id, newFav.value.favorite);
+  myUser.updateTodo(newFav.value.id, newFav.value.favorite)
 }
 </script>
 <template>
@@ -50,6 +50,10 @@ async function saveFavorite() {
       <div class="flex-col">
         <div class="font-bold text-4xl p-10 text-center inline flex-row">
           <div class="flex flex-row justify-between px-16">
+            <RouterLink to="/home" class="btn btn-circle text-bold">
+              <
+            </RouterLink>
+
             <button
               @click="saveFavorite(), (isFavoriteClicked = true)"
               :class="{
@@ -57,7 +61,20 @@ async function saveFavorite() {
                 'btn bg-red-500 text-white': isFavoriteClicked,
               }"
             >
-              Favorite
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
             </button>
           </div>
 
@@ -145,7 +162,9 @@ async function saveFavorite() {
         </div>
         <hr class="h-2 border-dashed border-gray-300" />
         <div class="flex justify-center p-5">
-          <div class="transition-transform duration-300 hover:scale-105 cursor-pointer">
+          <div
+            class="transition-transform duration-300 hover:scale-105 cursor-pointer"
+          >
             <RouterLink
               :to="{
                 path: '/available',

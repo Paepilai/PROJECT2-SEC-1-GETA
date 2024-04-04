@@ -1,16 +1,16 @@
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { addItem } from "../libs/fetchUtils";
-import { myUserTodo } from "../stores/users";
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+import { addItem } from "../libs/fetchUtils"
+import { myUserTodo } from "../stores/users"
 
-const router = useRouter();
-const users = ref();
+const router = useRouter()
+const users = ref()
 
-const email = ref("");
-const password = ref("");
+const email = ref("")
+const password = ref("")
 
-const showPassword = ref(false);
+const showPassword = ref(false)
 
 const formData = ref({
   name: "",
@@ -21,23 +21,28 @@ const formData = ref({
   phone: "",
   bio: "",
   favorite: [],
-});
+})
 const closeModal = () => {
-  my_modal_1.close();
-};
+  my_modal_1.close()
+}
 
 const clearRegistrationForm = () => {
-  formData.value.name = "";
-  formData.value.location = "";
-  formData.value.job = "";
-  formData.value.email = "";
-  formData.value.password = "";
-  formData.value.phone = "";
-  formData.value.bio = "";
-  formData.value.favorite = [];
-};
+  formData.value.name = ""
+  formData.value.location = ""
+  formData.value.job = ""
+  formData.value.email = ""
+  formData.value.password = ""
+  formData.value.phone = ""
+  formData.value.bio = ""
+  formData.value.favorite = []
+}
 
 const register = () => {
+  if (!isValidFormData()) {
+    alert("Please fill in complete information.")
+    return
+  }
+
   const newUser = addItem(import.meta.env.VITE_USER_BASE_URL, {
     name: formData.value.name,
     location: formData.value.location,
@@ -47,53 +52,63 @@ const register = () => {
     phone: formData.value.phone,
     bio: formData.value.bio,
     favorite: formData.value.favorite,
-  });
+  })
 
-  console.log(newUser);
-  alert("Registration successful!");
-  closeModal();
-  clearRegistrationForm();
-};
+  console.log(newUser)
+  alert("Registration successful!")
+  closeModal()
+  clearRegistrationForm()
+}
+
+const isValidFormData = () => {
+  const requiredFields = ["name", "email", "password"]
+  for (const field of requiredFields) {
+    if (!formData.value[field]) {
+      return false
+    }
+  }
+  return true
+}
 
 const loginUser = async () => {
   try {
-    const response = await fetch(import.meta.env.VITE_USER_BASE_URL);
+    const response = await fetch(import.meta.env.VITE_USER_BASE_URL)
     if (!response.ok) {
-      throw new Error("Failed to fetch data");
+      throw new Error("Failed to fetch data")
     }
-    const data = await response.json();
-    users.value = data;
+    const data = await response.json()
+    users.value = data
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
 
-  console.log(users.value);
+  console.log(users.value)
 
   const user = users.value.find(
     (user) => user.email === email.value && user.password === password.value
-  );
+  )
 
-  console.log(user);
+  console.log(user)
   if (user) {
-    const myUser = myUserTodo();
-    console.log(myUser.getTodos());
-    myUser.addTodos([user]);
+    const myUser = myUserTodo()
+    console.log(myUser.getTodos())
+    myUser.addTodos([user])
 
-    console.log(myUser.getTodos());
+    console.log(myUser.getTodos())
 
-    router.push("/home");
+    router.push("/home")
   } else {
-    alert("Invalid email or password");
+    alert("Invalid email or password")
   }
-};
+}
 router.beforeEach(async (to, from) => {
-  const myUser = myUserTodo();
-  const emptyUser = myUser.getTodos();
+  const myUser = myUserTodo()
+  const emptyUser = myUser.getTodos()
 
   if (emptyUser.length === 0 && to.name !== "Login") {
-    return "/";
+    return "/"
   }
-});
+})
 </script>
 <template>
   <div class="full-page">
@@ -126,7 +141,9 @@ router.beforeEach(async (to, from) => {
 
         <input type="checkbox" v-model="showPassword" class="ml-2 mb-5" />
         Show Password
-        <button class="btn btn-outline btn-accent mr-5" @click="loginUser">Login</button>
+        <button class="btn btn-outline btn-accent mr-5" @click="loginUser">
+          Login
+        </button>
         <button class="btn" onclick="my_modal_1.showModal()">Register</button>
 
         <dialog id="my_modal_1" class="modal">
@@ -175,7 +192,11 @@ router.beforeEach(async (to, from) => {
                 placeholder="Password"
               />
             </label>
-            <input type="checkbox" v-model="showPassword" class="ml-2 mb-5 text-left" />
+            <input
+              type="checkbox"
+              v-model="showPassword"
+              class="ml-2 mb-5 text-left"
+            />
             Show Password
             <div class="modal-action">
               <form @submit.prevent="register" method="dialog">
