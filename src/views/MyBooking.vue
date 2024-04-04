@@ -3,10 +3,7 @@
     <div class="max-w-2xl mx-auto mt-10 rounded-lg">
       <div v-if="isLoading">Loading...</div>
       <div v-else class="">
-        <div
-          v-if="bookings.length === 0"
-          class="text-center font-bold text-3xl mt-20"
-        >
+        <div v-if="bookings.length === 0" class="text-center font-bold text-3xl mt-20">
           No bookings
         </div>
 
@@ -36,7 +33,7 @@
                 <p>Nights: {{ booking.numberOfNights }}</p>
                 <p>Name: {{ booking.name }}</p>
                 <p>Email: {{ booking.email }}</p>
-                <p>Phone Number: {{ booking.email }}</p>
+                <p>Phone Number: {{ booking.phone }}</p>
                 <p>Special Requests: {{ booking.specialRequests }}</p>
                 <p>Total Price: {{ booking.totalPrice }}</p>
               </div>
@@ -56,50 +53,44 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
-import { useRouter } from "vue-router"
-import {
-  fetchBookings,
-  deleteBooking,
-  fetchCampgrounds,
-} from "../libs/BookingFetch.js"
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { fetchBookings, deleteBooking, fetchCampgrounds } from "../libs/BookingFetch.js";
 
-const router = useRouter()
-const isLoading = ref(false)
-const bookings = ref([])
-const campgrounds = ref([])
+const router = useRouter();
+const isLoading = ref(false);
+const bookings = ref([]);
+const campgrounds = ref([]);
 
 const fetchData = async () => {
   try {
-    isLoading.value = true
-    bookings.value = await fetchBookings()
-    campgrounds.value = await fetchCampgrounds()
-    isLoading.value = false
+    isLoading.value = true;
+    bookings.value = await fetchBookings();
+    campgrounds.value = await fetchCampgrounds();
+    isLoading.value = false;
   } catch (error) {
-    console.error("Error fetching data:", error)
-    isLoading.value = false
+    console.error("Error fetching data:", error);
+    isLoading.value = false;
   }
-}
+};
 
 onMounted(() => {
-  fetchData()
-})
+  fetchData();
+});
 
 const deleteHandler = async (id, index) => {
   try {
-    await deleteBooking(id)
-    bookings.value.splice(index, 1)
+    await deleteBooking(id);
+    bookings.value.splice(index, 1);
   } catch (error) {
-    console.error("Error deleting booking:", error)
+    console.error("Error deleting booking:", error);
   }
-}
+};
 
 const getCampgroundImage = (campgroundName) => {
-  const campground = campgrounds.value.find(
-    (camp) => camp.name === campgroundName
-  )
-  return campground && campground.image ? campground.image : "placeholder.jpg"
-}
+  const campground = campgrounds.value.find((camp) => camp.name === campgroundName);
+  return campground && campground.image ? campground.image : "placeholder.jpg";
+};
 </script>
 <style scoped>
 .card {

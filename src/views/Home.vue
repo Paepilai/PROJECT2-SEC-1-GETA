@@ -1,53 +1,44 @@
 <script setup>
-import campData from "../../data/camp.json"
-import CampCard from "../components/CampCard.vue"
-import ListCard from "../components/ListCard.vue"
-import { ref, onMounted, computed } from "vue"
-import { myUserTodo } from "../stores/users"
+import campData from "../../data/camp.json";
+import CampCard from "../components/CampCard.vue";
+import ListCard from "../components/ListCard.vue";
+import { ref, onMounted, computed } from "vue";
+import { myUserTodo } from "../stores/users";
 
-const campgrounds = ref([])
-const searchQuery = ref("")
-const myUser = myUserTodo()
-const userName = myUser.getTodos()
-const name = ref(userName[0].name)
-
-onMounted(async () => {
-  try {
-    const response = await fetch(import.meta.env.VITE_CAMP_BASE_URL)
-    if (!response.ok) {
-      throw new Error("Failed to fetch data")
-    }
-    const data = await response.json()
-    campgrounds.value = data
-  } catch (error) {
-    console.error(error)
-  }
-})
+const campgrounds = ref([]);
+const searchQuery = ref("");
+const myUser = myUserTodo();
+const userName = myUser.getTodos();
+const name = ref(userName[0].name);
 
 const filtercamp = computed(() => {
   return campgrounds.value.filter((item) => {
-    return item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-  })
-})
+    return item.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+  });
+});
+
+onMounted(async () => {
+  try {
+    const response = await fetch(import.meta.env.VITE_CAMP_BASE_URL);
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    const data = await response.json();
+    campgrounds.value = data;
+  } catch (error) {
+    console.error(error);
+  }
+});
 </script>
 
 <template>
   <div class="py-6">
     <div class="grid-container">
       <div class="flex items-center justify-between px-3 py-5">
-        <h1 class="ml-8 text-4xl font-bold">
-          Hi {{ name }}, Welcome to your space!
-        </h1>
+        <h1 class="ml-8 text-4xl font-bold">Hi {{ name }}, Welcome to your space!</h1>
         <div id="app">
-          <label
-            class="mr-8 input input-bordered- flex items-center gap-2 text-black"
-          >
-            <input
-              type="text"
-              v-model="searchQuery"
-              class="grow"
-              placeholder="Search"
-            />
+          <label class="mr-8 input input-bordered- flex items-center gap-2 text-black">
+            <input type="text" v-model="searchQuery" class="grow" placeholder="Search" />
           </label>
         </div>
       </div>

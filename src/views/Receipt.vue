@@ -1,16 +1,16 @@
 <script setup>
-import { ref, onMounted } from "vue"
-import { useRoute, useRouter } from "vue-router"
-import { saveBooking } from "../libs/BookingFetch.js"
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { saveBooking } from "../libs/BookingFetch.js";
 
-const booking = ref(null)
-const route = useRoute()
-const router = useRouter()
+const booking = ref(null);
+const route = useRoute();
+const router = useRouter();
 
-const campgroundName = route.query.campgroundName
+const campgroundName = route.query.campgroundName;
 
 onMounted(() => {
-  const routeQuery = route.query
+  const routeQuery = route.query;
   if (routeQuery) {
     booking.value = {
       checkinDate: routeQuery.checkinDate,
@@ -24,15 +24,15 @@ onMounted(() => {
       campgroundName: campgroundName,
       zoneId: routeQuery.zoneId,
       zoneName: routeQuery.zoneName,
-    }
-    saveBooking(booking.value)
-    console.log("Campground Name:", campgroundName)
+    };
+    saveBooking(booking.value);
+    console.log("Campground Name:", campgroundName);
   }
-})
+});
 
 const submitReceipt = () => {
-  router.push("/mybooking")
-}
+  router.push("/mybooking");
+};
 </script>
 
 <template>
