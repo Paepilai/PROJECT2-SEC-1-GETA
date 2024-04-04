@@ -51,7 +51,6 @@ async function saveFavorite() {
         <div class="font-bold text-4xl p-10 text-center inline flex-row">
           <div class="flex flex-row justify-between px-16">
             <RouterLink to="/home" class="btn btn-circle text-bold">
-              <
             </RouterLink>
 
             <button

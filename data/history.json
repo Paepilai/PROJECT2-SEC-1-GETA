@@ -1,18 +1,3 @@
 {
-  "booking": [
-    {
-      "id": "a491",
-      "checkinDate": "2024-04-11",
-      "checkoutDate": "2024-04-19",
-      "name": "i",
-      "email": "i",
-      "phone": "0000000",
-      "specialRequests": "",
-      "numberOfNights": "8",
-      "totalPrice": "440",
-      "campgroundName": "ภูทับเบิก",
-      "zoneId": "1",
-      "zoneName": "โซนที่ทำการอุทยานแห่งชาติ"
-    }
-  ]
+  "booking": []
 }

@@ -160,10 +160,8 @@ const isFormValid = computed(() => {
   )
 })
 
-// Variable to track the completion of the first step
 const firstStepCompleted = ref(false)
 
-// Function to proceed to the next step
 const nextStep = () => {
   firstStepCompleted.value = true
 }
@@ -225,11 +223,7 @@ const nextStep = () => {
                 Sleeping bag
               </th>
               <td class="px-6 py-4">
-                <!-- <input
-                  type="number"
-                  v-model="qtyAmountSleepingBag"
-                  @input="validateInput('sleepingBag')"
-                /> -->
+                
                 <div>
                   <button
                     type="button"
@@ -267,11 +261,7 @@ const nextStep = () => {
                 Mattress
               </th>
               <td class="px-6 py-4">
-                <!-- <input
-                  type="number"
-                  v-model="qtyAmountMattress"
-                  @input="validateInput('mattress')"
-                /> -->
+                
                 <div>
                   <button
                     type="button"
@@ -308,11 +298,7 @@ const nextStep = () => {
                 Pillow
               </th>
               <td class="px-6 py-4">
-                <!-- <input
-                  type="number"
-                  v-model="qtyAmountPillow"
-                  @input="validateInput('pillow')"
-                /> -->
+                
                 <div>
                   <button
                     type="button"

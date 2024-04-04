@@ -32,6 +32,7 @@ const deleteHandler = async (id, index) => {
   try {
     await deleteBooking(id)
     bookings.value.splice(index, 1)
+    closeModal()
   } catch (error) {
     console.error("Error deleting booking:", error)
   }
@@ -61,7 +62,7 @@ const showModal = ref(false)
           v-if="bookings.length === 0"
           class="text-red-500 text-center font-bold text-3xl mt-20"
         >
-          No bookings
+          No Bookings
         </div>
 
         <div
