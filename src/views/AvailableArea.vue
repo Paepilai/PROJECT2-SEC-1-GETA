@@ -1,23 +1,26 @@
 <template>
   <div class="py-4">
-    <!-- <h1 class="text-3xl text-center font-bold mt-6 text-gray-700">
-      {{ campgroundName }}
-    </h1> -->
-    <div v-for="(zone, index) in campground.area" :key="index"
-      class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
+    <div
+      v-for="(zone, index) in campground.area"
+      :key="index"
+      class="transition-transform duration-300 hover:scale-105 cursor-pointer max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    >
+      <div
+        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+      >
         Zone {{ zone.zoneId }}
       </div>
       <div class="py-4 px-6">
         <div class="mb-4">
           <label class="block text-gray-700 font-bold mb-2">{{
-      zone.zoneName
-    }}</label>
+            zone.zoneName
+          }}</label>
           <h1 class="text-gray-700">{{ zone.zoneDesc }}</h1>
         </div>
         <button
-          class="bg-[#E6BB96] font-bold text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
-          @click="redirectToBooking(zone)">
+          class="bg-[#E6BB96] font-bold text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579]  hover:text-white focus:outline-none focus:shadow-outline"
+          @click="redirectToBooking(zone)"
+        >
           Book
         </button>
       </div>

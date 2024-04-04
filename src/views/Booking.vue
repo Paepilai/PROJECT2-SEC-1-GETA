@@ -1,7 +1,11 @@
 <template>
   <div id="bookInfo py-6">
-    <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
+    <div
+      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    >
+      <div
+        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+      >
         {{ campgroundName }}
       </div>
       <div class="text-gray-800 font-bold">
@@ -9,17 +13,32 @@
 
         <div class="-mb-2 py-4 px-6">
           <label for="checkin">Check-in Date:</label>
-          <input type="date" id="checkin" v-model="checkinDate" :min="minCheckinDate" @input="updateCheckoutMinDate" />
+          <input
+            type="date"
+            id="checkin"
+            v-model="checkinDate"
+            :min="minCheckinDate"
+            @input="updateCheckoutMinDate"
+          />
         </div>
         <div class="mb-6 px-6">
           <label for="checkout">Check-out Date:</label>
-          <input type="date" id="checkout" v-model="checkoutDate" :min="minCheckoutDate" />
+          <input
+            type="date"
+            id="checkout"
+            v-model="checkoutDate"
+            :min="minCheckoutDate"
+          />
         </div>
         <div class="mb-4 px-6">Total Nights: {{ numberOfNights }}</div>
       </div>
       <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
+          >
             <tr>
               <th scope="col" class="px-6 py-3 rounded-s-lg">List</th>
               <th scope="col" class="px-6 py-3 rounded-s-lg">Qty</th>
@@ -28,33 +47,54 @@
           </thead>
           <tbody class="bg-white dark:bg-gray-800">
             <tr class="bg-white dark:bg-gray-800">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
                 Sleeping bag
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountSleepingBag" @input="validateInput('sleepingBag')" />
+                <input
+                  type="number"
+                  v-model="qtyAmountSleepingBag"
+                  @input="validateInput('sleepingBag')"
+                />
               </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedZone, "sleeping_bag") }}
               </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
                 Mattress
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountMattress" @input="validateInput('mattress')" />
+                <input
+                  type="number"
+                  v-model="qtyAmountMattress"
+                  @input="validateInput('mattress')"
+                />
               </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedZone, "mattress") }}
               </td>
             </tr>
             <tr class="bg-white dark:bg-gray-800">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
                 Pillow
               </th>
               <td class="px-6 py-4">
-                <input type="number" v-model="qtyAmountPillow" @input="validateInput('pillow')" />
+                <input
+                  type="number"
+                  v-model="qtyAmountPillow"
+                  @input="validateInput('pillow')"
+                />
               </td>
               <td class="px-6 py-4">{{ getPrice(selectedZone, "pillow") }}</td>
             </tr>
@@ -83,18 +123,28 @@
         </table>
       </div>
     </div>
-    <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase">
+    <div
+      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+    >
+      <div
+        class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
+      >
         User Information
       </div>
-
+      <div v-if="!isFormValid" class="py-6 font-bold text-red-500 text-center">
+        Please fill in all required fields!!
+      </div>
       <div class="py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="name">
           Name
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="name" type="text" placeholder="Enter your name" v-model="nameValue" />
+          id="name"
+          type="text"
+          placeholder="Enter your name"
+          v-model="nameValue"
+        />
       </div>
 
       <div class="py-4 px-6">
@@ -103,7 +153,11 @@
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="email" type="email" placeholder="Enter your email" v-model="emailValue" />
+          id="email"
+          type="email"
+          placeholder="Enter your email"
+          v-model="emailValue"
+        />
       </div>
       <div class="py-4 px-6">
         <label class="block text-gray-700 font-bold mb-2" for="phone">
@@ -111,7 +165,11 @@
         </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="phone" type="tel" placeholder="Enter your phone number" v-model="phoneValue" />
+          id="phone"
+          type="tel"
+          placeholder="Enter your phone number"
+          v-model="phoneValue"
+        />
       </div>
 
       <div class="mb-4 py-4 px-6">
@@ -120,17 +178,21 @@
         </label>
         <textarea
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="message" rows="4" placeholder="Enter any additional information" v-model="specialRequests"></textarea>
+          id="message"
+          rows="4"
+          placeholder="Enter any additional information"
+          v-model="specialRequests"
+        ></textarea>
       </div>
       <div class="flex items-center justify-center mb-4">
-        <button :disabled="!isFormValid"
-          class="bg-[#E6BB96] text-black py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
-          type="button" @click="submitBooking">
+        <button
+          :disabled="!isFormValid"
+          class="cursor-pointer bg-[#E6BB96] hover:text-white font-bold text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+          type="button"
+          @click="submitBooking"
+        >
           Book Camp
         </button>
-      </div>
-      <div v-if="!isFormValid" class="text-red-500 text-center">
-        Please fill in all required fields
       </div>
     </div>
   </div>
@@ -232,7 +294,6 @@ const submitBooking = () => {
   })
 }
 
-const qtyAmountTent = ref(0)
 const qtyAmountSleepingBag = ref(0)
 const qtyAmountMattress = ref(0)
 const qtyAmountPillow = ref(0)

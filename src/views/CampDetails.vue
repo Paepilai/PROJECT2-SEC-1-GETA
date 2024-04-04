@@ -5,14 +5,14 @@
         <div class="font-bold text-4xl p-10 text-center inline flex-row">
           <div class="flex flex-row justify-between px-16">
             <RouterLink to="/home" class="btn btn-circle text-bold">
-            </RouterLink>
+              < </RouterLink>
 
-            <button @click="saveFavorite(), (isFavoriteClicked = true)" :class="{
+                <button @click="saveFavorite(), (isFavoriteClicked = true)" :class="{
     'btn hover:bg-red-500 hover:text-white': true,
     'btn bg-red-500 text-white': isFavoriteClicked,
   }">
-              Favorite
-            </button>
+                  Favorite
+                </button>
           </div>
 
           <h1>{{ campground.name }}</h1>
@@ -113,8 +113,8 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import { useRoute } from "vue-router"
-import { getItems, editItem, editFavorite } from "../libs/fetchUtils.js"
-import { myUserTodo } from "@/stores/users"
+import { getItems, editFavorite } from "../libs/fetchUtils.js"
+import { myUserTodo } from "../stores/users"
 
 const { params } = useRoute()
 const campground = ref(null)
@@ -127,7 +127,7 @@ const myUser = myUserTodo()
 onMounted(async () => {
   console.log(id)
 
-  const items = await getItems(import.meta.env.VITE_USER_BASE_URL)
+  const items = await getItems(import.meta.env.VITE_CAMP_BASE_URL)
   console.log(items)
 
   campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id))
@@ -147,7 +147,7 @@ async function saveFavorite() {
   }
 
   const addFav = await editFavorite(
-    import.meta.env.VITE_USER_BASE1_URL,
+    import.meta.env.VITE_USER_BASE_URL,
     newFav.value.id,
     newFav.value
   )

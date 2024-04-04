@@ -1,24 +1,19 @@
 <script setup>
 import campData from "../../data/camp.json"
-
-import Camplist from "../components/Navbar.vue"
 import CampCard from "../components/CampCard.vue"
 import ListCard from "../components/ListCard.vue"
 import { ref, onMounted, computed } from "vue"
 import { myUserTodo } from "../stores/users"
 
 const campgrounds = ref([])
-
 const searchQuery = ref("")
-const items = ref(campData)
-
 const myUser = myUserTodo()
 const userName = myUser.getTodos()
 const name = ref(userName[0].name)
-console.log(name.value)
+
 onMounted(async () => {
   try {
-    const response = await fetch(import.meta.env.VITE_USER_BASE_URL)
+    const response = await fetch(import.meta.env.VITE_CAMP_BASE_URL)
     if (!response.ok) {
       throw new Error("Failed to fetch data")
     }
@@ -34,18 +29,25 @@ const filtercamp = computed(() => {
     return item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   })
 })
-
-console.log(filtercamp)
 </script>
 
 <template>
   <div class="py-6">
     <div class="grid-container">
       <div class="flex items-center justify-between px-3 py-5">
-        <h1 class="ml-8 text-4xl font-bold">Hi {{ name }}, welcome to your space!</h1>
+        <h1 class="ml-8 text-4xl font-bold">
+          Hi {{ name }}, Welcome to your space!
+        </h1>
         <div id="app">
-          <label class="mr-8 input input-bordered- flex items-center gap-2 text-black">
-            <input type="text" v-model="searchQuery" class="grow" placeholder="Search" />
+          <label
+            class="mr-8 input input-bordered- flex items-center gap-2 text-black"
+          >
+            <input
+              type="text"
+              v-model="searchQuery"
+              class="grow"
+              placeholder="Search"
+            />
           </label>
         </div>
       </div>
@@ -54,13 +56,21 @@ console.log(filtercamp)
     <div class="text-gray-900">
       <ListCard :items="filtercamp">
         <template #default="slotProps">
-          <div class="transition-transform duration-300 hover:scale-105 shadow-lg cursor-pointer">
-            <CampCard :name="slotProps.item.name" :location="slotProps.item.location" :id="slotProps.item.id">
-              <!-- Added CSS transition and box-shadow -->
+          <div
+            class="transition-transform duration-300 hover:scale-105 shadow-lg cursor-pointer"
+          >
+            <CampCard
+              :name="slotProps.item.name"
+              :location="slotProps.item.location"
+              :id="slotProps.item.id"
+            >
               <template v-slot:location>
-                <img :src="slotProps.item.image" alt="Location Image"
+                <img
+                  :src="slotProps.item.image"
+                  alt="Location Image"
                   class="h-60 w-80 object-cover rounded-t transition-transform transform hover:scale-105"
-                  style="box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1)" />
+                  style="box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1)"
+                />
               </template>
             </CampCard>
           </div>

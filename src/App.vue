@@ -1,8 +1,6 @@
 <script setup>
 import Navbar from "./components/Navbar.vue"
-import { onMounted, ref } from "vue"
-import { getItems } from "./libs/fetchUtils.js"
-import { myUserTodo } from "./stores/users.js"
+import { ref } from "vue"
 
 const darkMode = ref(false)
 const toggleDarkMode = () => {

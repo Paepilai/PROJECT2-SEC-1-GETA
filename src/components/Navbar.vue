@@ -61,21 +61,6 @@ const decreaseFontSize = () => {
             Settings
           </button>
           <div v-if="showSettingsMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md overflow-hidden shadow-xl">
-            <!-- <button
-              @click="increaseFontSize"
-              class="px-6 py-2 text-sm text-gray-700 hover:bg-green-400"
-            >
-              +
-            </button>
-            <label class="text-sm font-medium text-gray-900 dark:text-gray-300"
-              >Fone Size</label
-            >
-            <button
-              @click="decreaseFontSize"
-              class="px-4 py-2 text-sm text-gray-700 hover:bg-red-400"
-            >
-              -
-            </button> -->
             <div class="py-3">
               <button type="button" @click="increaseFontSize"
                 class="text-gray-800 ms-5 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">

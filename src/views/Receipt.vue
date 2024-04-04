@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import { useRoute, useRouter } from "vue-router"
-import { saveBooking } from "../../libs/BookingFetch.js"
+import { saveBooking } from "../libs/BookingFetch.js"
 
 const booking = ref(null)
 const route = useRoute()
@@ -38,7 +38,9 @@ const submitReceipt = () => {
 <template>
   <div class="py-4 text-gray-800">
     <template v-if="booking">
-      <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden py-4">
+      <div
+        class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden py-4"
+      >
         <div class="flex flex-col justify-center items-center gap-2">
           <h4 class="font-semibold text-4xl">{{ campgroundName }}</h4>
         </div>
@@ -79,43 +81,6 @@ const submitReceipt = () => {
           </p>
         </div>
         <div class="flex flex-col gap-3 pb-6 pt-2 text-xl px-10">
-          <!-- <table class="w-full text-left">
-            <thead>
-              <tr class="flex">
-                <th class="w-full py-2">List</th>
-                <th class="min-w-[44px] py-2 px-28">QTY</th>
-                <th class="min-w-[44px] py-2">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="flex">
-                <td class="flex-1">Sleeping bag</td>
-                <td class="min-w-[44px] py-2 px-28">
-                  {{ $route.query.sleepingBagQty }}
-                </td>
-                <td class="min-w-[44px]"></td>
-              </tr>
-              <tr class="flex">
-                <td class="flex-1">Mattress</td>
-                <td class="min-w-[44px] py-2 px-28">
-                  {{ $route.query.mattressQty }}
-                </td>
-                <td class="min-w-[44px]"></td>
-              </tr>
-              <tr class="flex">
-                <td class="flex-1">Pillow</td>
-                <td class="min-w-[44px] py-2 px-28">
-                  {{ $route.query.pillowQty }}
-                </td>
-                <td class="min-w-[44px]"></td>
-              </tr>
-              <tr class="flex">
-                <td class="flex-1">All Total</td>
-                <td class="min-w-[44px] py-2 px-28"></td>
-                <td class="min-w-[44px]">{{ $route.query.totalPrice }}</td>
-              </tr>
-            </tbody>
-          </table> -->
           <table class="w-full text-left">
             <thead>
               <tr class="flex">
@@ -153,8 +118,10 @@ const submitReceipt = () => {
           </table>
           <div class="py-4 justify-center items-center flex flex-col gap-2">
             <button
-              class="font-bold bg-[#E6BB96] text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
-              type="submit" @click="submitReceipt">
+              class="hover:text-white font-bold bg-[#E6BB96] text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click="submitReceipt"
+            >
               My Booking
             </button>
           </div>

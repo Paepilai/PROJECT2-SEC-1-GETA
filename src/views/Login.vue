@@ -8,11 +8,14 @@
             class="w-4 h-4 opacity-70"></svg>
           <input type="text" class="grow" v-model="email" placeholder="Email" />
         </label>
-        <label class="input input-bordered flex items-center gap-2 m-2">
+        <label class="input input-bordered flex items-center gap-2 m-2  mb-5">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
             class="w-4 h-4 opacity-70"></svg>
-          <input type="password" class="grow" v-model="password" placeholder="Password" />
+          <input :type="showPassword ? 'text' : 'password'" class="grow" v-model="password" placeholder="Password" />
         </label>
+
+        <input type="checkbox" v-model="showPassword" class="ml-2 mb-5 mb-5 " />
+        Show Password
         <button class="btn btn-outline btn-accent mr-5" @click="loginUser">
           Login
         </button>
@@ -39,8 +42,10 @@
                 class="w-4 h-4 opacity-70"></svg>
               <input v-model="formData.password" :type="showPassword ? 'text' : 'password'" class="grow"
                 placeholder="Password" />
-              <input type="checkbox" v-model="showPassword" class="ml-2" /> show
+
             </label>
+            <input type="checkbox" v-model="showPassword" class="ml-2 mb-5 mb-5 text-left" />
+            Show Password
             <div class="modal-action">
               <form @submit.prevent="register" method="dialog">
                 <!-- End register -->
@@ -95,7 +100,7 @@ const clearRegistrationForm = () => {
 }
 
 const register = () => {
-  const newUser = addItem(import.meta.env.VITE_USER_BASE1_URL, {
+  const newUser = addItem(import.meta.env.VITE_USER_BASE_URL, {
     name: formData.value.name,
     location: formData.value.location,
     job: formData.value.job,
@@ -114,7 +119,7 @@ const register = () => {
 
 const loginUser = async () => {
   try {
-    const response = await fetch(import.meta.env.VITE_USER_BASE1_URL)
+    const response = await fetch(import.meta.env.VITE_USER_BASE_URL)
     if (!response.ok) {
       throw new Error("Failed to fetch data")
     }
