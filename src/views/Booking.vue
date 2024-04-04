@@ -193,7 +193,7 @@ const isFormValid = computed(() => {
 
         <div class="mb-4 px-6">Total Nights: {{ numberOfNights }}</div>
         <span v-if="!checkinDate || !checkoutDate" class="text-red-500 ml-6"
-          >Please choose both check-in and check-out dates</span
+          >Please choose check-in and check-out date</span
         >
       </div>
       <div class="relative overflow-x-auto">
