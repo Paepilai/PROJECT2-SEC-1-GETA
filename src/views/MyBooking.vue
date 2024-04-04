@@ -1,49 +1,66 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { fetchBookings, deleteBooking, fetchCampgrounds } from "../libs/BookingFetch.js";
+import { ref, onMounted } from "vue"
+import { useRouter } from "vue-router"
+import {
+  fetchBookings,
+  deleteBooking,
+  fetchCampgrounds,
+} from "../libs/BookingFetch.js"
 
-const router = useRouter();
-const isLoading = ref(false);
-const bookings = ref([]);
-const campgrounds = ref([]);
+const router = useRouter()
+const isLoading = ref(false)
+const bookings = ref([])
+const campgrounds = ref([])
 
 const fetchData = async () => {
   try {
-    isLoading.value = true;
-    bookings.value = await fetchBookings();
-    campgrounds.value = await fetchCampgrounds();
-    isLoading.value = false;
+    isLoading.value = true
+    bookings.value = await fetchBookings()
+    campgrounds.value = await fetchCampgrounds()
+    isLoading.value = false
   } catch (error) {
-    console.error("Error fetching data:", error);
-    isLoading.value = false;
+    console.error("Error fetching data:", error)
+    isLoading.value = false
   }
-};
+}
 
 onMounted(() => {
-  fetchData();
-});
+  fetchData()
+})
 
 const deleteHandler = async (id, index) => {
   try {
-    await deleteBooking(id);
-    bookings.value.splice(index, 1);
+    await deleteBooking(id)
+    bookings.value.splice(index, 1)
   } catch (error) {
-    console.error("Error deleting booking:", error);
+    console.error("Error deleting booking:", error)
   }
-};
+}
 
 const getCampgroundImage = (campgroundName) => {
-  const campground = campgrounds.value.find((camp) => camp.name === campgroundName);
-  return campground && campground.image ? campground.image : "placeholder.jpg";
-};
+  const campground = campgrounds.value.find(
+    (camp) => camp.name === campgroundName
+  )
+  return campground && campground.image ? campground.image : "placeholder.jpg"
+}
+
+const openModal = () => {
+  showModal.value = true
+}
+const closeModal = () => {
+  showModal.value = false
+}
+const showModal = ref(false)
 </script>
 <template>
   <div class="py-2">
     <div class="max-w-2xl mx-auto mt-10 rounded-lg">
       <div v-if="isLoading">Loading...</div>
-      <div v-else class="">
-        <div v-if="bookings.length === 0" class="text-center font-bold text-3xl mt-20">
+      <div v-else>
+        <div
+          v-if="bookings.length === 0"
+          class="text-red-500 text-center font-bold text-3xl mt-20"
+        >
           No bookings
         </div>
 
@@ -81,10 +98,34 @@ const getCampgroundImage = (campgroundName) => {
 
             <button
               class="cursor-pointer hover:text-white btn btn-outline btn-error text-xl font-semibold"
-              @click="deleteHandler(booking.id, index)"
+              @click="openModal()"
             >
               Cancel Booking
             </button>
+
+            <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto">
+              <div
+                class="flex items-center justify-center min-h-screen bg-black/[.05]"
+              >
+                <div
+                  class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative"
+                >
+                  <button
+                    class="text-black absolute top-0 right-0 m-4"
+                    @click="closeModal()"
+                  >
+                    x
+                  </button>
+                  <h2 class="text-black pb-5">Are you sure?</h2>
+                  <button
+                    class="btn btn-outline btn-error"
+                    @click="deleteHandler(booking.id, index)"
+                  >
+                    Confirm Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

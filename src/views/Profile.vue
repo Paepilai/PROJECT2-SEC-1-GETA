@@ -1,75 +1,75 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { getItems, editItem, editFavorite } from "../libs/fetchUtils";
-import { myUserTodo } from "../stores/users.js";
-import CampCard from "../components/CampCard.vue";
-import ListCard from "../components/ListCard.vue";
+import { ref, onMounted } from "vue"
+import { getItems, editItem, editFavorite } from "../libs/fetchUtils"
+import { myUserTodo } from "../stores/users.js"
+import CampCard from "../components/CampCard.vue"
+import ListCard from "../components/ListCard.vue"
 
-const newFav = ref();
+const newFav = ref()
 
-const id = ref();
-const name = ref();
-const location = ref();
-const job = ref();
-const email = ref();
-const password = ref();
-const phone = ref();
-const bio = ref();
-const favorite = ref();
+const id = ref()
+const name = ref()
+const location = ref()
+const job = ref()
+const email = ref()
+const password = ref()
+const phone = ref()
+const bio = ref()
+const favorite = ref()
 
-const showEditModal = ref(false);
-const showPassword = ref(false);
+const showEditModal = ref(false)
+const showPassword = ref(false)
 
-const myUser = myUserTodo();
-const favoriteUser = ref();
-const showModal = ref(false);
-const showModalLogout = ref(false);
-const campidref = ref();
+const myUser = myUserTodo()
+const favoriteUser = ref()
+const showModal = ref(false)
+const showModalLogout = ref(false)
+const campidref = ref()
 
 onMounted(async () => {
-  const items = await getItems(import.meta.env.VITE_CAMP_BASE_URL);
+  const items = await getItems(import.meta.env.VITE_CAMP_BASE_URL)
 
-  const userNow = myUser.getTodos();
-  console.log(userNow[0].id);
+  const userNow = myUser.getTodos()
+  console.log(userNow[0].id)
 
   newFav.value = {
     ...userNow[0],
-  };
-  console.log(userNow);
+  }
+  console.log(userNow)
 
   favoriteUser.value = items.filter((camp) =>
     userNow[0].favorite.includes(parseInt(camp.id))
-  );
+  )
 
-  id.value = newFav.value.id;
-  name.value = newFav.value.name;
-  location.value = newFav.value.location;
-  job.value = newFav.value.job;
-  email.value = newFav.value.email;
-  password.value = newFav.value.password;
-  phone.value = newFav.value.phone;
-  bio.value = newFav.value.bio;
-  favorite.value = newFav.value.favorite;
-});
+  id.value = newFav.value.id
+  name.value = newFav.value.name
+  location.value = newFav.value.location
+  job.value = newFav.value.job
+  email.value = newFav.value.email
+  password.value = newFav.value.password
+  phone.value = newFav.value.phone
+  bio.value = newFav.value.bio
+  favorite.value = newFav.value.favorite
+})
 
 const openModal = (campid) => {
-  campidref.value = campid;
-  showModal.value = true;
-};
+  campidref.value = campid
+  showModal.value = true
+}
 
 const openLogoutModal = async () => {
-  showModalLogout.value = true;
-  const userNow = myUser.getTodos();
-  myUser.removeTodo(userNow[0].id);
-};
+  showModalLogout.value = true
+  const userNow = myUser.getTodos()
+  myUser.removeTodo(userNow[0].id)
+}
 
 const closeModal = () => {
-  showModal.value = false;
-};
+  showModal.value = false
+}
 
 const updateProfile = async () => {
-  const userNow = myUser.getTodos();
-  console.log(userNow);
+  const userNow = myUser.getTodos()
+  console.log(userNow)
   const updatedProfile = {
     id: id.value,
     name: name.value,
@@ -80,54 +80,56 @@ const updateProfile = async () => {
     phone: phone.value,
     bio: bio.value,
     favorite: favorite.value,
-  };
-  console.log(updatedProfile);
+  }
+  console.log(updatedProfile)
 
   const response = await editItem(
     import.meta.env.VITE_USER_BASE_URL,
     id.value,
     updatedProfile
-  );
+  )
 
-  console.log(response);
+  console.log(response)
 
-  myUser.updateTodoUser(updatedProfile.id, updatedProfile);
-  console.log(myUser.getTodos());
+  myUser.updateTodoUser(updatedProfile.id, updatedProfile)
+  console.log(myUser.getTodos())
 
-  showEditModal.value = false;
-};
+  showEditModal.value = false
+}
 
 async function deleteFav(idcamp) {
-  console.log(newFav.value.favorite);
+  console.log(newFav.value.favorite)
   const indexToRemove = newFav.value.favorite.findIndex(
     (item) => item === parseInt(idcamp)
-  );
+  )
   if (indexToRemove !== -1) {
-    newFav.value.favorite.splice(indexToRemove, 1);
+    newFav.value.favorite.splice(indexToRemove, 1)
   }
 
   const deleteCamp = await editFavorite(
     `${import.meta.env.VITE_USER_BASE_URL}`,
     newFav.value.id,
     newFav.value
-  );
-  console.log(deleteCamp);
+  )
+  console.log(deleteCamp)
 
   favoriteUser.value.splice(
     favoriteUser.value.findIndex((todo) => todo.id === idcamp),
     1
-  );
+  )
 
-  console.log(myUser.getTodos());
+  console.log(myUser.getTodos())
 
-  closeModal();
+  closeModal()
 }
 </script>
 
 <template>
   <div class="py-2">
     <div class="flex items-center justify-center">
-      <div class="border-2 rounded-md shadow-md m-3 p-3 mt-4 h-auto w-1/2 flex bg-white">
+      <div
+        class="border-2 rounded-md shadow-md m-3 p-3 mt-4 h-auto w-1/2 flex bg-white"
+      >
         <div class="flex p-5">
           <img
             src="https://static.vecteezy.com/system/resources/previews/018/765/757/original/user-profile-icon-in-flat-style-member-avatar-illustration-on-isolated-background-human-permission-sign-business-concept-vector.jpg"
@@ -162,6 +164,12 @@ async function deleteFav(idcamp) {
 
     <h1 class="text-3xl font-bold mb-4 mt-4 ml-10">Favorite Campground</h1>
 
+    <div
+      v-if="favoriteUser === undefined || favoriteUser.length === 0"
+      class="text-center font-bold text-3xl mt-20 text-red-500"
+    >
+      No Favorites
+    </div>
     <div>
       <ListCard :items="favoriteUser">
         <template #default="slotProps">
@@ -171,10 +179,14 @@ async function deleteFav(idcamp) {
             :id="slotProps.item.id"
           >
             <template v-slot:option>
-              <button class="btn btn-sm" @click="openModal(slotProps.item.id)">X</button>
+              <button class="btn btn-sm" @click="openModal(slotProps.item.id)">
+                X
+              </button>
 
               <div v-if="showModal" class="fixed z-10 inset-0 overflow-y-auto">
-                <div class="flex items-center justify-center min-h-screen bg-black/[.05]">
+                <div
+                  class="flex items-center justify-center min-h-screen bg-black/[.05]"
+                >
                   <div
                     class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative"
                   >
@@ -195,8 +207,13 @@ async function deleteFav(idcamp) {
                 </div>
               </div>
 
-              <div v-if="showModalLogout" class="fixed z-10 inset-0 overflow-y-auto">
-                <div class="flex items-center justify-center min-h-screen bg-black/[.05]">
+              <div
+                v-if="showModalLogout"
+                class="fixed z-10 inset-0 overflow-y-auto"
+              >
+                <div
+                  class="flex items-center justify-center min-h-screen bg-black/[.05]"
+                >
                   <div
                     class="flex flex-col bg-white p-10 rounded shadow w-auto h-auto relative"
                   >
@@ -227,7 +244,10 @@ async function deleteFav(idcamp) {
       </ListCard>
     </div>
 
-    <div v-if="showEditModal" class="text-black fixed z-10 inset-0 overflow-y-auto">
+    <div
+      v-if="showEditModal"
+      class="text-black fixed z-10 inset-0 overflow-y-auto"
+    >
       <div class="flex items-center justify-center min-h-screen bg-black/[.05]">
         <div class="bg-white w-1/2 p-6 rounded shadow-lg">
           <h2 class="text-2xl font-bold mb-4">Edit Mode</h2>
@@ -248,7 +268,8 @@ async function deleteFav(idcamp) {
             placeholder="Job"
           />
 
-          <br /><label for="location" class="font-bold">Location: </label> <br /><input
+          <br /><label for="location" class="font-bold">Location: </label>
+          <br /><input
             v-model="location"
             type="text"
             id="location"
@@ -256,7 +277,8 @@ async function deleteFav(idcamp) {
             placeholder="Location"
           />
 
-          <br /><label for="location" class="font-bold">Phone: </label> <br /><input
+          <br /><label for="location" class="font-bold">Phone: </label>
+          <br /><input
             v-model="phone"
             type="text"
             class="input input-bordered mb-3 w-full"
@@ -270,7 +292,8 @@ async function deleteFav(idcamp) {
             placeholder="Bio"
           ></textarea>
 
-          <br /><label for="email" class="font-bold">Email: </label> <br /><input
+          <br /><label for="email" class="font-bold">Email: </label>
+          <br /><input
             v-model="email"
             type="email"
             id="email"
@@ -278,7 +301,8 @@ async function deleteFav(idcamp) {
             placeholder="Email"
           />
 
-          <br /><label for="password" class="font-bold">Password: </label> <br /><input
+          <br /><label for="password" class="font-bold">Password: </label>
+          <br /><input
             v-model="password"
             :type="showPassword ? 'text' : 'password'"
             id="password"

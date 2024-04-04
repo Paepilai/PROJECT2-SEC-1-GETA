@@ -99,6 +99,8 @@ const submitBooking = () => {
   })
 }
 
+qtyAmountSleepingBag > 0 ? qtyAmountSleepingBag-- : null
+
 const validateInput = (item) => {
   switch (item) {
     case "sleepingBag":
@@ -157,11 +159,20 @@ const isFormValid = computed(() => {
     phoneValue.value
   )
 })
+
+// Variable to track the completion of the first step
+const firstStepCompleted = ref(false)
+
+// Function to proceed to the next step
+const nextStep = () => {
+  firstStepCompleted.value = true
+}
 </script>
 <template>
   <div id="bookInfo py-6">
     <div
-      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+      v-if="!firstStepCompleted"
+      class="book1 max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
     >
       <div
         class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
@@ -214,11 +225,35 @@ const isFormValid = computed(() => {
                 Sleeping bag
               </th>
               <td class="px-6 py-4">
-                <input
+                <!-- <input
                   type="number"
                   v-model="qtyAmountSleepingBag"
                   @input="validateInput('sleepingBag')"
-                />
+                /> -->
+                <div>
+                  <button
+                    type="button"
+                    class="text-gray-800 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    @click="qtyAmountSleepingBag++"
+                  >
+                    +
+                  </button>
+                  <input
+                    type="text"
+                    id="quantity-input"
+                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm -px-20"
+                    v-model="qtyAmountSleepingBag"
+                  />
+                  <button
+                    type="button"
+                    class="text-gray-800 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    @click="
+                      qtyAmountSleepingBag > 0 ? qtyAmountSleepingBag-- : null
+                    "
+                  >
+                    -
+                  </button>
+                </div>
               </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedZone, "sleeping_bag") }}
@@ -232,11 +267,34 @@ const isFormValid = computed(() => {
                 Mattress
               </th>
               <td class="px-6 py-4">
-                <input
+                <!-- <input
                   type="number"
                   v-model="qtyAmountMattress"
                   @input="validateInput('mattress')"
-                />
+                /> -->
+                <div>
+                  <button
+                    type="button"
+                    class="text-gray-800 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    @click="qtyAmountMattress++"
+                  >
+                    +
+                  </button>
+                  <input
+                    type="text"
+                    id="quantity-input"
+                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm -px-20"
+                    v-model="qtyAmountMattress"
+                    @input="validateInput('sleepingBag')"
+                  />
+                  <button
+                    type="button"
+                    class="text-gray-800 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    @click="qtyAmountMattress > 0 ? qtyAmountMattress-- : null"
+                  >
+                    -
+                  </button>
+                </div>
               </td>
               <td class="px-6 py-4">
                 {{ getPrice(selectedZone, "mattress") }}
@@ -250,11 +308,34 @@ const isFormValid = computed(() => {
                 Pillow
               </th>
               <td class="px-6 py-4">
-                <input
+                <!-- <input
                   type="number"
                   v-model="qtyAmountPillow"
                   @input="validateInput('pillow')"
-                />
+                /> -->
+                <div>
+                  <button
+                    type="button"
+                    class="text-gray-800 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    @click="qtyAmountPillow++"
+                  >
+                    +
+                  </button>
+                  <input
+                    type="text"
+                    id="quantity-input"
+                    class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm -px-20"
+                    v-model="qtyAmountPillow"
+                    @input="validateInput('sleepingBag')"
+                  />
+                  <button
+                    type="button"
+                    class="text-gray-800 bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    @click="qtyAmountPillow > 0 ? qtyAmountPillow-- : null"
+                  >
+                    -
+                  </button>
+                </div>
               </td>
               <td class="px-6 py-4">{{ getPrice(selectedZone, "pillow") }}</td>
             </tr>
@@ -281,10 +362,21 @@ const isFormValid = computed(() => {
             </tr>
           </tfoot>
         </table>
+        <div class="flex items-center justify-center mb-4">
+          <button
+            class="cursor-pointer bg-[#E6BB96] hover:text-white font-bold text-gray-800 py-2 px-4 rounded hover:bg-[#8C9579] focus:outline-none focus:shadow-outline"
+            type="button"
+            @click="nextStep"
+            v-if="!firstStepCompleted"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
     <div
-      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
+      v-if="firstStepCompleted"
+      class="book2 py-6 max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
     >
       <div
         class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
