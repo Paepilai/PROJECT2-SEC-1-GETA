@@ -449,7 +449,9 @@
       "password": "password",
       "phone": "0812345678",
       "bio": "While my weekdays are filled with lines of code, my weekends are dedicated to scaling mountains, traversing untamed landscapes, and basking in the untethered freedom of camping. As I trade in my keyboard for hiking boots, I immerse myself in the raw majesty of nature, where the only bugs I encounter are the ones beneath the stars.",
-      "favorite": []
+      "favorite": [
+        1
+      ]
     },
     {
       "id": "5",
@@ -460,7 +462,9 @@
       "password": "password",
       "phone": "0812345678",
       "bio": "While I thrive on the adrenaline of innovating solutions, my true passion lies in escaping the hustle and bustle of city life to seek refuge in the tranquil embrace of the wilderness. Camping beneath towering trees, listening to the symphony of chirping crickets, and breathing in the crisp, clean air rejuvenates my soul like nothing else.",
-      "favorite": []
+      "favorite": [
+        3
+      ]
     },
     {
       "id": "3a66",
@@ -470,7 +474,7 @@
       "email": "namnaow@gmail.com",
       "password": "password",
       "phone": "0810000000",
-      "bio": "asdas",
+      "bio": "Born to be star",
       "favorite": [
         3,
         9
