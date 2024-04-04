@@ -1,8 +1,166 @@
+<script setup>
+import { ref, computed, watch } from "vue";
+import { useRouter } from "vue-router";
+import campData from "../../data/camp.json";
+import { myUserTodo } from "../stores/users";
+const router = useRouter();
+const zoneId = router.currentRoute.value.query.zoneId;
+const zoneName = router.currentRoute.value.query.zoneName;
+const selectedZone = router.currentRoute.value.query.campId;
+const campgroundName = router.currentRoute.value.query.campgroundName;
+
+const checkinDate = ref(null);
+const checkoutDate = ref(null);
+const nameValue = ref("");
+const emailValue = ref("");
+const phoneValue = ref("");
+const specialRequests = ref("");
+const qtyAmountSleepingBag = ref(0);
+const qtyAmountMattress = ref(0);
+const qtyAmountPillow = ref(0);
+
+const myUser = myUserTodo();
+const user = myUser.getTodos();
+const bookingUser = ref(user[0]);
+
+nameValue.value = bookingUser.value.name;
+emailValue.value = bookingUser.value.email;
+phoneValue.value = bookingUser.value.phone;
+
+const calculateNightsAndTotal = () => {
+  const nights = numberOfNights.value;
+  const price = CampgroundPrice.value;
+  totalPrice.value = nights && price ? nights * price : 0;
+};
+
+const getPrice = (campId, item) => {
+  const camp = campData.camp.find((camp) => camp.id === parseInt(campId));
+  return camp ? camp.price[item] : 0;
+};
+
+watch([checkinDate, checkoutDate], () => {
+  calculateNightsAndTotal();
+});
+
+const today = new Date().toISOString().split("T")[0];
+const minCheckinDate = computed(() => today);
+
+const minCheckoutDate = computed(() => {
+  const minDate = new Date(checkinDate.value);
+  minDate.setDate(minDate.getDate() + 1);
+  return minDate.toISOString().split("T")[0];
+});
+
+const numberOfNights = computed(() => {
+  if (!checkinDate.value || !checkoutDate.value) return 0;
+  const startDate = new Date(checkinDate.value);
+  const endDate = new Date(checkoutDate.value);
+  const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+  const numberOfNights = Math.ceil(timeDifference / (1000 * 3600 * 24));
+  return numberOfNights;
+});
+
+const CampgroundPrice = computed(() => {
+  return selectedZone ? getPrice(selectedZone, "Campground") : 0;
+});
+
+const totalPrice = ref(0);
+
+const updateCheckoutMinDate = () => {
+  checkoutDate.value = null;
+};
+
+const submitBooking = () => {
+  if (!isFormValid.value) {
+    return;
+  }
+
+  const bookingData = {
+    checkinDate: checkinDate.value,
+    checkoutDate: checkoutDate.value,
+    nameValue: nameValue.value,
+    emailValue: emailValue.value,
+    phoneValue: phoneValue.value,
+    specialRequests: specialRequests.value,
+    numberOfNights: numberOfNights.value,
+    zoneId: zoneId,
+    zoneName: zoneName,
+    totalPrice: sumAllTotal.value,
+    equipmentPrice: calculateTotalAmount.value,
+    sleepingBagQty: qtyAmountSleepingBag.value,
+    mattressQty: qtyAmountMattress.value,
+    pillowQty: qtyAmountPillow.value,
+    campgroundName: campgroundName,
+  };
+
+  router.push({
+    path: "/receipt",
+    query: bookingData,
+  });
+};
+
+const validateInput = (item) => {
+  switch (item) {
+    case "sleepingBag":
+      if (qtyAmountSleepingBag.value < 0) {
+        qtyAmountSleepingBag.value = 0;
+      }
+      break;
+    case "mattress":
+      if (qtyAmountMattress.value < 0) {
+        qtyAmountMattress.value = 0;
+      }
+      break;
+    case "pillow":
+      if (qtyAmountPillow.value < 0) {
+        qtyAmountPillow.value = 0;
+      }
+      break;
+    default:
+      break;
+  }
+};
+
+const calculateTotalAmount = computed(() => {
+  let total = 0;
+
+  total += getPrice(selectedZone, "sleeping_bag") * qtyAmountSleepingBag.value;
+  total += getPrice(selectedZone, "mattress") * qtyAmountMattress.value;
+  total += getPrice(selectedZone, "pillow") * qtyAmountPillow.value;
+
+  return total;
+});
+
+const sumAllTotal = computed(() => {
+  let sum = 0;
+
+  sum += calculateTotalAmount.value;
+  sum += totalPrice.value;
+  return sum;
+});
+
+const sumQuantities = computed(() => {
+  let sum = 0;
+
+  sum += qtyAmountSleepingBag.value;
+  sum += qtyAmountMattress.value;
+  sum += qtyAmountPillow.value;
+  return sum;
+});
+
+const isFormValid = computed(() => {
+  return (
+    checkinDate.value &&
+    checkoutDate.value &&
+    nameValue.value &&
+    emailValue.value &&
+    phoneValue.value
+  );
+});
+</script>
 <template>
   <div id="bookInfo py-6">
-    <div
-      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
+    <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div
         class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
       >
@@ -101,16 +259,12 @@
           </tbody>
           <tfoot>
             <tr class="font-semibold text-gray-900 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">
-                Total Equipments Price
-              </th>
+              <th scope="row" class="px-6 py-3 text-base">Total Equipments Price</th>
               <td class="px-6 py-3">{{ sumQuantities }}</td>
               <td class="px-6 py-3">{{ calculateTotalAmount }}</td>
             </tr>
             <tr class="font-semibold text-gray-900 dark:text-white">
-              <th scope="row" class="px-6 py-3 text-base">
-                Total Nights Price
-              </th>
+              <th scope="row" class="px-6 py-3 text-base">Total Nights Price</th>
               <td class="px-6 py-3">{{ numberOfNights }}</td>
               <td class="px-6 py-3">{{ totalPrice }}</td>
             </tr>
@@ -123,9 +277,7 @@
         </table>
       </div>
     </div>
-    <div
-      class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden"
-    >
+    <div class="max-w-2xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
       <div
         class="text-2xl py-4 px-6 bg-[#8C9579] text-white text-center font-bold uppercase"
       >
@@ -135,9 +287,7 @@
         Please fill in all required fields!!
       </div>
       <div class="py-4 px-6">
-        <label class="block text-gray-700 font-bold mb-2" for="name">
-          Name
-        </label>
+        <label class="block text-gray-700 font-bold mb-2" for="name"> Name </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="name"
@@ -148,9 +298,7 @@
       </div>
 
       <div class="py-4 px-6">
-        <label class="block text-gray-700 font-bold mb-2" for="email">
-          Email
-        </label>
+        <label class="block text-gray-700 font-bold mb-2" for="email"> Email </label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="email"
@@ -197,165 +345,5 @@
     </div>
   </div>
 </template>
-<script setup>
-import { ref, computed, watch } from "vue"
-import { useRouter } from "vue-router"
-import campData from "../../data/camp.json"
-import { myUserTodo } from "../stores/users"
-const router = useRouter()
-const zoneId = router.currentRoute.value.query.zoneId
-const zoneName = router.currentRoute.value.query.zoneName
-const selectedZone = router.currentRoute.value.query.campId
-const campgroundName = router.currentRoute.value.query.campgroundName
-
-const checkinDate = ref(null)
-const checkoutDate = ref(null)
-const nameValue = ref("")
-const emailValue = ref("")
-const phoneValue = ref("")
-const specialRequests = ref("")
-
-const myUser = myUserTodo()
-const user = myUser.getTodos()
-const bookingUser = ref(user[0])
-
-nameValue.value = bookingUser.value.name
-emailValue.value = bookingUser.value.email
-phoneValue.value = bookingUser.value.phone
-
-const calculateNightsAndTotal = () => {
-  const nights = numberOfNights.value
-  const price = CampgroundPrice.value
-  totalPrice.value = nights && price ? nights * price : 0
-}
-watch([checkinDate, checkoutDate], () => {
-  calculateNightsAndTotal()
-})
-
-const getPrice = (campId, item) => {
-  const camp = campData.camp.find((camp) => camp.id === parseInt(campId))
-  return camp ? camp.price[item] : 0
-}
-
-const today = new Date().toISOString().split("T")[0]
-const minCheckinDate = computed(() => today)
-
-const minCheckoutDate = computed(() => {
-  const minDate = new Date(checkinDate.value)
-  minDate.setDate(minDate.getDate() + 1)
-  return minDate.toISOString().split("T")[0]
-})
-
-const numberOfNights = computed(() => {
-  if (!checkinDate.value || !checkoutDate.value) return 0
-  const startDate = new Date(checkinDate.value)
-  const endDate = new Date(checkoutDate.value)
-  const timeDifference = Math.abs(endDate.getTime() - startDate.getTime())
-  const numberOfNights = Math.ceil(timeDifference / (1000 * 3600 * 24))
-  return numberOfNights
-})
-
-const CampgroundPrice = computed(() => {
-  return selectedZone ? getPrice(selectedZone, "Campground") : 0
-})
-
-const totalPrice = ref(0)
-
-const updateCheckoutMinDate = () => {
-  checkoutDate.value = null
-}
-
-const submitBooking = () => {
-  if (!isFormValid.value) {
-    return
-  }
-
-  const bookingData = {
-    checkinDate: checkinDate.value,
-    checkoutDate: checkoutDate.value,
-    nameValue: nameValue.value,
-    emailValue: emailValue.value,
-    phoneValue: phoneValue.value,
-    specialRequests: specialRequests.value,
-    numberOfNights: numberOfNights.value,
-    zoneId: zoneId,
-    zoneName: zoneName,
-    totalPrice: sumAllTotal.value,
-    equipmentPrice: calculateTotalAmount.value,
-    sleepingBagQty: qtyAmountSleepingBag.value,
-    mattressQty: qtyAmountMattress.value,
-    pillowQty: qtyAmountPillow.value,
-    campgroundName: campgroundName,
-  }
-
-  router.push({
-    path: "/receipt",
-    query: bookingData,
-  })
-}
-
-const qtyAmountSleepingBag = ref(0)
-const qtyAmountMattress = ref(0)
-const qtyAmountPillow = ref(0)
-
-const validateInput = (item) => {
-  switch (item) {
-    case "sleepingBag":
-      if (qtyAmountSleepingBag.value < 0) {
-        qtyAmountSleepingBag.value = 0
-      }
-      break
-    case "mattress":
-      if (qtyAmountMattress.value < 0) {
-        qtyAmountMattress.value = 0
-      }
-      break
-    case "pillow":
-      if (qtyAmountPillow.value < 0) {
-        qtyAmountPillow.value = 0
-      }
-      break
-    default:
-      break
-  }
-}
-
-const calculateTotalAmount = computed(() => {
-  let total = 0
-
-  total += getPrice(selectedZone, "sleeping_bag") * qtyAmountSleepingBag.value
-  total += getPrice(selectedZone, "mattress") * qtyAmountMattress.value
-  total += getPrice(selectedZone, "pillow") * qtyAmountPillow.value
-
-  return total
-})
-
-const sumAllTotal = computed(() => {
-  let sum = 0
-
-  sum += calculateTotalAmount.value
-  sum += totalPrice.value
-  return sum
-})
-
-const sumQuantities = computed(() => {
-  let sum = 0
-
-  sum += qtyAmountSleepingBag.value
-  sum += qtyAmountMattress.value
-  sum += qtyAmountPillow.value
-  return sum
-})
-
-const isFormValid = computed(() => {
-  return (
-    checkinDate.value &&
-    checkoutDate.value &&
-    nameValue.value &&
-    emailValue.value &&
-    phoneValue.value
-  )
-})
-</script>
 
 <style scoped></style>

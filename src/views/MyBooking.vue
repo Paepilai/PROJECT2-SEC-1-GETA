@@ -1,3 +1,43 @@
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { fetchBookings, deleteBooking, fetchCampgrounds } from "../libs/BookingFetch.js";
+
+const router = useRouter();
+const isLoading = ref(false);
+const bookings = ref([]);
+const campgrounds = ref([]);
+
+const fetchData = async () => {
+  try {
+    isLoading.value = true;
+    bookings.value = await fetchBookings();
+    campgrounds.value = await fetchCampgrounds();
+    isLoading.value = false;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    isLoading.value = false;
+  }
+};
+
+onMounted(() => {
+  fetchData();
+});
+
+const deleteHandler = async (id, index) => {
+  try {
+    await deleteBooking(id);
+    bookings.value.splice(index, 1);
+  } catch (error) {
+    console.error("Error deleting booking:", error);
+  }
+};
+
+const getCampgroundImage = (campgroundName) => {
+  const campground = campgrounds.value.find((camp) => camp.name === campgroundName);
+  return campground && campground.image ? campground.image : "placeholder.jpg";
+};
+</script>
 <template>
   <div class="py-2">
     <div class="max-w-2xl mx-auto mt-10 rounded-lg">
@@ -52,46 +92,6 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { fetchBookings, deleteBooking, fetchCampgrounds } from "../libs/BookingFetch.js";
-
-const router = useRouter();
-const isLoading = ref(false);
-const bookings = ref([]);
-const campgrounds = ref([]);
-
-const fetchData = async () => {
-  try {
-    isLoading.value = true;
-    bookings.value = await fetchBookings();
-    campgrounds.value = await fetchCampgrounds();
-    isLoading.value = false;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    isLoading.value = false;
-  }
-};
-
-onMounted(() => {
-  fetchData();
-});
-
-const deleteHandler = async (id, index) => {
-  try {
-    await deleteBooking(id);
-    bookings.value.splice(index, 1);
-  } catch (error) {
-    console.error("Error deleting booking:", error);
-  }
-};
-
-const getCampgroundImage = (campgroundName) => {
-  const campground = campgrounds.value.find((camp) => camp.name === campgroundName);
-  return campground && campground.image ? campground.image : "placeholder.jpg";
-};
-</script>
 <style scoped>
 .card {
   border: 1px solid #ccc;

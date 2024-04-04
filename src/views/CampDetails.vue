@@ -1,3 +1,49 @@
+<script setup>
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { getItems, editFavorite } from "../libs/fetchUtils.js";
+import { myUserTodo } from "../stores/users";
+
+const { params } = useRoute();
+const campground = ref(null);
+const newFav = ref({});
+const id = params.id;
+
+const isFavoriteClicked = ref(false);
+
+const myUser = myUserTodo();
+onMounted(async () => {
+  console.log(id);
+
+  const items = await getItems(import.meta.env.VITE_CAMP_BASE_URL);
+  console.log(items);
+
+  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id));
+  console.log(campground.value);
+});
+
+async function saveFavorite() {
+  const userNow = myUser.getTodos();
+  console.log(userNow[0].favorite);
+
+  newFav.value = {
+    ...userNow[0],
+  };
+
+  if (!userNow[0].favorite.includes(parseInt(id))) {
+    newFav.value.favorite.push(parseInt(id));
+  }
+
+  const addFav = await editFavorite(
+    import.meta.env.VITE_USER_BASE_URL,
+    newFav.value.id,
+    newFav.value
+  );
+  console.log(addFav);
+
+  myUser.updateTodo(newFav.value.id, newFav.value.favorite);
+}
+</script>
 <template>
   <div v-if="campground">
     <div class="col-span-2">
@@ -124,50 +170,4 @@
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
-import { getItems, editFavorite } from "../libs/fetchUtils.js";
-import { myUserTodo } from "../stores/users";
-
-const { params } = useRoute();
-const campground = ref(null);
-const newFav = ref({});
-const id = params.id;
-
-const isFavoriteClicked = ref(false);
-
-const myUser = myUserTodo();
-onMounted(async () => {
-  console.log(id);
-
-  const items = await getItems(import.meta.env.VITE_CAMP_BASE_URL);
-  console.log(items);
-
-  campground.value = items.find((camp) => parseInt(camp.id) === parseInt(id));
-  console.log(campground.value);
-});
-
-async function saveFavorite() {
-  const userNow = myUser.getTodos();
-  console.log(userNow[0].favorite);
-
-  newFav.value = {
-    ...userNow[0],
-  };
-
-  if (!userNow[0].favorite.includes(parseInt(id))) {
-    newFav.value.favorite.push(parseInt(id));
-  }
-
-  const addFav = await editFavorite(
-    import.meta.env.VITE_USER_BASE_URL,
-    newFav.value.id,
-    newFav.value
-  );
-  console.log(addFav);
-
-  myUser.updateTodo(newFav.value.id, newFav.value.favorite);
-}
-</script>
 <style scoped></style>
